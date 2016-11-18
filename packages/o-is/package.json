@@ -1,0 +1,39 @@
+{
+  "name": "o-is",
+  "version": "0.5.2",
+  "description": "Serializable object assertions.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo 'See main repo to run tests'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AGhost-7/dyna-table.git"
+  },
+  "keywords": [
+    "Assertion",
+    "Conditional",
+    "Serialization",
+    "Storable",
+    "Conditions",
+    "Validation",
+    "Schema"
+  ],
+  "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AGhost-7/dyna-table/issues"
+  },
+  "homepage": "https://github.com/AGhost-7/dyna-table#readme",
+  "dependencies": {
+    "lodash.assign": "^4.0.8",
+    "lodash.clone": "^4.3.2",
+    "lodash.get": "^4.2.1"
+  },
+  "devDependencies": {
+    "source-map-support": "^0.4.0"
+  }
+}
