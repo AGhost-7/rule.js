@@ -19,7 +19,7 @@ oIs()
 ```
 
 Outputs:
-``json
+```json
 {
   "bool": {
     "must": [
