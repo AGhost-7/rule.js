@@ -302,7 +302,10 @@ var mod = function mod(items) {
 var extend = function extend(a, m) {
 	var newAsserts = (0, _lodash4.default)((0, _lodash2.default)(assertions), a);
 	var newMembers = (0, _lodash4.default)((0, _lodash2.default)(members), m);
-	return createClass(newAsserts, newMembers);
+	var Class = createClass(newAsserts, newMembers);
+	return function (items) {
+		return new Class(items || [], []);
+	};
 };
 
 mod.ObjectIs = ObjectIs;

@@ -218,4 +218,19 @@ describe('o-is', function () {
 			o.assert({ name: { first: 'Jonathan' } });
 		});
 	});
+
+	describe('extensions', function () {
+		it('should allow extensions', function () {
+			var oIs2 = oIs.extend({}, {});
+			oIs2().equal('a', 1).assert({ a: 1 });
+		});
+		it('should allow adding new methods', function () {
+			var oIs2 = oIs.extend({}, {
+				foo: function foo() {
+					return 'bar';
+				}
+			});
+			assert.equal(oIs2().equal('foo', 'baz').foo(), 'bar');
+		});
+	});
 });

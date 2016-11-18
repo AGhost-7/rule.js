@@ -276,7 +276,10 @@ const mod = (items) => {
 const extend = (a, m) => {
 	const newAsserts = assign(clone(assertions), a)
 	const newMembers = assign(clone(members), m)
-	return createClass(newAsserts, newMembers)
+	const Class = createClass(newAsserts, newMembers)
+	return (items) => {
+		return new Class(items || [], [])
+	}
 }
 
 mod.ObjectIs = ObjectIs

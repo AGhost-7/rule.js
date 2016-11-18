@@ -332,5 +332,23 @@ describe('o-is', () => {
 			o.assert({ name: { first: 'Jonathan' } })
 		})
 	})
+
+	describe('extensions', () => {
+		it('should allow extensions', () => {
+			var oIs2 = oIs.extend({}, {})
+			oIs2()
+				.equal('a', 1)
+				.assert({a:1})
+		})
+		it('should allow adding new methods', () => {
+			var oIs2 = oIs.extend({}, {
+				foo() {
+					return 'bar'
+				}
+			})
+			assert.equal(oIs2().equal('foo', 'baz').foo(), 'bar')
+		})
+	})
+
 })
 
