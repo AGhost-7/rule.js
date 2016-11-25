@@ -172,20 +172,7 @@ describe('o-is', () => {
 				.end()
 			assert(o.test({ age: 70, senior: true, money: 15 }))
 		})
-		it('should allow mixtures of ors and ands', () => {
-			const o = oIs()
-				.or()
-					.equal('a', 1)
-					.and()
-						.equal('a', 2)
-						.equal('b', 3)
-					.end()
-				.end()
-			assert(o.test({ a: 1 }))
-			assert(o.test({ a: 2, b: 3 }))
-			assert(!o.test({ a: 2 }))
-			assert(!o.test({ b: 3 }))
-		})
+
 	})
 
 	describe('binding', () => {
@@ -342,6 +329,20 @@ describe('o-is', () => {
 				.end()
 			o.assert({ name: { first: 'jonathan' } })
 			o.assert({ name: { first: 'Jonathan' } })
+		})
+		it('should allow mixtures of ors and ands', () => {
+			const o = oIs()
+				.or()
+					.equal('a', 1)
+					.and()
+						.equal('a', 2)
+						.equal('b', 3)
+					.end()
+				.end()
+			assert(o.test({ a: 1 }))
+			assert(o.test({ a: 2, b: 3 }))
+			assert(!o.test({ a: 2 }))
+			assert(!o.test({ b: 3 }))
 		})
 	})
 
