@@ -28,7 +28,9 @@
   "dependencies": {
   },
   "devDependencies": {
-    "source-map-support": "^0.4.0",
 		"o-is": "^0.0.0"
-  }
+  },
+	"engines": {
+		"node": ">=6.9.0"
+	}
 }

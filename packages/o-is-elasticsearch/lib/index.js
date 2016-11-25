@@ -1,59 +1,55 @@
-"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var conversions = {
-	_expand: function _expand(ts) {
-		var _this = this;
-
-		return ts.map(function (t) {
-			return _this[t.type](t);
-		});
+const conversions = {
+	_expand(ts) {
+		return ts.map((t) => {
+			return this[t.type](t)
+		})
 	},
-	equal: function equal(obj) {
-		var t = { term: {} };
-		t.term[obj.key] = obj.value;
-		return t;
+	equal(obj) {
+		const t = { term: {} }
+		t.term[obj.key] = obj.value
+		return t
 	},
-	lt: function lt(obj) {
-		var r = { range: {} };
+	lt(obj) {
+		const r = { range: {} }
 		r.range[obj.key] = {
 			lt: obj.value
-		};
-		return r;
+		}
+		return r
 	},
-	gt: function gt(obj) {
-		var r = { range: {} };
+	gt(obj) {
+		const r = { range: {} }
 		r.range[obj.key] = {
 			gt: obj.value
-		};
-		return r;
+		}
+		return r
 	},
-	if: function _if(obj) {
+	if(obj) {
 		return {
 			bool: {
-				should: [{
-					bool: {
-						must: this._expand(obj.conds).concat(this._expand(obj.ifTrue))
+				should: [
+					{
+						bool: {
+							must: this._expand(obj.conds).concat(this._expand(obj.ifTrue))
+						},
+					},
+					{
+						bool: {
+							must: this._expand(obj.ifFalse)
+						}
 					}
-				}, {
-					bool: {
-						must: this._expand(obj.ifFalse)
-					}
-				}]
+				]
 			}
-		};
+		}
 	}
-};
+}
 
-var convert = function convert() {
+const convert = function() {
 	return {
 		bool: {
 			must: conversions._expand(this.tests)
 		}
-	};
-};
+	}
+}
 
-exports.default = convert;
+module.exports = convert

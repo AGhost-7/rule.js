@@ -2,22 +2,13 @@
   "name": "o-is",
   "version": "1.0.0",
   "description": "",
+	"private": true,
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build:src": "for d in packages/*; do babel $PWD/$d/src -d $PWD/$d/lib; done ",
-    "build:test": "for d in packages/*; do babel $PWD/$d/test -d $PWD/$d/.test; done",
-    "build": "npm run build:src && npm run build:test",
-		"build:es": "babel packages/o-is-elasticsearch/src -d packages/o-is-elasticsearch/lib && babel packages/o-is-elasticsearch/test -d packages/o-is-elasticsearch/.test",
-		"test:es": "mocha packages/o-is-elasticsearch/.test",
-		"dev:es": "npm run build:es && npm run test:es",
-		"dev": "mocha --require babel-register.js --watch packages/* packages/*/test/**/*.js",
-    "test": "mocha packages/*/.test/**/*.js"
+    "test": "mocha packages/*/test/**/*.js"
   },
   "dependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-register": "^6.18.0",
     "eslint": "^2.10.2",
     "lerna": "^1.1.2",
     "mocha": "^3.1.2"
