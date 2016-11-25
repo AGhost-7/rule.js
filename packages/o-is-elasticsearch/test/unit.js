@@ -1,8 +1,5 @@
 'use strict'
 
-import sourceMapSupport from 'source-map-support'
-sourceMapSupport.install()
-
 const oIsElasticsearch = require('../index')
 const oIs = require('o-is').extend({}, {
 	elasticsearch: oIsElasticsearch
@@ -10,7 +7,7 @@ const oIs = require('o-is').extend({}, {
 
 const assert = require('assert')
 
-describe('o-is-elasticsearch', () => {
+describe('o-is-elasticsearch#unit', () => {
 
 	it('converts arbitrary comparisons', () => {
 		const query = oIs()

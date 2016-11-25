@@ -19,18 +19,18 @@
     "Storable",
     "Conditions",
     "Validation",
-		"Elasticsearch"
+    "Elasticsearch"
   ],
   "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com>",
   "license": "MIT",
-  "bugs": {
-  },
-  "dependencies": {
-  },
+  "bugs": {},
+  "dependencies": {},
   "devDependencies": {
-		"o-is": "^0.0.0"
+    "elasticsearch": "^12.1.0",
+    "o-is": "^0.0.0",
+    "power-assert": "^1.4.2"
   },
-	"engines": {
-		"node": ">=6.9.0"
-	}
+  "engines": {
+    "node": ">=6.9.0"
+  }
 }

@@ -1,0 +1,38 @@
+[
+	{
+		"firstName": "Jonathan",
+		"lastName": "Boudreau",
+		"age": 24,
+		"deceased": false,
+		"occupation": "Software Developer",
+		"country": "Canada",
+		"instrument": "Guitar"
+	},
+	{
+		"firstName": "Joe",
+		"lastName": "Pass",
+		"age": 65,
+		"deceased": true,
+		"occupation": "Musician",
+		"country": "US",
+		"instrument": "Guitar"
+	},
+	{
+		"firstName": "Nils",
+		"lastName": "Frahm",
+		"age": 34,
+		"deceased": false,
+		"occupation": "Musician",
+		"country": "Germany",
+		"instrument": "Piano"
+	},
+	{
+		"firstName": "Bill",
+		"lastName": "Evans",
+		"age": 51,
+		"deceased": true,
+		"occupation": "Musician",
+		"country": "US",
+		"instrument": "Piano"
+	}
+]
