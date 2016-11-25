@@ -30,6 +30,8 @@
     "lodash.get": "^4.2.1"
   },
   "devDependencies": {
-    "source-map-support": "^0.4.0"
-  }
+  },
+	"engine": {
+		"node": ">=6.9.0"
+	}
 }

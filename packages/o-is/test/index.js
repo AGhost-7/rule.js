@@ -1,7 +1,5 @@
 'use strict'
 
-import sourceMapSupport from 'source-map-support'
-sourceMapSupport.install()
 const oIs = require('../index')
 const assert = require('assert')
 
@@ -170,9 +168,23 @@ describe('o-is', () => {
 						.true('junior')
 					.end()
 				.then()
-				.lt('money', 20)
+					.lt('money', 20)
 				.end()
 			assert(o.test({ age: 70, senior: true, money: 15 }))
+		})
+		it('should allow mixtures of ors and ands', () => {
+			const o = oIs()
+				.or()
+					.equal('a', 1)
+					.and()
+						.equal('a', 2)
+						.equal('b', 3)
+					.end()
+				.end()
+			assert(o.test({ a: 1 }))
+			assert(o.test({ a: 2, b: 3 }))
+			assert(!o.test({ a: 2 }))
+			assert(!o.test({ b: 3 }))
 		})
 	})
 
