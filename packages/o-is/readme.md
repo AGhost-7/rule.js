@@ -116,7 +116,7 @@ const merged = oIs().equal('fullName.lastName', 'Boudreau').cons(cond);
 
 ## Not (Logical Inversion)
 When you call `not`, the next method chain's result will be inverted.
-```
+```javascript
 oIs()
 	.not().equal('a', 1)
 	.not().exist('c')
@@ -153,13 +153,23 @@ oIs()
 ```
 
 ## Or Statement
-```
+```javascript
 oIs()
 	.or()
 		.equal('a', 1)
 		.equal('a', 2)
 	.end()
 	.test({ a: 2 }); // => true
+
+oIs()
+	.or()
+		.equal('a', 1)
+		.and()
+			.equal('a', 2)
+			.equal('b', 3)
+		.end()
+	.end()
+	.test({ a: 2, b: 3 }) // => true
 ```
 
 # TODO
