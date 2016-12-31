@@ -79,10 +79,6 @@ const assertions = {
 		const val = get(context, args.key)
 		return val === null || val === undefined
 	},
-	number(context, args) {
-		const val = get(context, args.key)
-		return !isNaN(val)
-	},
 	empty(context, args) {
 		const v = get(context, args.key)
 		if(v === null) {
@@ -101,9 +97,6 @@ const assertions = {
 	},
 	exist(context, args) {
 		return !this.nil(context, args)
-	},
-	string(context, args) {
-		return typeof get(context, args.key) === 'string'
 	}
 }
 
@@ -150,8 +143,7 @@ const keyOnlyTestMethods = [
 	'false',
 	'nil',
 	'empty',
-	'exist',
-	'number'
+	'exist'
 ]
 
 const kvOnlyTestMethods = [

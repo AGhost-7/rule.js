@@ -27,10 +27,6 @@ describe('o-is', () => {
 			{
 				type: 'propsEqual',
 				keys: ['name', 'fullName.first']
-			},
-			{
-				type: 'string',
-				key: 'name'
 			}
 		]
 
@@ -38,32 +34,6 @@ describe('o-is', () => {
 			oIs.test(oIs.assertions, obj, tests)
 		})
 
-		it('should return the type of failure', () => {
-			const res = oIs.test(oIs.assertions, { a: 'BOOM' }, [{
-				type: 'number',
-				key: 'a'
-			}])
-
-			assert.ok(!res)
-		})
-
-		// This will be handy for client-side generation of error messages.
-		it('should gimme more detailed errors', () => {
-			const res = oIs.testDetailed(oIs.assertions, obj, [
-				{
-					type: 'equal',
-					key: 'name',
-					value: 'jonathan'
-				},
-				{
-					type: 'number',
-					key: 'name'
-				}
-			])
-
-			assert.equal(res[0].test.key, 'name')
-			assert.equal(res[0].test.type, 'number')
-		})
 	})
 
 	describe('builder basics', () => {
@@ -86,7 +56,7 @@ describe('o-is', () => {
 				.lt('a', 10)
 				.gt('a', 0)
 				.exist('a')
-				.number('a')
+				.equal('a', 1)
 				.propsEqual('a', 'foo.bar')
 				.equal('arr[0]', 1)
 				.assert({
