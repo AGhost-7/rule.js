@@ -99,7 +99,8 @@ const prepareIndex = (done) => {
 
 describe('o-is-elasticsearch#functional', () => {
 
-	before((done) => {
+	before(function(done) {
+		this.timeout(10000)
 		prepareIndex((err) => {
 			if(err) return done(err)
 			es.bulk({
