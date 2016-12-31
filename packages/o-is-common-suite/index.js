@@ -1,9 +1,9 @@
 const assert = require('assert')
 
-const data = [
+exports.data = [
 ]
 
-const tests = [
+exports.tests = [
 	[
 		oIs()
 			.equal('name', 'Joe'),
@@ -29,14 +29,3 @@ const tests = [
 	]
 ]
 
-const createCommonSuite = (it) => {
-	it(
-}
-
-describe('o-is-elasticsearch#common', () => {
-	before(() => {
-	})
-
-	execCommonSuite({
-	})
-})
