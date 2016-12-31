@@ -13,7 +13,6 @@ describe('o-is-elasticsearch#unit', () => {
 		const query = oIs()
 			.equal('foo', 'bar')
 			.elasticsearch()
-		console.log(query)
 		assert.equal(query.bool.must[0].term.foo, 'bar');
 	})
 
