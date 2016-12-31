@@ -55,7 +55,7 @@ const assertions = {
 		return !self.equal(context, args)
 	},
 	propsEqual(context, args) {
-		return get(context, args.keys[0]) === get(context, args.keys[0])
+		return get(context, args.keys[0]) === get(context, args.keys[1])
 	},
 	undefined(context, args) {
 		return get(context, args.key) === undefined
@@ -148,7 +148,8 @@ const keyOnlyTestMethods = [
 
 const kvOnlyTestMethods = [
 	'lt',
-	'gt'
+	'gt',
+	'notEqual'
 ]
 
 keyOnlyTestMethods.forEach((name) => {

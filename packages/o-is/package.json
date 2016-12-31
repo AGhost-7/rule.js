@@ -30,6 +30,7 @@
     "lodash.get": "^4.2.1"
   },
   "devDependencies": {
+		"o-is-common-suite": "^0.0.0"
   },
 	"engine": {
 		"node": ">=6.9.0"
