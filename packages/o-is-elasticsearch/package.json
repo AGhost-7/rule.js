@@ -28,7 +28,8 @@
   "devDependencies": {
     "elasticsearch": "^12.1.0",
     "o-is": "^0.0.0",
-    "power-assert": "^1.4.2"
+    "power-assert": "^1.4.2",
+		"o-is-common-suite": "^0.0.0"
   },
   "engines": {
     "node": ">=6.9.0"

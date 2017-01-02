@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "test": "mocha packages/*/test/**/*.js"
+    "test": "mocha packages/*/test/**/*.test.js"
   },
   "dependencies": {
     "eslint": "^2.10.2",

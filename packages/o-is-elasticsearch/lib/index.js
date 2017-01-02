@@ -13,6 +13,7 @@ const term = (key, val) => {
 
 const conversions = {
 	_expand(ts) {
+		if(!ts.map) console.log('ts:', ts)
 		return ts.map((t) => {
 			return this[t.type](t)
 		})
@@ -57,7 +58,7 @@ const conversions = {
 	not(obj) {
 		return {
 			bool: {
-				must_not: this._expand(obj.args)
+				must_not: conversions[obj.args.type](obj.args)
 			}
 		}
 	},
