@@ -1,3 +1,4 @@
+'use strict'
 
 const objOf = (key, val) => {
 	const obj = {}
@@ -17,11 +18,6 @@ const conversions = {
 		return ts.map((t) => {
 			return this[t.type](t)
 		})
-	},
-	equal(obj) {
-		const t = { term: {} }
-		t.term[obj.key] = obj.value
-		return t
 	},
 	lt(obj) {
 		const r = { range: {} }

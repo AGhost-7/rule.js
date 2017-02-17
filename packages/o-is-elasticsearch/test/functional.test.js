@@ -1,3 +1,4 @@
+'use strict'
 
 const assert = require('power-assert')
 const esUtil = require('./es-util')

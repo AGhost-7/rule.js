@@ -1,3 +1,5 @@
+'use strict'
+
 const esUtil = require('./es-util')
 
 const oIsElasticsearch = require('../index')

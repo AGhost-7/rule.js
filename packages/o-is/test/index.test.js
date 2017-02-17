@@ -34,6 +34,18 @@ describe('o-is', () => {
 			oIs.test(oIs.assertions, obj, tests)
 		})
 
+		it('should fail', () => {
+			const res = oIs.test(oIs.assertions, {}, [{
+				type: 'fail'
+			}])
+			assert(!res)
+		})
+		it('should pass', () => {
+			const res = oIs.test(oIs.assertions, {}, [{
+				type: 'pass'
+			}])
+			assert(res)
+		})
 	})
 
 	describe('builder basics', () => {

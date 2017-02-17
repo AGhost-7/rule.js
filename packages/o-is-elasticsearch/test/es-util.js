@@ -1,3 +1,4 @@
+'use strict'
 
 const oIsElasticsearch = require('../index')
 const oIs = require('o-is').extend({}, {
@@ -10,7 +11,8 @@ const es = new elasticsearch.Client({
 })
 
 const promiseResolver = (resolve, reject) => (err, res) => {
-	err? reject(err) : resolve(res)
+	if(err) reject(err)
+	else resolve(res)
 }
 
 exports.search = (filter) => {

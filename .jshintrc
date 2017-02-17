@@ -1,0 +1,10 @@
+{
+	"esversion": 6,
+	"forin": false,
+	"strict": true,
+	"maxdepth": 5,
+	"maxstatements": 20,
+	"asi": true,
+	"node": true,
+	"mocha": true
+}

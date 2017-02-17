@@ -1,3 +1,5 @@
+'use strict'
+
 const oIs = require('../index')
 const commonSuite = require('o-is-common-suite')(oIs)
 

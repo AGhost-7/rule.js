@@ -45,6 +45,12 @@ const assert = (assertions, context, tests) => {
 }
 
 const assertions = {
+	fail() {
+		return false
+	},
+	pass() {
+		return true
+	},
 	not(context, args, self) {
 		return assertNot(context, args, self)
 	},

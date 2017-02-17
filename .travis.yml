@@ -4,4 +4,4 @@ node_js:
 services:
   - "elasticsearch"
 before_script: npm run bootstrap
-script: npm test
+script: npm run ci
