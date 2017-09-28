@@ -19,7 +19,6 @@ exports.search = (filter) => {
 				}
 			}
 		}
-		console.log('body is:', JSON.stringify(body, null, 2))
 		es.search({
 			index: 'test',
 			body

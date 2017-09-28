@@ -105,10 +105,13 @@ const conversions = {
 	propsEqual(obj) {
 		return {
 			script: {
-				script: `doc[val1].value == doc['val2']`,
-				params: {
-					val1: obj.keys[0],
-					val2: obj.keys[1]
+				script: {
+					lang: 'painless',
+					inline: 'doc[params.val1].value == doc[params.val2].value',
+					params: {
+						val1: obj.keys[0],
+						val2: obj.keys[1]
+					}
 				}
 			}
 		}

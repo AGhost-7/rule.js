@@ -9,7 +9,7 @@ const containsProp = (arr, prop, val) => {
 const containsName = (arr, name) => containsProp(arr, 'firstName', name)
 
 const containsNames = (arr, names) => names.every((name) => {
-		return containsName(arr, name)
+	return containsName(arr, name)
 })
 
 module.exports = (oIs) => {
@@ -86,15 +86,15 @@ module.exports = (oIs) => {
 					assert(!containsProp(res, 'firstName', 'Joe'))
 				}
 			],
-			//[
-			//	'propsEqual',
-			//	oIs()
-			//		.propsEqual('deceased', 'virtuoso'),
-			//	(res) => {
-			//		assert.equal(res.length, 3)
-			//		assert(!containsProp(res, 'firstName', 'Bill'))
-			//	}
-			//],
+			[
+				'propsEqual',
+				oIs()
+					.propsEqual('deceased', 'virtuoso'),
+				(res) => {
+					assert.equal(res.length, 3)
+					assert(!containsProp(res, 'firstName', 'Bill'))
+				}
+			],
 			[
 				'simple notEqual',
 				oIs()
