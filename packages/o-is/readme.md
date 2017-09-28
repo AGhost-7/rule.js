@@ -171,23 +171,3 @@ oIs()
 	.end()
 	.test({ a: 2, b: 3 }) // => true
 ```
-
-# TODO
-
-Provide enough data for phrase construction:
-```javascript
-const phrase = (results) => {
-	return results.reduce((accu, part) => {
-		if(part.type === 'if') {
-			return accu + ' when ' ...
-		} else if(part.type === 'equal') {
-			return accu + ' ' + type.key + ' should be equal ' + part.value;
-		}
-		...
-	}, '');
-};
-
-// ...or something
-
-```
-

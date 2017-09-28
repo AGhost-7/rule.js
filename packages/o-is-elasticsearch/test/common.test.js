@@ -43,6 +43,9 @@ describe('o-is-elastiscearch#common', () => {
 							},
 							instrument: {
 								type: 'keyword'
+							},
+							description: {
+								type: 'text'
 							}
 						}
 					}

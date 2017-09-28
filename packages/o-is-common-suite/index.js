@@ -24,6 +24,7 @@ module.exports = (oIs) => {
 				virtuoso: false,
 				occupation: 'Software Developer',
 				country: 'Canada',
+				description: '',
 				instrument: 'Guitar'
 			},
 			{
@@ -34,7 +35,8 @@ module.exports = (oIs) => {
 				virtuoso: true,
 				occupation: 'Musician',
 				country: 'US',
-				instrument: 'Guitar'
+				instrument: 'Guitar',
+				description: 'Joe Pass was an American virtuoso jazz guitarist of Sicilian descent.'
 			},
 			{
 				firstName: 'Nils',
@@ -44,6 +46,7 @@ module.exports = (oIs) => {
 				virtuoso: false,
 				occupation: 'Musician',
 				country: 'Germany',
+				description: 'Nils Frahm (born 20 September 1982) is a German musician, composer and record producer based in Berlin.',
 				instrument: 'Piano'
 			},
 			{
@@ -53,6 +56,7 @@ module.exports = (oIs) => {
 				deceased: true,
 				virtuoso: false,
 				occupation: 'Musician',
+				description: null,
 				country: 'US',
 				instrument: 'Piano'
 			}
@@ -60,7 +64,7 @@ module.exports = (oIs) => {
 
 		tests: [
 			[
-				'simple equal',
+				'equal',
 				oIs()
 					.equal('firstName', 'Joe'),
 				(res) => {
@@ -68,7 +72,7 @@ module.exports = (oIs) => {
 				}
 			],
 			[
-				'simple or',
+				'or',
 				oIs()
 					.or()
 						.equal('firstName', 'Nils')
@@ -79,7 +83,7 @@ module.exports = (oIs) => {
 				}
 			],
 			[
-				'simple not',
+				'not',
 				oIs()
 					.not().equal('firstName', 'Joe'),
 				(res) => {
@@ -96,7 +100,7 @@ module.exports = (oIs) => {
 				}
 			],
 			[
-				'simple notEqual',
+				'notEqual',
 				oIs()
 					.notEqual('deceased', false),
 				(res) => {
@@ -105,7 +109,7 @@ module.exports = (oIs) => {
 				}
 			],
 			[
-				'simple false',
+				'false',
 				oIs().false('deceased'),
 				(res) => {
 					assert.equal(res.length, 2)
@@ -113,11 +117,28 @@ module.exports = (oIs) => {
 				}
 			],
 			[
-				'simple true',
+				'true',
 				oIs().true('virtuoso'),
 				(res) => {
 					assert.equal(res.length, 1)
 					assert(containsName(res, 'Joe'))
+				}
+			],
+			[
+				'gt',
+				oIs().gt('age', 24),
+				(res) => {
+					assert.equal(res.length, 3)
+				}
+			],
+			[
+				'multiple conditions',
+				oIs()
+					.gt('age', 24)
+					.lt('age', 50),
+				(res) => {
+					assert(containsName(res, 'Nils'))
+					assert.equal(res.length, 1)
 				}
 			],
 			[
@@ -157,6 +178,13 @@ module.exports = (oIs) => {
 				(res) => {
 					assert.equal(res.length, 2)
 					assert(!containsName(res, ['Nils']))
+				}
+			],
+			[
+				'null',
+				oIs().null('description'),
+				(res) => {
+					assert.equal(res.length, 1)
 				}
 			]
 		]

@@ -63,9 +63,6 @@ const assertions = {
 	propsEqual(context, args) {
 		return get(context, args.keys[0]) === get(context, args.keys[1])
 	},
-	undefined(context, args) {
-		return get(context, args.key) === undefined
-	},
 	null(context, args) {
 		return get(context, args.key) === null
 	},
@@ -80,29 +77,6 @@ const assertions = {
 	},
 	lt(context, args) {
 		return get(context, args.key) < args.value
-	},
-	nil(context, args) {
-		const val = get(context, args.key)
-		return val === null || val === undefined
-	},
-	empty(context, args) {
-		const v = get(context, args.key)
-		if(v === null) {
-			return true
-		}
-		if(v === undefined) {
-			return true
-		}
-		if(typeof v === 'string') {
-			return v.trim().length === 0
-		}
-		if(Array.isArray(v)) {
-			return v.length === 0
-		}
-		return false
-	},
-	exist(context, args) {
-		return !this.nil(context, args)
 	}
 }
 
@@ -143,13 +117,9 @@ const memberTestMethods = {
 }
 
 const keyOnlyTestMethods = [
-	'undefined',
 	'null',
 	'true',
-	'false',
-	'nil',
-	'empty',
-	'exist'
+	'false'
 ]
 
 const kvOnlyTestMethods = [

@@ -33,6 +33,11 @@ const conversions = {
 		}
 		return r
 	},
+	exists(obj) {
+		return {
+			exists: objOf('field', obj.key)
+		}
+	},
 	if(obj) {
 		const query = {
 			bool: {
@@ -97,7 +102,15 @@ const conversions = {
 		return term(obj.key, null)
 	},
 	null(obj) {
-		return term(obj.key, null)
+		return {
+			bool: {
+				must_not: [
+					{
+						exists: objOf('field', obj.key)
+					}
+				]
+			}
+		}
 	},
 	// This is the only possible way to handle this in elasticsearch.
 	// Normally you're not going to need this when running elasticsearch
