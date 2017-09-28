@@ -119,6 +119,45 @@ module.exports = (oIs) => {
 					assert.equal(res.length, 1)
 					assert(containsName(res, 'Joe'))
 				}
+			],
+			[
+				'if',
+				oIs()
+					.if()
+						.lt('age', 40)
+					.then()
+						.equal('occupation', 'Musician')
+					.end(),
+				(res) => {
+					assert(!containsName(res, ['Jonathan']))
+				}
+			],
+			[
+				'if else',
+				oIs()
+					.if()
+						.equal('firstName', 'Joe')
+					.then()
+						.equal('age', 65)
+					.else()
+						.equal('deceased', false)
+					.end(),
+				(res) => {
+					assert.equal(res.length, 3)
+				}
+			],
+			[
+				'if not',
+				oIs()
+					.if()
+						.not().true('virtuoso')
+					.then()
+						.not().equal('occupation', 'Musician')
+					.end(),
+				(res) => {
+					assert.equal(res.length, 2)
+					assert(!containsName(res, ['Nils']))
+				}
 			]
 		]
 	}

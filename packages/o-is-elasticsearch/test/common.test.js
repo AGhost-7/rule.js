@@ -21,12 +21,10 @@ describe('o-is-elastiscearch#common', () => {
 					people: {
 						properties: {
 							firstName: {
-								type: 'string',
-								index: 'not_analyzed'
+								type: 'keyword'
 							},
 							lastName: {
-								type: 'string',
-								index: 'not_analyzed'
+								type: 'keyword'
 							},
 							age: {
 								type: 'integer'
@@ -38,13 +36,13 @@ describe('o-is-elastiscearch#common', () => {
 								type: 'boolean'
 							},
 							occupation: {
-								type: 'string'
+								type: 'keyword'
 							},
 							country: {
-								type: 'string'
+								type: 'keyword'
 							},
 							instrument: {
-								type: 'string'
+								type: 'keyword'
 							}
 						}
 					}
