@@ -13,7 +13,7 @@ describe('o-is-elasticsearch#unit', () => {
 		const query = oIs()
 			.equal('foo', 'bar')
 			.elasticsearch()
-		assert.equal(query.bool.must[0].term.foo, 'bar');
+		assert.equal(query.bool.must[0].term.foo, 'bar')
 	})
 
 	it('converts lt and gt', () => {

@@ -34,7 +34,7 @@ const conversions = {
 		return r
 	},
 	if(obj) {
-		return {
+		const query = {
 			bool: {
 				should: [
 					{
@@ -42,14 +42,23 @@ const conversions = {
 							must: this._expand(obj.conds).concat(this._expand(obj.ifTrue))
 						},
 					},
-					{
-						bool: {
-							must: this._expand(obj.ifFalse)
-						}
-					}
 				]
 			}
 		}
+		if(obj.ifFalse && obj.ifFalse.length) {
+			query.bool.should.push({
+				bool: {
+					must: this._expand(obj.ifFalse)
+				}
+			})
+		} else {
+			query.bool.should.push({
+				bool: {
+					must_not: this._expand(obj.conds)
+				}
+			})
+		}
+		return query
 	},
 	not(obj) {
 		return {
@@ -96,7 +105,11 @@ const conversions = {
 	propsEqual(obj) {
 		return {
 			script: {
-				script: `doc['${obj.keys[0]}'].value == doc['${obj.keys[1]}']`
+				script: `doc[val1].value == doc['val2']`,
+				params: {
+					val1: obj.keys[0],
+					val2: obj.keys[1]
+				}
 			}
 		}
 	},

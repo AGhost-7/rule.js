@@ -1,10 +1,5 @@
 'use strict'
 
-const oIsElasticsearch = require('../index')
-const oIs = require('o-is').extend({}, {
-	elasticsearch: oIsElasticsearch
-})
-
 const elasticsearch = require('elasticsearch')
 const es = new elasticsearch.Client({
 	host: process.env.O_IS_ES_HOST || 'localhost:9200'
@@ -19,14 +14,12 @@ exports.search = (filter) => {
 	return new Promise((resolve, reject) => {
 		const body = {
 			query: {
-				filtered: {
-					query: {
-						match_all: {}
-					},
+				bool: {
 					filter
 				}
 			}
 		}
+		console.log('body is:', JSON.stringify(body, null, 2))
 		es.search({
 			index: 'test',
 			body

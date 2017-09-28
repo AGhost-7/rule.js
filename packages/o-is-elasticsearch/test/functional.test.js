@@ -16,41 +16,41 @@ describe('o-is-elasticsearch#functional', () => {
 	before(function() {
 		this.timeout(10000)
 		return esUtil.prepareType({
-				mapping: {
-					index: 'test',
-					type: 'people',
-					body: {
-						people: {
-							properties: {
-								firstName: {
-									type: 'string',
-									index: 'not_analyzed'
-								},
-								lastName: {
-									type: 'string',
-									index: 'not_analyzed'
-								},
-								age: {
-									type: 'integer'
-								},
-								deceased: {
-									type: 'boolean'
-								},
-								occupation: {
-									type: 'string'
-								},
-								country: {
-									type: 'string'
-								},
-								instrument: {
-									type: 'string'
-								}
+			mapping: {
+				index: 'test',
+				type: 'people',
+				body: {
+					people: {
+						properties: {
+							firstName: {
+								type: 'string',
+								index: 'not_analyzed'
+							},
+							lastName: {
+								type: 'string',
+								index: 'not_analyzed'
+							},
+							age: {
+								type: 'integer'
+							},
+							deceased: {
+								type: 'boolean'
+							},
+							occupation: {
+								type: 'string'
+							},
+							country: {
+								type: 'string'
+							},
+							instrument: {
+								type: 'string'
 							}
 						}
 					}
-				},
-				data: require('./fixtures/es-data')
-			})
+				}
+			},
+			data: require('./fixtures/es-data')
+		})
 	})
 
 	it('allows strict equality', () => {
@@ -88,15 +88,16 @@ describe('o-is-elasticsearch#functional', () => {
 	})
 
 	describe('if conditions', () => {
+
 		it('handles simple conditions', () => {
 			const query = oIs()
-				.if().gt('age', 60).then()
-					.equal('firstName', 'Joe')
+				.if().equal('firstName', 'Joe').then()
+					.gt('age', 64)
 				.end()
 				.elasticsearch()
 			return search(query)
 				.then((res) => {
-					assert.equal(res.hits.hits.length, 1)
+					assert.equal(res.hits.hits.length, 4)
 				})
 		})
 

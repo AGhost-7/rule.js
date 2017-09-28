@@ -18,6 +18,15 @@
 		"instrument": "Guitar"
 	},
 	{
+		"firstName": "Joe",
+		"lastName": "Satriani",
+		"age": 61,
+		"deceased": false,
+		"occupation": "Musician",
+		"country": "US",
+		"instrument": "Guitar"
+	},
+	{
 		"firstName": "Nils",
 		"lastName": "Frahm",
 		"age": 34,
