@@ -8,6 +8,9 @@ module.exports = function(oIs, options) {
 
 	if(!options) options = {}
 
+	const oIsMembers = assign({}, oIs.members, options.members || {})
+	const oIsAssertions = assign({}, oIs.assertions, options.assertions || {})
+
 	const constraintTypes = {
 		mandatory(context, args) {
 			const errors = []
@@ -37,7 +40,7 @@ module.exports = function(oIs, options) {
 	const constraintMembers = {
 		assert(context) {
 			for(const constraint of this._constraints) {
-				if(oIs.test(oIs.assertions, context, constraint.conditions)) {
+				if(oIs.test(oIsAssertions, context, constraint.conditions)) {
 					const errors = constraintTypes[constraint.type](context, constraint.args)
 					if(errors.length > 0) {
 						const message = util.format(
@@ -49,11 +52,20 @@ module.exports = function(oIs, options) {
 					}
 				}
 			}
+		},
+		errors(context) {
+			const errors = []
+			for(const constraint of this._constraints) {
+				if(oIs.test(oIsAssertions, context, constraint.conditions)) {
+					for(const error of constraintTypes[constraint.type](context, constraint.args)) {
+						errors.push(error)
+					}
+				}
+			}
+			return errors
 		}
 	}
 
-	const oIsAssertions = assign({}, oIs.assertions, options.assertions || {})
-	const oIsMembers = assign({}, oIs.members, options.members || {})
 
 	for(let type in constraintTypes) {
 		oIsMembers[type] = (function(type) {

@@ -30,5 +30,10 @@ describe('o-is-constraint', () => {
 			.assert({ role: 'admin', subRole: 'super', hobbies: ['guitar'] })
 	})
 
+	it('errors', () => {
+		const errors = constraint.mandatory('foobar').errors({ foobar: null })
+		assert.equal(errors.length, 1)
+	})
+
 })
 
