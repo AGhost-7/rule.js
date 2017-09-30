@@ -256,8 +256,10 @@ mod.ObjectIs = ObjectIs
 mod.test = testFn
 mod.testDetailed = testDetailed
 mod.assertions = assertions
+mod.members = members
 mod.get = get
 mod.extend = extend
+mod.createClass = createClass
 
 module.exports = mod
 
