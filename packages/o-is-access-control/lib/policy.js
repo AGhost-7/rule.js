@@ -1,11 +1,10 @@
-/**
- * Immutable builder for policies.
- */
-
 'use strict'
+
+const oIsDefault = require('./o-is-default')
 
 function Policy(policySet, effect) {
 	this._policySet = policySet
+	this._oIs = policySet._oIs || oIsDefault
 	this._target = null
 	this._action = null
 	this._condition = null
@@ -41,19 +40,18 @@ Policy.prototype.deny = function() {
 	return this._policySet.concat(this).deny()
 }
 
+Policy.prototype.concat = function(item) {
+	return this._policySet.concat(this, item)
+}
+
 Policy.prototype.condition = function() {
-	const o = this._policySet._oIs()
+	const o = this._oIs()
 	o._policy = this
 	return o
 }
 
 Policy.prototype.toJSON = function() {
-	return {
-		effect: this._effect,
-		action: this._action,
-		condition: this._condition,
-		target: this._target
-	}
+	return this._policySet.concat(this).toJSON()
 }
 
 module.exports = Policy

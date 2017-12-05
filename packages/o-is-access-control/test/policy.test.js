@@ -22,10 +22,9 @@ describe('policy', () => {
 			.effect('allow')
 			.action('create')
 			.target('video')
-			.toJSON()
-		assert.equal(policy.effect, 'allow')
-		assert.equal(policy.action, 'create')
-		assert.equal(policy.target, 'video')
+		assert.equal(policy._effect, 'allow')
+		assert.equal(policy._action, 'create')
+		assert.equal(policy._target, 'video')
 	})
 
 	it('condition', () => {
@@ -33,10 +32,9 @@ describe('policy', () => {
 			.condition()
 				.equal('foo', 'bar')
 			.end()
-			.toJSON()
 
-		assert.equal(policy.condition[0].key, 'foo')
-		assert.equal(policy.condition[0].value, 'bar')
-		assert.equal(policy.condition[0].type, 'equal')
+		assert.equal(policy._condition[0].key, 'foo')
+		assert.equal(policy._condition[0].value, 'bar')
+		assert.equal(policy._condition[0].type, 'equal')
 	})
 })

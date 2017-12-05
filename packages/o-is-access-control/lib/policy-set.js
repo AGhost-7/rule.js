@@ -1,7 +1,8 @@
 'use strict'
 
-const Policy = require('./lib/policy')
-const oIsDefault = require('./lib/o-is-default')
+const oIsDefault = require('./o-is-default')
+
+const Policy = require('./policy')
 
 const authorize = function(oIs, policies, options) {
 	const context = {
@@ -17,12 +18,12 @@ const authorize = function(oIs, policies, options) {
 				policy.target === options.target &&
 				oIs.test(assertions, context, condition)) {
 			switch(policy.effect) {
-				case 'allow':
-					return true
-				case 'deny':
-					return false
-				default:
-					throw new Error('Invalid effect "' + policy.effect + '"')
+			case 'allow':
+				return true
+			case 'deny':
+				return false
+			default:
+				throw new Error('Invalid effect "' + policy.effect + '"')
 			}
 		}
 	}
@@ -44,8 +45,24 @@ PolicySet.prototype.allow = function() {
 	return new Policy(this, 'allow')
 }
 
-module.exports = PolicySet
-PolicySet.policy = function(options) {
-	var oIs = (options && options.oIs) || oIs
-	return new Policy(oIs)
+PolicySet.prototype.concat = function() {
+	var policies = Array.prototype.concat.apply(this._policies, arguments)
+	return new PolicySet(this._oIs, policies)
 }
+
+PolicySet.prototype.toJSON = function() {
+	return this._policies.map((policy) => {
+		return {
+			effect: policy._effect,
+			action: policy._action,
+			condition: policy._condition,
+			target: policy._target
+		}
+	})
+}
+
+PolicySet.prototype.authorize = function(options) {
+	return authorize(this._oIs, this._policies, options)
+}
+
+module.exports = PolicySet

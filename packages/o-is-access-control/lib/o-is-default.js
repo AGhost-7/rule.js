@@ -7,7 +7,6 @@ const OIsClass = oIs.createClass(oIs.assertions, oIs.members)
 OIsClass.prototype.end = function() {
 	const copy = this._policy._copy()
 	copy._condition = this.tests
-	console.log('copy:', copy)
 	return copy
 }
 

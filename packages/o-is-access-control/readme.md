@@ -1,4 +1,4 @@
-# o-is-abac
+# o-is-access-control
 [Attribute-based access control][1] inspired by [xacml][2]
 
 ## Glossary
@@ -12,9 +12,9 @@ global settings/configurations.
 
 ## Example
 ```javascript
-const ABAC = require('o-is-abac');
+const ABAC = require('o-is-access-control');
 
-const control = ABAC.control()
+const control = ABAC.policySet()
 	.deny()
 		.target('todo_item')
 		.action('create')
@@ -56,8 +56,8 @@ const decision = controlWithReadTodoRule.authorize({
 
 ```
 
-Data can be serialized/deserialize. The above example would look like the
-following:
+This access control module can be serialized/deserialized. The above example
+would look like the following when converted to JSON:
 ```json
 [
 	{
@@ -92,8 +92,6 @@ Using this model, one can implement virtually any kind of access control; role
 based access control, multi-level access control, etc.
 
 ```
-## TODO
-- dependencies
 
 [1]: https://en.wikipedia.org/wiki/Attribute-based_access_control
 [2]: http://docs.oasis-open.org/xacml/3.0/errata01/os/xacml-3.0-core-spec-errata01-os-complete.html

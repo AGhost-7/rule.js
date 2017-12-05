@@ -1,5 +1,5 @@
 {
-	"name": "o-is-abac",
+	"name": "o-is-access-control",
 	"version": "0.0.0",
 	"description": "Attribute base access control using o-is for the conditions",
 	"main": "index.js",
