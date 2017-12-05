@@ -30,7 +30,7 @@ const control = ABAC.policySet()
 		.end()
 
 
-# Rules can be composed together.
+// Rules can be composed together.
 const policy = ABAC.policy()
 	.allow()
 		.target('todo_item')
@@ -39,7 +39,7 @@ const policy = ABAC.policy()
 			.propsEqual('subject.id', 'resource.collaborators')
 		.end()
 
-const controlWithReadTodoRule = control.concat(rule);
+const controlWithReadTodoRule = control.concat(rule)
 
 const decision = controlWithReadTodoRule.authorize({
 	environment: {},

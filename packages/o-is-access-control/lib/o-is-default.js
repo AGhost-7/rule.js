@@ -17,3 +17,7 @@ OIsClass.prototype._create = function(tests, boundKeys) {
 }
 
 module.exports = (items) => new OIsClass(items || [], [])
+
+module.exports.test = oIs.test
+module.exports.assertions = oIs.assertions
+module.exports.members = oIs.members
