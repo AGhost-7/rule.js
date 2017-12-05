@@ -9,12 +9,23 @@
 - environment: Data which is not specific to the resource or subject, e.g.,
 global settings/configurations.
 - effect: If the rule passes, what effect it will have (either deny or allow).
+- policy: A policy is the smallest unit of access control. It represents a
+single rule. A policy reaches a decision based on the context it is given,
+which is the action, resource, subject,
+- policy set: A policy set is a list of policies.
+- strategy: A strategy decides how to use policies. Mainly, these define
+how actions behave, and pass the context over to the policies.
+
 
 ## Example
 ```javascript
-const ABAC = require('o-is-access-control');
+const ABAC = require('o-is-access-control')
+const oIs = require('o-is')
 
-const control = ABAC.policySet()
+// conditions can be re-used.
+const isOwner = oIs().propsEqual('subject.id', 'resource.owner')
+
+const policySet = ABAC.policySet()
 	.deny()
 		.target('todo_item')
 		.action('create')
@@ -25,9 +36,7 @@ const control = ABAC.policySet()
 	.allow()
 		.target('todo_item')
 		.action('create', 'update', 'delete', 'read')
-		.condition()
-			.propsEqual('subject.id', 'resource.owner')
-		.end()
+		.condition(isOwner)
 
 
 // Rules can be composed together.
@@ -39,16 +48,19 @@ const policy = ABAC.policy()
 			.propsEqual('subject.id', 'resource.collaborators')
 		.end()
 
-const controlWithReadTodoRule = control.concat(rule)
+const fullPolicySet = policySet.concat(rule)
 
-const decision = controlWithReadTodoRule.authorize({
-	environment: {},
+const decision = ABAC.strategies.simple(fullPolicySet, {
+	environment: {
+		someGlobalConfigurations: {}
+	},
 	resource: {
 		owner: 'foobar',
 		value: 'example todo item',
-		collaborators: 
+		collaborators: []
 	},
 	action: 'create',
+	target: 'todo_item'
 	subject: {
 		id: 'foobar'
 	}
