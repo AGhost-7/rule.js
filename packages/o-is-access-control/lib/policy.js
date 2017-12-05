@@ -76,8 +76,6 @@ class Policy {
 	 */
 	decision(context) {
 
-		debugger
-
 		if(typeof context.action !== 'string') {
 			throw new Error('Action must be a string.')
 		}
