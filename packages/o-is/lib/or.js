@@ -46,25 +46,5 @@ const createOrClass = (oIsProto) => {
 	return Or
 }
 
-const assertOr = (context, args, self) => {
-	for(var i = 0; i < args.tests.length; i++) {
-		var test = args.tests[i]
-		if(self[test.type](context, test, self)) {
-			return true
-		}
-	}
-	return false
-}
-
-const assertAnd = (context, args, self) => {
-	for(var i = 0; i < args.tests.length; i++) {
-		var test = args.tests[i]
-		if(!self[test.type](context, test, self)) {
-			return false
-		}
-	}
-	return true
-}
-
-module.exports = {createOrClass, assertOr, assertAnd}
+module.exports = {createOrClass}
 

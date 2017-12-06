@@ -1,88 +1,12 @@
 'use strict'
 
+const {assertions, testRunner, assertRunner} = require('./assertions')
 const clone = require('lodash.clone')
 const assign = require('lodash.assign')
 const get = require('lodash.get')
-const {createIfClass, assertIf} = require('./if')
-const {createNotClass, assertNot} = require('./not')
-const {createOrClass, assertOr, assertAnd} = require('./or')
-
-const testFn = (assertions, context, tests) => {
-	for(var i = 0; i < tests.length; i++) {
-		var test = tests[i]
-		var res = assertions[test.type](context, test, assertions, false)
-		if(res !== true) {
-			return false
-		}
-	}
-	return true
-}
-
-const testDetailed = (assertions, context, tests) => {
-	var arr = []
-	for(var i = 0; i < tests.length; i++) {
-		var test = tests[i]
-		var res = assertions[test.type](context, test, assertions, true)
-		if(res !== true) {
-			arr.push({
-				context,
-				test,
-				result: res
-			})
-		}
-	}
-	return arr
-}
-
-const assert = (assertions, context, tests) => {
-	for(var i = 0; i < tests.length; i++) {
-		var test = tests[i]
-		var res = assertions[test.type](context, test, assertions, false)
-		if(res !== true) {
-			throw new Error('Failed for type ' + test.type)
-		}
-	}
-}
-
-const assertions = {
-	fail() {
-		return false
-	},
-	pass() {
-		return true
-	},
-	not(context, args, self) {
-		return assertNot(context, args, self)
-	},
-	equal(context, args) {
-		return args.value === get(context, args.key)
-	},
-	notEqual(context, args, self) {
-		return !self.equal(context, args)
-	},
-	propsEqual(context, args) {
-		return get(context, args.keys[0]) === get(context, args.keys[1])
-	},
-	null(context, args) {
-		return get(context, args.key) === null
-	},
-	true(context, args) {
-		return get(context, args.key) === true
-	},
-	false(context, args) {
-		return get(context, args.key) === false
-	},
-	gt(context, args) {
-		return get(context, args.key) > args.value
-	},
-	lt(context, args) {
-		return get(context, args.key) < args.value
-	}
-}
-
-assertions.if = assertIf
-assertions.or = assertOr
-assertions.and = assertAnd
+const {createIfClass} = require('./if')
+const {createNotClass} = require('./not')
+const {createOrClass} = require('./or')
 
 // below are the sort-of-but-not-really "builders".
 
@@ -194,16 +118,13 @@ const members = {
 		return this
 	},
 	test(obj) {
-		return testFn(this.assertions, obj, this.tests)
-	},
-	testDetailed(obj) {
-		return testDetailed(this.assertions, obj, this.tests)
+		return testRunner(this.assertions, obj, this.tests)
 	},
 	fails(obj) {
 		return !this.test(obj)
 	},
 	assert(obj) {
-		assert(this.assertions, obj, this.tests)
+		assertRunner(this.assertions, obj, this.tests)
 	}
 }
 
@@ -253,8 +174,7 @@ const extend = (a, m) => {
 }
 
 mod.ObjectIs = ObjectIs
-mod.test = testFn
-mod.testDetailed = testDetailed
+mod.test = testRunner
 mod.assertions = assertions
 mod.members = members
 mod.get = get
