@@ -158,7 +158,7 @@ concatenate it with another.
 // you can currently do this
 const cond = oIs().equal('name', 'Jonathan');
 // You get a new object which will test for both properties.
-const merged = oIs().equal('fullName.lastName', 'Boudreau').cons(cond);
+const merged = oIs().equal('fullName.lastName', 'Boudreau').concat(cond);
 ```
 
 ## Extensions

@@ -75,7 +75,7 @@ const members = {
 	_cons(val) {
 		return this._create(this.tests.concat(val), this._boundKeys)
 	},
-	cons(val) {
+	concat(val) {
 		if(this._isInstance(val)) {
 			return this._create(this.tests.concat(val.tests))
 		}
