@@ -171,7 +171,7 @@ const objectIs = oIs.extend({
 	}
 }, {
 	foo(key) {
-		return this.cons({
+		return this.concat({
 			type: 'foo', // this specifies what assertion to call
 			key
 		});
@@ -194,7 +194,7 @@ const objectIs = oIs.extend({
 	}
 }, {
 	eql(compare) {
-		return this.cons({
+		return this.concat({
 			type: 'eql',
 			compare
 		});
