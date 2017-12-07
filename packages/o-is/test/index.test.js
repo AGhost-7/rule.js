@@ -253,6 +253,8 @@ describe('o-is', () => {
 			o.assert({ a: 1 })
 			o.assert({ a: 2 })
 			assert(!o.test({ a: 3 }))
+			assert(o.test({ a: 1}))
+			assert(o.test({ a: 2 }))
 		})
 		it('allows multiple strict conditions', () => {
 			const o = oIs()

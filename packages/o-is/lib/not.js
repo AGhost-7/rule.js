@@ -20,9 +20,5 @@ const createNotClass = (oIsProto) => {
 	return Not
 }
 
-const assertNot = (context, args, self) => {
-	return !self[args.args.type](context, args.args, self, false)
-}
-
-module.exports = {createNotClass, assertNot}
+module.exports = {createNotClass}
 
