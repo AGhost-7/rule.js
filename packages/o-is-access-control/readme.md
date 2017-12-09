@@ -23,12 +23,12 @@ details.
 ### API
 
 ### Policy
-The policy class is an immutable builder. Allow methods returning a policy
-will return a new instance with the same properties as the previous policy with
-some additions done by the method call. For example, if you have a policy with
-an action of "update" and decide to call `target('user')`, this will return a
-new policy with an action of "update" and a target of "user" instead of
-mutating the current existing one.
+The policy class is an immutable builder. Methods returning a policy will
+return a new instance with the same properties as the previous policy with some
+additions done by the method call. For example, if you have a policy with an
+action of "update" and decide to call `target('user')`, this will return a new
+policy with an action of "update" and a target of "user" instead of mutating
+the current existing one.
 
 #### `decision(context)`
 Returns true if the decision was made to allow access, false if denied,
