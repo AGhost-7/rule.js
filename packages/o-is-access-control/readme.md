@@ -87,6 +87,29 @@ an allow effect.
 Concatenates the policy to the policy set and returns the policy set.
 
 
+### PolicySet
+
+#### `concat(value)`
+Concatenates policy sets together.
+
+#### `allow()`
+Returns a new policy with an "allow" effect.
+
+#### `deny()`
+Returns a new policy with a "deny" effect.
+
+#### `toJSON()`
+Returns a serializable representation of the policy set.
+
+#### `static fromJSON(json)`
+Takes the serializable representation and returns a policy set.
+
+#### `authorize(context)`
+Returns true if you are authorized or false if denied. The context object
+must contain an `action` (string), `target` (string), `environment` (object),
+`resource` (object), and `subject` (object) property.
+
+
 ## Full Example
 ```javascript
 const ABAC = require('o-is-access-control')
