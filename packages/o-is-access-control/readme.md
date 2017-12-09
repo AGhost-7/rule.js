@@ -88,6 +88,8 @@ Concatenates the policy to the policy set and returns the policy set.
 
 
 ### PolicySet
+Much like the `Policy`, the `PolicySet` class is immutable. All calls
+return a new policy set instead of mutating itself.
 
 #### `concat(value)`
 Concatenates policy sets together.
