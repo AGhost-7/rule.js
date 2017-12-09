@@ -36,6 +36,9 @@ class Policy {
 		return this._concat('_action', value)
 	}
 	effect(value) {
+		if(value !== 'allow' || value !== 'deny') {
+			throw new Error('Effect "' + value + '" is not valid')
+		}
 		return this._set('_effect', value)
 	}
 	allow() {

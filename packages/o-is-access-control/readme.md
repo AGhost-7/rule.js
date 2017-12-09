@@ -16,8 +16,78 @@ which is the action, resource, subject,
 - strategy: A strategy decides how to use policies. Mainly, these define
 how actions behave, and pass the context over to the policies.
 
+## Conditions
+Conditions are generated using the `o-is` module. See [documentation][3] for
+details.
 
-## Example
+### API
+
+### Policy
+The policy class is an immutable builder. Allow methods returning a policy
+will return a new instance with the same properties as the previous policy with
+some additions done by the method call. For example, if you have a policy with
+an action of "update" and decide to call `target('user')`, this will return a
+new policy with an action of "update" and a target of "user" instead of
+mutating the current existing one.
+
+#### `decision(context)`
+Returns true if the decision was made to allow access, false if denied,
+undefined if unable to reach decision (meaning the condition didn't apply).
+
+#### `target(value)`
+Returns a new policy with the specified targets. Accepts multiple string values
+or an array of values.
+
+#### `action(value)`
+Returns a new policy with the specified action. Accepts multiple string values
+or an array of values.
+
+#### `effect(value)`
+Returns a new policy with the specified effect. Valid effects are "allow" and
+"deny".
+
+#### `condition(value)`
+Optionally accepts a value which will be "set" as the policie's condition.
+If no value is given this will instead return an `o-is` instance, allowing
+construction of the condition immediately.
+
+Example when specifying the condition value: 
+```javascript
+const isAdmin = oIs().true('isAdmin')
+
+// You can define your conditions first and use them on policies later.
+const policy = ABAC.policy()
+	.condition(isAdmin)
+	.target('comment')
+	.effect('allow')
+	.action('update')
+```
+
+Example when not specifying the condition (results in the same thing as the 
+previous example):
+```javascript
+const policy = ABAC.policy()
+	.condition()
+		.true('isAdmin')
+	.end()
+	.target('comment')
+	.effect('allow')
+	.action('update')
+```
+
+#### `deny()`
+Concatenates the current policy to the policy set and returns a new policy with
+a deny effect.
+
+#### `allow()`
+Concatenates the current policy to the policy set and returns a new policy with
+an allow effect.
+
+#### `end()`
+Concatenates the policy to the policy set and returns the policy set.
+
+
+## Full Example
 ```javascript
 const ABAC = require('o-is-access-control')
 const oIs = require('o-is')
