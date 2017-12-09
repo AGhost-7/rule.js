@@ -1,26 +1,26 @@
 {
-	"name": "o-is-access-control",
-	"version": "0.0.0",
-	"description": "Attribute base access control using o-is for the conditions",
-	"main": "index.js",
-	"author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com",
-	"license": "MIT",
-	"dependencies": {
-		"o-is": "^0.0.0"
-	},
+  "name": "o-is-access-control",
+  "version": "0.0.0",
+  "description": "Attribute base access control using o-is for the conditions",
+  "main": "index.js",
+  "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "o-is": "^0.0.0"
+  },
   "scripts": {
     "test": "echo 'See main repo to run tests'"
   },
-	"repository": {
-		"type": "git"
-	},
-	"keywords": [
-		"Access",
-		"Control",
-		"ABAC",
-		"Attribute",
-		"Based",
-		"Policy"
-	]
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "Access",
+    "Control",
+    "ABAC",
+    "Attribute",
+    "Based",
+    "Policy"
+  ]
 }
-

@@ -14,10 +14,7 @@ const simpleStrategy = exports.simple = (policySet, options) => {
 		resource: options.resource || {}
 	}
 
-	return policySet.authorize((policy) => {
-		const res = policy.decision(context)
-		return res
-	}, false)
+	return policySet.authorize(context)
 }
 
 const previousResourceStrategy = (policySet, options) => {
@@ -42,15 +39,19 @@ const previousResourceStrategy = (policySet, options) => {
  * modified.
  */
 exports.crud = (policySet, options) => {
-	if(options.action !== 'update') {
+
+	switch(options.action) {
+	case 'update':
+		return simpleStrategy(policySet, options) &&
+			previousResourceStrategy(policySet, options)
+	case 'update-from':
+		return previousResourceStrategy(policySet, options)
+	case 'update-into':
+		return simpleStrategy(policySet, options)
+	default:
 		return simpleStrategy(policySet, options)
 	}
 
-	if(!simpleStrategy(policySet, options)) {
-		return false
-	} else {
-		return previousResourceStrategy(policySet, options)
-	}
 }
 
 /**
@@ -77,7 +78,12 @@ exports.bread = (policySet, options) => {
 			})
 		})
 	case 'edit':
+		return simpleStrategy(policySet, options) &&
+			previousResourceStrategy(policySet, options)
+	case 'edit-from':
 		return previousResourceStrategy(policySet, options)
+	case 'edit-into':
+		return simpleStrategy(policySet, options)
 	case 'read':
 	case 'add':
 	case 'delete':
