@@ -37,4 +37,18 @@ describe('policy', () => {
 		assert.equal(policy._condition[0].value, 'bar')
 		assert.equal(policy._condition[0].type, 'equal')
 	})
+
+	it('external condition', () => {
+		const isAdmin = oIsDefault().true('isAdmin')
+		const policy = new Policy(mock)
+			.effect('allow')
+			.condition(isAdmin)
+			.action('create')
+			.target('video')
+
+		assert.equal(policy._condition[0].key, 'isAdmin')
+		assert.equal(policy._condition[0].type, 'true')
+		assert.equal(policy._effect, 'allow')
+		assert.equal(policy._action, 'create')
+	})
 })
