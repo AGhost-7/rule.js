@@ -74,48 +74,5 @@ const createIfClass = (oIsProto) => {
 
 	return If
 }
-
-// this will evaluate everything and aggregate the result instead of returning
-// as soon as one of the tests fail.
-const ifAsContinual = (context, tests, self) => {
-	var arr = []
-	for(var i = 0; i < tests.length; i++) {
-		var test = tests[i]
-		var res = self[test.type](context, test, self, true)
-		if(res !== true) {
-			arr.push({
-				context,
-				test,
-				result: res
-			})
-		}
-	}
-	return arr.length === 0 ? true : arr
-}
-
-const ifQuick = (context, tests, self) => {
-	for(var i = 0; i < tests.length; i++) {
-		var test = tests[i]
-		if(!self[test.type](context, test, self, false)) {
-			return false
-		}
-	}
-	return true
-}
-
-const assertIf = (context, args, self, shouldContinue) => {
-	if(!ifQuick(context, args.conds, self)) {
-		if(args.ifFalse.length > 0) {
-			return shouldContinue ?
-				ifAsContinual(context, args.ifFalse, self) :
-				ifQuick(context, args.ifFalse, self)
-		}
-		return true
-	}
-	return shouldContinue ?
-		ifAsContinual(context, args.ifTrue, self) :
-		ifQuick(context, args.ifTrue, self)
-}
-
-module.exports = {assertIf, createIfClass}
+module.exports = {createIfClass}
 
