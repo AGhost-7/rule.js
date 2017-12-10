@@ -19,12 +19,14 @@ describe('policy', () => {
 
 	it('setters', () => {
 		const policy = new Policy(mock)
+			.name('create vids')
 			.effect('allow')
 			.action('create')
 			.target('video')
 		assert.equal(policy._effect, 'allow')
 		assert.equal(policy._action, 'create')
 		assert.equal(policy._target, 'video')
+		assert.equal(policy._name, 'create vids')
 	})
 
 	it('condition', () => {

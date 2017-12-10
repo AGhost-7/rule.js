@@ -8,6 +8,7 @@ class Policy {
 		this._oIs = policySet._oIs || oIsDefault
 		this._target = []
 		this._action = []
+		this._name = null
 		this._condition = null
 		this._effect = effect || null
 	}
@@ -17,6 +18,7 @@ class Policy {
 		copy._action = this._action
 		copy._condition = this._condition
 		copy._target = this._target
+		copy._name = this._name
 		return copy
 	}
 	_set(key, value) {
@@ -40,6 +42,9 @@ class Policy {
 			throw new Error('Effect "' + value + '" is not valid')
 		}
 		return this._set('_effect', value)
+	}
+	name(value) {
+		return this._set('_name', value)
 	}
 	allow() {
 		return this._policySet.concat(this).allow()
@@ -70,6 +75,7 @@ class Policy {
 		policy._target = obj.target
 		policy._action = obj.action
 		policy._condition = obj.condition
+		policy._name = obj.name
 		return policy
 	}
 

@@ -44,6 +44,7 @@ class PolicySet {
 				effect: policy._effect,
 				action: policy._action,
 				condition: policy._condition,
+				name: policy._name,
 				target: policy._target
 			}
 		})
@@ -54,9 +55,7 @@ class PolicySet {
 	 */
 	authorize(context) {
 		for(const policy of this._policies) {
-			if(debug.enabled) {
-				debug('Evaluating policy %O', policy.toJSON())
-			}
+			debug('Evaluating policy "%s"', policy._name)
 			const result = policy.decision(context)
 			if(result !== undefined) {
 				debug('Decision "%s" reached', result)
