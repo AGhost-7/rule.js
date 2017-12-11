@@ -2,13 +2,13 @@
 
 const assert = require('assert')
 const oIs = require('o-is')
-const ABAC = require('../')
+const AccessMate = require('../')
 
 
 describe('strategies', () => {
 	const isAdmin = oIs().true('subject.isAdmin')
 
-	const simpleForumPolicySet = ABAC.policySet()
+	const simpleForumPolicySet = AccessMate.policySet()
 		.allow()
 			.target('user_ban')
 			.action('delete')
@@ -33,7 +33,7 @@ describe('strategies', () => {
 		.end()
 
 	const forumAllow = (strategyName) => () => {
-		const strategy = ABAC.strategies[strategyName]
+		const strategy = AccessMate.strategies[strategyName]
 		const allow = (context) => assert(strategy(simpleForumPolicySet, context))
 
 		allow({
@@ -52,7 +52,7 @@ describe('strategies', () => {
 
 	}
 	const forumDeny = (strategyName) => () => {
-		const strategy = ABAC.strategies[strategyName]
+		const strategy = AccessMate.strategies[strategyName]
 		const deny = (context) => assert(!strategy(simpleForumPolicySet, context))
 
 		deny({
@@ -86,7 +86,7 @@ describe('strategies', () => {
 
 		it('forum deny', forumDeny('crud'))
 		
-		const forumPolicySet = ABAC.policySet()
+		const forumPolicySet = AccessMate.policySet()
 			.deny()
 				.name('only admins can modify a post on a locked thread')
 				.target('post')
@@ -142,11 +142,11 @@ describe('strategies', () => {
 			.end()
 		
 		const allow = (options) => {
-			assert(ABAC.strategies.crud(forumPolicySet, options))
+			assert(AccessMate.strategies.crud(forumPolicySet, options))
 		}
 
 		const deny = (options) => {
-			assert(!ABAC.strategies.crud(forumPolicySet, options))
+			assert(!AccessMate.strategies.crud(forumPolicySet, options))
 		}
 
 		it('allows admins to lock a thread', () => {

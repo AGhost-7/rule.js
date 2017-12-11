@@ -1,5 +1,5 @@
 {
-  "name": "o-is-access-control",
+  "name": "access-mate",
   "version": "0.0.0",
   "description": "Attribute base access control using o-is for the conditions",
   "main": "index.js",
@@ -21,6 +21,7 @@
     "ABAC",
     "Attribute",
     "Based",
-    "Policy"
+    "Policy",
+		"ACL"
   ]
 }

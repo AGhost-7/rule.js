@@ -1,4 +1,4 @@
-# o-is-access-control
+# Access Mate
 [Attribute-based access control][1] inspired by [xacml][2]
 
 ## Glossary
@@ -56,7 +56,7 @@ Example when specifying the condition value:
 const isAdmin = oIs().true('isAdmin')
 
 // You can define your conditions first and use them on policies later.
-const policy = ABAC.policy()
+const policy = AccessMate.policy()
 	.condition(isAdmin)
 	.target('comment')
 	.effect('allow')
@@ -66,7 +66,7 @@ const policy = ABAC.policy()
 Example when not specifying the condition (results in the same thing as the 
 previous example):
 ```javascript
-const policy = ABAC.policy()
+const policy = AccessMate.policy()
 	.condition()
 		.true('isAdmin')
 	.end()
@@ -114,13 +114,13 @@ must contain an `action` (string), `target` (string), `environment` (object),
 
 ## Full Example
 ```javascript
-const ABAC = require('o-is-access-control')
+const AccessMate = require('access-mate')
 const oIs = require('o-is')
 
 // conditions can be re-used.
 const isOwner = oIs().propsEqual('subject.id', 'resource.owner')
 
-const policySet = ABAC.policySet()
+const policySet = AcessMate.policySet()
 	.deny()
 		.target('todo_item')
 		.action('create')
@@ -135,7 +135,7 @@ const policySet = ABAC.policySet()
 
 
 // Rules can be composed together.
-const policy = ABAC.policy()
+const policy = AccessMate.policy()
 	.allow()
 		.target('todo_item')
 		.action('read')
@@ -145,7 +145,7 @@ const policy = ABAC.policy()
 
 const fullPolicySet = policySet.concat(rule)
 
-const decision = ABAC.strategies.simple(fullPolicySet, {
+const decision = AccessMate.strategies.simple(fullPolicySet, {
 	environment: {
 		someGlobalConfigurations: {}
 	},

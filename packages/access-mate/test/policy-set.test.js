@@ -1,12 +1,12 @@
 'use strict'
 
 var assert = require('assert')
-var ABAC = require('../index')
+var AccessMate = require('../index')
 
 describe('policy set', () => {
 
 	it('basic', () => {
-		const control = ABAC.policySet()
+		const control = AccessMate.policySet()
 			.deny()
 				.target('todo_item')
 				.action('create')
@@ -21,7 +21,7 @@ describe('policy set', () => {
 	})
 
 	it('multiple', () => {
-		const control = ABAC.policySet()
+		const control = AccessMate.policySet()
 			.deny()
 				.target('todo_item')
 				.action('create')
@@ -41,14 +41,14 @@ describe('policy set', () => {
 	})
 
 	it('composes', () => {
-		const policy = ABAC.policy()
+		const policy = AccessMate.policy()
 			.effect('allow')
 			.target('forum_post')
 			.action('update')
 			.condition()
 				.true('resource.creator')
 			.end()
-		const control = ABAC.policySet()
+		const control = AccessMate.policySet()
 			.deny()
 				.target('forum_post')
 				.action('create')
