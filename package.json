@@ -7,13 +7,13 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "test": "mocha packages/*/test/**/*.test.js",
-		"lint": "jshint packages",
-		"ci": "npm run lint && npm test"
+    "lint": "jshint packages",
+    "ci": "npm run lint && npm test"
   },
   "dependencies": {
     "eslint": "^2.10.2",
     "jshint": "^2.9.4",
-    "lerna": "^1.1.2",
+    "lerna": "^2.5.1",
     "mocha": "^3.1.2"
   },
   "author": "",
