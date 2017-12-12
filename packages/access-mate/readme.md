@@ -112,6 +112,35 @@ must contain an `action` (string), `target` (string), `environment` (object),
 `resource` (object), and `subject` (object) property.
 
 
+### strategies
+Strategies determine how actions behave. Policy sets only use actions to
+determine if a policy should be applied or not, strategies define additional
+behaviour on top of this. All strategies require a policy set and an options
+object. The options object requires at least `resource`, `subject`, and
+`environment`.
+
+#### `simple(policySet, options)`
+A very basic strategy which simply returns true if the user has access . There
+is no special behaviour for this strategy.
+
+#### `crud(policySet, options)`
+The CRUD strategy is identical to the simple strategy except it defines
+special behaviour for the updates. For update actions, you will need to pass in
+an additional property `previousResource` which is the resource that was last
+updated. There are 3 different kind of update actions which your policies can
+use:
+- `update-into`: This action is only applied on the resource which is to be
+updated.
+- `update-from`: This action is only applied on the previous revision of the
+resource.
+- `update`: This is just a combination of `update-into` and `update-from`.
+
+### `bread(policySet, options)`
+`BREAD` stands for "browse", "read", "edit", "add", "delete". "Edit" has the
+"edit-from" and "edit-into" similar to the CRUD strategy. Browse represents a
+request to list multiple records, in which case if the resource doesn't have
+access to one of the requests it will return false.
+
 ## Full Example
 ```javascript
 const AccessMate = require('access-mate')
