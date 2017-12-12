@@ -1,5 +1,5 @@
 {
-  "name": "o-is-elasticsearch",
+  "name": "o-is-contextualize",
   "version": "0.0.0",
   "description": "Serializable object assertions.",
   "main": "index.js",
