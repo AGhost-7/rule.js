@@ -1,4 +1,5 @@
-# o-is
+# o-is [![status][badge-url]][ci-url]
+
 Stands for "Object Is".
 
 This repository is used to host multiple projects:
@@ -8,3 +9,6 @@ a condition.
 into an elasticsearch query.
 - [access-mate](packages/access-mate): Attribute-based access control using
 o-is conditions.
+
+[badge-url]: https://travis-ci.org/AGhost-7/o-is.svg?branch=master
+[ci-url]: https://travis-ci.org/AGhost-7/o-is
