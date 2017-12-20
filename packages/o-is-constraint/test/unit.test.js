@@ -65,7 +65,7 @@ describe('o-is-constraint', () => {
 		const constraints = constraint
 			.when()
 				.not().null('datePublished')
-			.const('published', ['status'])
+			.constant('published', ['status'])
 
 		constraints.assert({
 			datePublished: new Date(),

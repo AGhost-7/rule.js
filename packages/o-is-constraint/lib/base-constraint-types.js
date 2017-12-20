@@ -51,7 +51,7 @@ module.exports = {
 		}
 		return errors
 	},
-	const(context, args) {
+	constant(context, args) {
 		const errors = []
 		for(const key of args[1]) {
 			const value = get(context, key)
