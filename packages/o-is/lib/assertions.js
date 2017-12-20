@@ -66,7 +66,8 @@ exports.assertions = {
 		return true
 	},
 	equal(context, args) {
-		return args.value === get(context, args.key)
+		const value = get(context, args.key)
+		return Array.isArray(value) ? value.indexOf(args.value) > -1 : value === args.value
 	},
 	notEqual(context, args, self) {
 		return !self.equal(context, args)

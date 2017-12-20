@@ -2,7 +2,8 @@
 
 const elasticsearch = require('elasticsearch')
 const es = new elasticsearch.Client({
-	host: process.env.O_IS_ES_HOST || 'localhost:9200'
+	host: process.env.O_IS_ES_HOST || 'localhost:9200',
+	httpAuth: 'elastic:changeme'
 })
 
 const promiseResolver = (resolve, reject) => (err, res) => {

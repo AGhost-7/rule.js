@@ -38,6 +38,9 @@ describe('o-is-elastiscearch#common', () => {
 							occupation: {
 								type: 'keyword'
 							},
+							hobbies: {
+								type: 'keyword'
+							},
 							country: {
 								type: 'keyword'
 							},

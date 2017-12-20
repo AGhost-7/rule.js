@@ -23,6 +23,7 @@ module.exports = (oIs) => {
 				deceased: false,
 				virtuoso: false,
 				occupation: 'Software Developer',
+				hobbies: ['Guitar', 'Games', 'Moar coding'],
 				country: 'Canada',
 				description: '',
 				instrument: 'Guitar'
@@ -132,12 +133,27 @@ module.exports = (oIs) => {
 				}
 			],
 			[
+				'lt',
+				oIs().lt('age', 35),
+				(res) => {
+					assert.equal(res.length, 2)
+				}
+			],
+			[
 				'multiple conditions',
 				oIs()
 					.gt('age', 24)
 					.lt('age', 50),
 				(res) => {
 					assert(containsName(res, 'Nils'))
+					assert.equal(res.length, 1)
+				}
+			],
+			[
+				'array: equal',
+				oIs().equal('hobbies', 'Guitar').equal('hobbies', 'Games'),
+				(res) => {
+					assert(containsName(res, 'Jonathan'))
 					assert.equal(res.length, 1)
 				}
 			],
