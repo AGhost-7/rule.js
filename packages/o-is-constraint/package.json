@@ -8,10 +8,10 @@
   },
   "dependencies": {
     "lodash.assign": "^4.2.0",
-    "lodash.get": "^4.4.2"
+    "lodash.get": "^4.4.2",
+    "o-is": "^0.0.0"
   },
   "devDependencies": {
-    "o-is": "^0.0.0"
   },
   "author": "",
   "license": "ISC"

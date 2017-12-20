@@ -1,8 +1,7 @@
 'use strict'
 
 const assert = require('assert')
-const oIs = require('o-is')
-const constraint = require('../index')(oIs)
+const constraint = require('../index')()
 
 describe('o-is-constraint', () => {
 

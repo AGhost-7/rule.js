@@ -4,8 +4,9 @@ const get = require('lodash.get')
 const assign = require('lodash.assign')
 const util = require('util')
 const baseConstraintTypes = require('./base-constraint-types')
+const oIs = require('o-is')
 
-module.exports = function(oIs, options) {
+module.exports = function(options) {
 
 	if(!options) options = {}
 

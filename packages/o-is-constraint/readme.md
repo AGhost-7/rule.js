@@ -4,8 +4,7 @@ module).
 
 Example:
 ```javascript
-const oIs = require('o-is')
-const constraint = require('o-is-constraint')(oIs)
+const constraint = require('o-is-constraint')()
 
 const errors = constraint
 	// `when()` starts a condition builder which ends the moment you call a
@@ -79,5 +78,57 @@ Returns an array of errors
 #### `assert(object)`
 Throws an exception at the first constaint failure.
 
+### Customization
+You can extend this module to add methods to the condition builder or the
+constraints builder. This is done by specifying some options when initializing
+the module.
+
+#### `options.constraintTypes`
+This option allows you to specify additional constraint types or even override
+existing ones. `constraintTypes` is an object where the key is the name of the
+new constraint and the value is a function.
+
+The function should accept two arguments, one is the object you want to
+check if the constraint fails on and the second are the arguments passed into
+the builder when calling your constraint type.
+
+A minimal example would be the following:
+```javascript
+const get = require('lodash.get')
+
+const constraint = require('o-is-constraint')({
+	constraintTypes: {
+		nan: function(context, args) {
+			const errors = []
+			// The custom 
+			for(const key of args[0]) {
+				const value = get(context, key)
+				if(!isNaN(value)) {
+					errors.push({
+						type: 'nan',
+						value: value,
+						key: key
+					})
+				}
+			}
+			return errors
+		}
+	}
+})
+
+// Example usage...
+constraint
+	.nan(['name'])
+	.assert({ name: 'foobar' })
+
+```
+In this example, we define a constraint which checks if the value of the
+property is not a number (NaN).
+
+#### `options.members`
+Allows you to add methods to the [o-is][1] condition builder.
+
+#### `options.assertions`
+Allows you to add new condition types to the [o-is][1] condition builder.
 
 [1]: https://github.com/AGhost-7/o-is/tree/master/packages/o-is
