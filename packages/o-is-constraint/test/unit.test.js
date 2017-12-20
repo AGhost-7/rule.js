@@ -61,7 +61,7 @@ describe('o-is-constraint', () => {
 		assert.equal(errors.length, 1)
 	})
 
-	it('const', () => {
+	it('constant', () => {
 		const constraints = constraint
 			.when()
 				.not().null('datePublished')
@@ -76,6 +76,35 @@ describe('o-is-constraint', () => {
 			datePublished: null,
 			status: 'published'
 		})
+	})
+
+	it('toJSON/fromJSON', () => {
+		const constraints = constraint
+			.when().true('admin').minLength(5, ['password'])
+			.minLength(4, ['password'])
+		const pass = { admin: false, password: 'helloworld' }
+		const fail = { admin: true, password: '1234' }
+
+		assert.equal(constraints.errors(pass), 0)
+		assert.equal(constraints.errors(fail).length, 1)
+		const js = constraints.toJSON()
+		const deserialized = constraint.fromJSON(js)
+		assert.equal(deserialized.errors(pass).length, 0)
+		assert.equal(deserialized.errors(fail).length, 1)
+	})
+
+	it('concat', () => {
+		const constraint1 = constraint.mandatory(['firstName'])
+		const constraint2 = constraint.mandatory(['lastName'])
+		const constraints = constraint1.concat(constraint2)
+		const assertErrors = (obj, length) => {
+			const errors = constraints.errors(obj)
+			assert.equal(errors.length, length)
+		}
+		assertErrors({ firstName: null, lastName: 'b' }, 1)
+		assertErrors({ firstName: 'a', lastName: 'b' }, 0)
+		assertErrors({ firstName: 'a', lastName: '' }, 1)
+		assertErrors({ firstName: ' ', lastName: undefined }, 2)
 	})
 
 })

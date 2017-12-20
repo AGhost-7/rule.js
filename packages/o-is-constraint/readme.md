@@ -53,10 +53,29 @@ const errors = constraint
 	.when()
 		.equal('status', 'closed')
 	.constant('fixed', ['resolution'])
+	.errors(bug)
 ```
 In the above example, a bug cannot be closed if it is a "nofix".
 
 ### `pattern(regex, fields)`
 A regex constraint.
+
+## Additional methods
+
+### `fromJSON(data)`
+Takes a parsed json object and returns
+
+### `toJSON()`
+Returns a json serializable object.
+
+### `concat(constraints)`
+Takes two sets of constraints and combines them.
+
+### `errors(object)`
+Returns an array of errors
+
+### `assert(object)`
+Throws an exception at the first constaint failure.
+
 
 [1]: https://github.com/AGhost-7/o-is/tree/master/packages/o-is

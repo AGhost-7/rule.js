@@ -95,7 +95,9 @@ module.exports = function(oIs, options) {
 	}
 
 	ConstraintBuilder.prototype.concat = function(constraint) {
-		const constraints = this._constraints.concat(constraint)
+		const concatening = constraint instanceof ConstraintBuilder ?
+			constraint._constraints : constraint
+		const constraints = this._constraints.concat(concatening)
 		return new ConstraintBuilder(constraints, this._constraintTypes)
 	}
 
@@ -103,6 +105,14 @@ module.exports = function(oIs, options) {
 		const condition = new OIsExtended([], [])
 		condition._constraintBuilder = this
 		return condition
+	}
+
+	ConstraintBuilder.prototype.toJSON = function() {
+		return this._constraints
+	}
+
+	ConstraintBuilder.prototype.fromJSON = function(constraints) {
+		return new ConstraintBuilder(constraints, constraintTypes)
 	}
 
 	return new ConstraintBuilder([], constraintTypes)
