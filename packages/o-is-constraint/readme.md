@@ -100,7 +100,8 @@ const constraint = require('o-is-constraint')({
 	constraintTypes: {
 		nan: function(context, args) {
 			const errors = []
-			// The custom 
+			// The custom constraint will only accept one argument which is a array
+			// of fields, hence the `args[0]`.
 			for(const key of args[0]) {
 				const value = get(context, key)
 				if(!isNaN(value)) {

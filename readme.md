@@ -9,6 +9,8 @@ a condition.
 into an elasticsearch query.
 - [access-mate](packages/access-mate): Attribute-based access control using
 o-is conditions.
+- [o-is-constraint](packages/o-is-constraint): Data constraints module
+leveraging the core library.
 
 [badge-url]: https://travis-ci.org/AGhost-7/o-is.svg?branch=master
 [ci-url]: https://travis-ci.org/AGhost-7/o-is
