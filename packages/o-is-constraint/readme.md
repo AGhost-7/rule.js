@@ -27,19 +27,21 @@ In this example, the region field is mandatory for supervisors with a clearance
 lower than 5 and any non-administrators. The name must also be 5 characters
 long at a minimum.
 
-## Built-in Constraints
+## API
 
-### `mandatory(fields)`
+### Built-in Constraints
+
+#### `mandatory(fields)`
 Fields must not be null, undefined, or and empty string.
 
-### `minLength(length, fields)`
+#### `minLength(length, fields)`
 Fields must contain a length of at least the specified `length` parameter.
 Handles arrays and strings.
 
-### `maxLength(length, fields)`
+#### `maxLength(length, fields)`
 Same as `minLength`, but for the maximum length.
 
-### `constant(value, fields)`
+#### `constant(value, fields)`
 Fields must be equal the specified value. This is only really useful when
 combined with a condition. For example:
 
@@ -57,24 +59,24 @@ const errors = constraint
 ```
 In the above example, a bug cannot be closed if it is a "nofix".
 
-### `pattern(regex, fields)`
+#### `pattern(regex, fields)`
 A regex constraint.
 
-## Additional methods
+### Additional methods
 
-### `fromJSON(data)`
+#### `fromJSON(data)`
 Takes a parsed json object and returns
 
-### `toJSON()`
+#### `toJSON()`
 Returns a json serializable object.
 
-### `concat(constraints)`
+#### `concat(constraints)`
 Takes two sets of constraints and combines them.
 
-### `errors(object)`
+#### `errors(object)`
 Returns an array of errors
 
-### `assert(object)`
+#### `assert(object)`
 Throws an exception at the first constaint failure.
 
 
