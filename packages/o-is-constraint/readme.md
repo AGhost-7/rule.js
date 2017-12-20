@@ -64,7 +64,7 @@ A regex constraint.
 ### Additional methods
 
 #### `fromJSON(data)`
-Takes a parsed json object and returns
+Takes a parsed json object and returns a constraints instance.
 
 #### `toJSON()`
 Returns a json serializable object.
