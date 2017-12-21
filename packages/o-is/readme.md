@@ -93,6 +93,13 @@ Checks if the given property is less than the given value
 const result = oIs().lt('one', 2).test({ one: 1 }) // => true
 ```
 
+### `any(key, values)`
+Checks if the given property(key) is equal to any of the values.
+
+```javascript
+const result = oIs().any('letter', ['a', 'b']).test({ letter: 'a' }) // => true
+```
+
 ## Not (Logical Inversion)
 When you call `not`, the next method chain's result will be inverted.
 ```javascript

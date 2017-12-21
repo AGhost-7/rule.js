@@ -37,6 +37,13 @@ const memberTestMethods = {
 			keys: keys.map((k) => this._key(k)),
 			type: 'propsEqual'
 		})
+	},
+	any(key, values) {
+		return this._cons({
+			type: 'any',
+			key: key,
+			values: values
+		})
 	}
 }
 

@@ -28,6 +28,11 @@ describe('o-is', () => {
 			{
 				type: 'propsEqual',
 				keys: ['name', 'fullName.first']
+			},
+			{
+				type: 'any',
+				key: 'name',
+				values: ['jonathan']
 			}
 		]
 

@@ -14,10 +14,14 @@ const term = (key, val) => {
 
 const conversions = {
 	_expand(ts) {
-		if(!ts.map) console.log('ts:', ts)
 		return ts.map((t) => {
 			return this[t.type](t)
 		})
+	},
+	any(obj) {
+		return {
+			terms: objOf(obj.key, obj.values)
+		}
 	},
 	lt(obj) {
 		const r = { range: {} }
