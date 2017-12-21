@@ -202,6 +202,27 @@ module.exports = (oIs) => {
 				(res) => {
 					assert.equal(res.length, 1)
 				}
+			],
+			[
+				'any:none',
+				oIs().any('firstName', ['foobar']),
+				(res) => {
+					assert.equal(res.length, 0)
+				}
+			],
+			[
+				'any:some',
+				oIs().any('country', ['US', 'Canada']),
+				(res) => {
+					assert.equal(res.length, 3)
+				}
+			],
+			[
+				'any:all',
+				oIs().any('instrument', ['Piano', 'Guitar']),
+				(res) => {
+					assert.equal(res.length, 4)
+				}
 			]
 		]
 	}
