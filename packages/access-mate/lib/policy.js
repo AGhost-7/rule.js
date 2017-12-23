@@ -11,6 +11,7 @@ class Policy {
 		this._name = null
 		this._condition = null
 		this._effect = effect || null
+		this._fields = null
 	}
 	_copy() {
 		const copy = new Policy(this._policySet)
@@ -19,6 +20,7 @@ class Policy {
 		copy._condition = this._condition
 		copy._target = this._target
 		copy._name = this._name
+		copy._fields = this._fields
 		return copy
 	}
 	_set(key, value) {
@@ -42,6 +44,9 @@ class Policy {
 			throw new Error('Effect "' + value + '" is not valid')
 		}
 		return this._set('_effect', value)
+	}
+	fields(...values) {
+		return this._set('_fields', values)
 	}
 	name(value) {
 		return this._set('_name', value)
@@ -76,13 +81,10 @@ class Policy {
 		policy._action = obj.action
 		policy._condition = obj.condition
 		policy._name = obj.name
+		policy._fields = obj.fields || null
 		return policy
 	}
 
-	/**
-	 * Returns true if the decision was made to allow access, false if denied,
-	 * undefined if unable to reach decision.
-	 */
 	decision(context) {
 
 		if(typeof context.action !== 'string') {
@@ -92,7 +94,6 @@ class Policy {
 		if(typeof context.target !== 'string') {
 			throw new Error('Target must be a string.')
 		}
-
 		for(const action of this._action) {
 			for(const target of this._target) {
 				if(context.action === action &&
@@ -111,9 +112,6 @@ class Policy {
 		}
 	}
 
-	/**
-	 * Concatenates the policy to the policy set and returns the policy set.
-	 */
 	end() {
 		return this._policySet.concat(this)
 	}

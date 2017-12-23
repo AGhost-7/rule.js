@@ -34,7 +34,10 @@ describe('strategies', () => {
 
 	const forumAllow = (strategyName) => () => {
 		const strategy = AccessMate.strategies[strategyName]
-		const allow = (context) => assert(strategy(simpleForumPolicySet, context))
+		const allow = (context) => {
+			const result = strategy(simpleForumPolicySet, context)
+			assert(result.authorize)
+		}
 
 		allow({
 			action: 'delete',
@@ -53,7 +56,10 @@ describe('strategies', () => {
 	}
 	const forumDeny = (strategyName) => () => {
 		const strategy = AccessMate.strategies[strategyName]
-		const deny = (context) => assert(!strategy(simpleForumPolicySet, context))
+		const deny = (context) => {
+			const result = strategy(simpleForumPolicySet, context)
+			assert(!result.authorize)
+		}
 
 		deny({
 			action: 'create',
@@ -65,6 +71,9 @@ describe('strategies', () => {
 			action: 'update',
 			target: 'post',
 			resource: {
+				locked: true
+			},
+			previousResource: {
 				locked: true
 			},
 			subject: {
@@ -142,11 +151,13 @@ describe('strategies', () => {
 			.end()
 		
 		const allow = (options) => {
-			assert(AccessMate.strategies.crud(forumPolicySet, options))
+			const result = AccessMate.strategies.crud(forumPolicySet, options)
+			assert(result.authorize)
 		}
 
 		const deny = (options) => {
-			assert(!AccessMate.strategies.crud(forumPolicySet, options))
+			const result = AccessMate.strategies.crud(forumPolicySet, options)
+			assert(!result.authorize)
 		}
 
 		it('allows admins to lock a thread', () => {

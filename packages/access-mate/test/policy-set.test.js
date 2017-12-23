@@ -60,4 +60,27 @@ describe('policy set', () => {
 		assert.equal(control.toJSON().length, 2)
 	})
 
+	it('fields', () => {
+		const policies = AccessMate.policySet()
+			.deny()
+				.fields('email')
+				.target('user')
+				.action('read')
+				.condition()
+					.not().propsEqual('subject.id', 'resource.id')
+				.end()
+			.end()
+
+		const {omit, authorize} = policies.authorize({
+			action: 'read',
+			target: 'user',
+			resource: { id: 1 },
+			subject: { id: 2 },
+			environment: {}
+		})
+
+		assert.equal(omit[0], 'email')
+		assert.equal(authorize, false)
+	})
+
 })
