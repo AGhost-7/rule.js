@@ -126,7 +126,7 @@ The context object must contain an `action` (string), `target` (string),
 Strategies determine how actions behave. Policy sets only use actions to
 determine if a policy should be applied or not, strategies define additional
 behaviour on top of this. All strategies require a policy set and an options
-object. The options object requires at least `resource`, `subject`, and
+object. The options object usually requires at least `resource`, `subject`, and
 `environment`.
 
 #### `simple(policySet, options)`
@@ -147,9 +147,13 @@ resource.
 
 ### `bread(policySet, options)`
 `BREAD` stands for "browse", "read", "edit", "add", "delete". "Edit" has the
-"edit-from" and "edit-into" similar to the CRUD strategy. Browse represents a
-request to list multiple records, in which case if the resource doesn't have
-access to one of the requests it will return false.
+"edit-from" and "edit-into" similar to the "update" action in the CRUD
+strategy.
+
+Browse represents a request to list multiple records. For this action, the
+strategy requires a `resources` property instead of `resource`. This
+`resources` object is then used to return an array of authorization results
+instead of the usual single result.
 
 
 ## Full Example
