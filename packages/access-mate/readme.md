@@ -1,5 +1,5 @@
 # Access Mate
-[Attribute-based access control][1] inspired by [xacml][2]
+[Attribute-based access control][1] inspired by [xacml][2].
 
 ## Glossary
 - resource: The data that wants to be accessed.
@@ -16,11 +16,13 @@ which is the action, resource, subject,
 - strategy: A strategy decides how to use policies. Mainly, these define
 how actions behave, and pass the context over to the policies.
 
+
 ## Conditions
 Conditions are generated using the `o-is` module. See [documentation][3] for
 details.
 
-### API
+
+## API
 
 ### Policy
 The policy class is an immutable builder. Methods returning a policy will
@@ -45,6 +47,11 @@ or an array of values.
 #### `effect(value)`
 Returns a new policy with the specified effect. Valid effects are "allow" and
 "deny".
+
+#### `fields(...values)`
+Returns a new policy which will only apply to certain fields. This means that
+if the policy denies access, it will add the specified fields to the `omit`
+array in the result instead of causing the entire record to fail authorization.
 
 #### `condition(value)`
 Optionally accepts a value which will be "set" as the policie's condition.
@@ -107,9 +114,12 @@ Returns a serializable representation of the policy set.
 Takes the serializable representation and returns a policy set.
 
 #### `authorize(context)`
-Returns true if you are authorized or false if denied. The context object
-must contain an `action` (string), `target` (string), `environment` (object),
-`resource` (object), and `subject` (object) property.
+Returns an object containing two properties: `authorize` and `omit`. If
+`authorize` is true, the user has access to the resource. `omit` is a list of
+fields that the user does not have access to.
+
+The context object must contain an `action` (string), `target` (string),
+`environment` (object), `resource` (object), and `subject` (object) property.
 
 
 ### strategies
@@ -120,7 +130,7 @@ object. The options object requires at least `resource`, `subject`, and
 `environment`.
 
 #### `simple(policySet, options)`
-A very basic strategy which simply returns true if the user has access . There
+A very basic strategy which simply returns the result of the policy set. There
 is no special behaviour for this strategy.
 
 #### `crud(policySet, options)`
@@ -140,6 +150,7 @@ resource.
 "edit-from" and "edit-into" similar to the CRUD strategy. Browse represents a
 request to list multiple records, in which case if the resource doesn't have
 access to one of the requests it will return false.
+
 
 ## Full Example
 ```javascript
@@ -225,9 +236,11 @@ would look like the following when converted to JSON:
 
 ```
 
+
 ## Benefits
 Using this model, one can implement virtually any kind of access control; role
 based access control, multi-level access control, etc.
+
 
 ## Debugging
 This module uses the `debug` package for managing debug logs. Simply set your
