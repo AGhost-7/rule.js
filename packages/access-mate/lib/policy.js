@@ -9,7 +9,7 @@ class Policy {
 		this._target = []
 		this._action = []
 		this._name = null
-		this._condition = null
+		this._condition = []
 		this._effect = effect || null
 		this._fields = null
 	}

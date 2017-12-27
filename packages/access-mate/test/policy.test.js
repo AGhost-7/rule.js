@@ -53,4 +53,17 @@ describe('policy', () => {
 		assert.equal(policy._effect, 'allow')
 		assert.equal(policy._action, 'create')
 	})
+
+	it('no condition is always applied', () => {
+		const deny = new Policy(mock)
+			.effect('deny')
+			.action('create')
+			.target('user')
+		assert(!deny.decision({ action: 'create', target: 'user' }))
+		const allow = new Policy(mock)
+			.effect('allow')
+			.action('create')
+			.target('user')
+		assert(allow.decision({ action: 'create', target: 'user' }))
+	})
 })
