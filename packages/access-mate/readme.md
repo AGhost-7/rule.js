@@ -1,6 +1,12 @@
 # Access Mate
 [Attribute-based access control][1] inspired by [xacml][2].
 
+## Benefits
+Using this model, one can implement virtually any kind of access control; role
+based access control, multi-level access control, identity based access
+control, etc.
+
+
 ## Glossary
 - resource: The data that wants to be accessed.
 - target: Name of the resource.
@@ -241,11 +247,6 @@ would look like the following when converted to JSON:
 ```
 
 
-## Benefits
-Using this model, one can implement virtually any kind of access control; role
-based access control, multi-level access control, etc.
-
-
 ## Debugging
 This module uses the `debug` package for managing debug logs. Simply set your
 `DEBUG` environment variable to include this package's name to enable it.
@@ -253,3 +254,4 @@ This module uses the `debug` package for managing debug logs. Simply set your
 
 [1]: https://en.wikipedia.org/wiki/Attribute-based_access_control
 [2]: http://docs.oasis-open.org/xacml/3.0/errata01/os/xacml-3.0-core-spec-errata01-os-complete.html
+[3]: https://github.com/AGhost-7/o-is/tree/master/packages/o-is
