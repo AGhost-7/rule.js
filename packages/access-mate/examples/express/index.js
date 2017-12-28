@@ -1,19 +1,21 @@
 'use strict'
 
-const AccessMate = require('../index')
+const AccessMate = require('../../index')
 const express = require('express')
 const _ = require('lodash')
 const uuid = require('uuid')
 const knex = require('knex')(require('./knexfile').development)
 const policySet = require('./lib/policy-set')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 
 app.use(express.json())
+app.use(cookieParser())
 
 const authorize = (options) => {
 	const fullOptions = Object.assign({
-		environment: process.env // meh.
+		environment: {}
 	}, options)
 
 	return AccessMate.strategies.crud(policySet, fullOptions)
@@ -64,6 +66,20 @@ app.get('/user/:id', (req, res, next) => {
 		.catch(next)
 })
 
+// Return an error if there are any fields being set which aren't permitted.
+const canWriteFields = (req, res, auth) => {
+	const fields = auth.omit.filter((field) => {
+		return _.has(req.body, field)
+	})
+
+	if(fields.length > 0) {
+		res.status(401).send({ fields })
+		return false
+	} else {
+		return true
+	}
+}
+
 // Post here is used for creating new users.
 app.post('/user', (req, res, next) => {
 	const auth = authorize({
@@ -75,8 +91,11 @@ app.post('/user', (req, res, next) => {
 
 	if(!auth.authorize) {
 		res.status(401).end()
-	} else {
-		const user = Object.assign({}, res.body, { id: uuid.v4() })
+	} else if(canWriteFields(req, res, auth)) {
+		const user = Object.assign({
+			banned: false,
+			admin: false
+		}, res.body, { id: uuid.v4() })
 		knex('user')
 			.insert(user)
 			.then((user) => {
@@ -103,19 +122,7 @@ const canEdit = (req, res, user, updated) => {
 		res.status(401).end()
 		return false
 	} else {
-		// Return an error if there are any fields being modified which
-		// aren't permitted.
-		const fields = auth.omit.filter((field) => {
-			return _.has(req.body, field)
-		})
-		if(fields.length > 0) {
-			res.status(401).send({
-				fields
-			})
-			return false
-		} else {
-			return true
-		}
+		return canWriteFields(req, res, auth)
 	}
 }
 
@@ -168,3 +175,4 @@ app.patch('/user/:id', (req, res, next) => {
 		.catch(next)
 })
 
+app.listen(3000)
