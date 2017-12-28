@@ -5,7 +5,6 @@ const PolicySet = require('./lib/policy-set')
 const oIsDefault = require('./lib/o-is-default')
 const strategies = require('./lib/strategies')
 
-
 exports.PolicySet = PolicySet
 exports.Policy = Policy
 
