@@ -1,0 +1,7 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:10
+    network_mode: host
+    environment:
+      POSTGRES_DB: express
