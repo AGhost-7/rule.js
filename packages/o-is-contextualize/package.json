@@ -26,7 +26,8 @@
   "bugs": {},
   "dependencies": {
     "lodash.assign": "^4.2.0",
-    "lodash.get": "^4.4.2"
+    "lodash.get": "^4.4.2",
+    "lodash.topath": "^4.5.2"
   },
   "devDependencies": {
     "elasticsearch": "^12.1.0",

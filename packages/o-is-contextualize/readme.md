@@ -17,8 +17,10 @@ const condition = oIs()
 	.propEqual('user.name', 'creator')
 
 const query = condition
-	.contextualize('user', {
-		name: 'foobar'
+	.contextualize({
+		user: {
+			name: 'foobar'
+		}
 	})
 	.elasticsearch()
 

@@ -1,93 +1,89 @@
 'use strict'
 
 const assign = require('lodash.assign')
+const toPath = require('lodash.topath')
 const get = require('lodash.get')
 
-const fail = () => {
+
+const returnFirst = (type) => (self, test, types, data) => {
+	const results = Array(test.tests.length)
+	for(let i = 0; i < test.tests.length; i++) {
+		const orTest = test.tests[i]
+		const result = types[orTest.type](self, orTest, types, data)
+		if(result.type === type) {
+			return result
+		}
+		results[i] = result
+	}
 	return {
-		type: 'fail'
+		type: 'or',
+		tests: results
 	}
 }
 
-const pass = () => {
-	return {
-		type: 'pass'
+const runWithContext = (type, data, test, self) => {
+	if(self.assertions[type](data, test, self)) {
+		return {
+			type: 'pass'
+		}
+	} else {
+		return {
+			type: 'fail'
+		}
 	}
 }
 
-const builtinRunners = {
-	equal(tests, runners, key, value) {
-		const regContains = new RegExp('^' + key + '.')
-		return tests.map((test) => {
-			if(test.type === 'equal' && regContains.test(test.key)) {
-				const part = test.key.split(regContains)[1]
-				if(get(value, part) === test.value) {
-					return pass()
-				} else {
-					return fail()
+const builtinTypes = {
+	equal(self, test, types, data) {
+		const path = toPath(test.key)
+		if(path[0] in data) {
+			return runWithContext('equal', data, test, self)
+		} else {
+			return test
+		}
+	},
+	or: returnFirst('pass'),
+	and: returnFirst('fail'),
+	propsEqual(self, test, types, data) {
+		const path1 = toPath(test.keys[0])
+		const path2 = toPath(test.keys[1])
+		if(path1[0] in data) {
+			if(path2[0] in data) {
+				return runWithContext('propsEqual', data, test, self)
+			} else {
+				return {
+					type: 'equal',
+					key: test.keys[1],
+					value: get(data, path1)
 				}
 			}
+		} else if(path2[0] in data) {
+			return {
+				type: 'equal',
+				key: test.keys[0],
+				value: get(data, path2)
+			}
+		} else {
 			return test
-		})
-	}//,
-	//propsEqual(tests, runners, key, value) {
-	//	const regContains = new RegExp('^' + key + '.')
-	//	return tests
-	//	return tests.map((test) => {
-	//		if(test.type === 'equal') {
-	//			if(regContains.test(test.keys[0])) {
-	//				if(regContains.test(test.keys[1])) {
-	//					const part1 = test.keys[0].split(regContains)[1]
-	//					const part2 = test.keys[1].split(regContains)[1]
-	//					if(get(value, part1) === get(value, part2)) {
-	//						return pass()
-	//					} else {
-	//						return fail()
-	//					}
-	//				}
-	//				const part = test.keys[0].split(regContains)[1]
-	//				const val = get(value, part)
-	//				return {
-	//					type: 'equal',
-	//					key: test.keys[1],
-	//					value: val
-	//				}
-	//			}
-	//			if(regContains.test(test.key[1])) {
-	//				const part = test.keys[1].split(regContains)[1]
-	//				const val = get(value, part)
-	//				return {
-	//					type: 'equal',
-	//					key: test.keys[0],
-	//					value: val
-	//				}
-	//			}
-	//			return test
-	//		}
-	//	})
-	//}
-}
-
-const contextualize = (self, runners, key, value) => {
-	console.log('contextualize')
-	let tests = self.tests
-	console.log(tests)
-	for(var k in runners) {
-		tests = runners[k](tests, runners, key, value)
-	}
-	console.log('tests:', tests)
-	return self._create(tests, self._boundKeys)
-}
-
-const createContextualize = (runners) => {
-	return function(key, value) {
-		return contextualize(this, runners, key, value)
+		}
 	}
 }
 
-module.exports = createContextualize(builtinRunners)
+const contextualize = (self, types, data) => {
+	return self.tests.map((test) => {
+		return types[test.type](self, test, types, data)
+	})
+}
+
+const createContextualize = (types) => {
+	return function(data) {
+		return this._create(contextualize(this, types, data), this._boundKeys)
+	}
+}
+
+module.exports = createContextualize(builtinTypes)
 
 module.exports.extend = (extension) => {
-	const runners = assign({}, builtinRunners, extension)
-	createContextualize(runners)
+	const runners = assign({}, builtinTypes, extension)
+	return createContextualize(runners)
 }
