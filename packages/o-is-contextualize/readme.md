@@ -1,6 +1,4 @@
 ## Object Is: Contextualize
-Note: This module is WIP.
-
 The idea behind this module is to allow to bind properties on
 every call done to an oIs object as though the property was
 present on every object you're testing against. This allows,

@@ -7,6 +7,8 @@ This repository is used to host multiple projects:
 a condition.
 - [o-is-elasticsearch](packages/o-is-elasticsearch): Convert your condition
 into an elasticsearch query.
+- [o-is-contextualize](packages/o-is-contextualize): Replace certain keys
+in your conditions with data.
 - [access-mate](packages/access-mate): Attribute-based access control using
 o-is conditions.
 - [o-is-constraint](packages/o-is-constraint): Data constraints module
