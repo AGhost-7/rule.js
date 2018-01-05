@@ -1,6 +1,6 @@
 {
   "name": "o-is",
-  "version": "0.0.0",
+  "version": "0.7.0",
   "description": "Serializable object assertions.",
   "main": "index.js",
   "directories": {
@@ -22,17 +22,16 @@
   ],
   "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com>",
   "license": "MIT",
-  "bugs": {
-  },
+  "bugs": {},
   "dependencies": {
     "lodash.assign": "^4.0.8",
     "lodash.clone": "^4.3.2",
     "lodash.get": "^4.2.1"
   },
   "devDependencies": {
-		"o-is-common-suite": "^0.0.0"
+    "o-is-common-suite": "^0.7.0"
   },
-	"engine": {
-		"node": ">=6.9.0"
-	}
+  "engine": {
+    "node": ">=6.9.0"
+  }
 }
