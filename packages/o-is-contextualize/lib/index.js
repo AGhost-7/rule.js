@@ -66,6 +66,23 @@ const builtinTypes = {
 		} else {
 			return test
 		}
+	},
+	not(self, test, types, data) {
+		const result = types[test.args.type](self, test.args, types, data)
+		if(result.type === 'pass') {
+			return {
+				type: 'fail'
+			}
+		} else if(result.type === 'fail') {
+			return {
+				type: 'pass'
+			}
+		} else {
+			return {
+				type: 'not',
+				args: result
+			}
+		}
 	}
 }
 

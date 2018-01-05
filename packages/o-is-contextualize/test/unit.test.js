@@ -108,4 +108,33 @@ describe('o-is-contextualize', () => {
 	describe.skip('and', () => {
 	})
 
+	describe('not', () => {
+		const isSenior = oIs().not().equal('person.senior', false)
+		const senior = (is) => ({ person: { senior: is } })
+
+		it('pass', () => {
+			isSenior
+				.contextualize(senior(true))
+				.assert({})
+		})
+
+		it('fail', () => {
+			const result = isSenior
+				.contextualize(senior(false))
+				.test({})
+			assert(!result)
+		})
+
+		it('undefined', () => {
+			const result = isSenior
+				.contextualize({})
+				.test(senior(false))
+			assert(!result)
+			const result2 = isSenior
+				.contextualize({})
+				.test(senior(true))
+			assert(result2)
+		})
+	})
+
 })
