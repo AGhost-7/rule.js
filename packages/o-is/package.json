@@ -1,6 +1,6 @@
 {
   "name": "o-is",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Serializable object assertions.",
   "main": "index.js",
   "directories": {
@@ -29,7 +29,7 @@
     "lodash.get": "^4.2.1"
   },
   "devDependencies": {
-    "o-is-common-suite": "^0.7.0"
+    "o-is-common-suite": "^0.7.1"
   },
   "engine": {
     "node": ">=6.9.0"

@@ -1,6 +1,6 @@
 {
   "name": "o-is-contextualize",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Serializable object assertions.",
   "main": "index.js",
   "directories": {
@@ -31,8 +31,8 @@
   },
   "devDependencies": {
     "elasticsearch": "^12.1.0",
-    "o-is": "^0.7.0",
-    "o-is-common-suite": "^0.7.0",
+    "o-is": "^0.7.1",
+    "o-is-common-suite": "^0.7.1",
     "power-assert": "^1.4.2"
   },
   "engines": {

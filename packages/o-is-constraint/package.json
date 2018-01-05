@@ -1,6 +1,6 @@
 {
   "name": "o-is-constraint",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "dependencies": {
     "lodash.assign": "^4.2.0",
     "lodash.get": "^4.4.2",
-    "o-is": "^0.7.0"
+    "o-is": "^0.7.1"
   },
   "author": "",
   "license": "ISC"
