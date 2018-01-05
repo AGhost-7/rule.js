@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-		"publish": "lerna publish",
+		"publish": "npm login && lerna publish",
     "bootstrap": "lerna bootstrap",
     "test": "mocha packages/*/test/**/*.test.js",
     "lint": "jshint packages",
