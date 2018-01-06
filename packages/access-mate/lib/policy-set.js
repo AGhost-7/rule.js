@@ -11,14 +11,40 @@ class PolicySet {
 	constructor(oIs, policies) {
 		this._policies = policies || []
 		this._oIs = oIs || oIsDefault
+		this._defaults = null
+	}
+
+	defaults(defaults) {
+		const policySet = new PolicySet(this._oIs, this._policies)
+		policySet._defaults = defaults
+		return policySet
+	}
+
+	_createPolicy(effect) {
+		const policy = new Policy(this, effect)
+		if(this._defaults) {
+			const properties = [
+				'fields',
+				'action',
+				'condition',
+				'target',
+				'name'
+			]
+			for(const property of properties) {
+				if(property in this._defaults) {
+					policy['_' + property] = this._defaults[property]
+				}
+			}
+		}
+		return policy
 	}
 
 	deny() {
-		return new Policy(this, 'deny')
+		return this._createPolicy('deny')
 	}
 
 	allow() {
-		return new Policy(this, 'allow')
+		return this._createPolicy('allow')
 	}
 
 	concat() {

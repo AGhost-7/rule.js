@@ -83,4 +83,16 @@ describe('policy set', () => {
 		assert.equal(authorize, false)
 	})
 
+	it('defaults', () => {
+		const policies = AccessMate.policySet()
+			.defaults({ target: 'example' })
+			.allow()
+			.action('read')
+			.end()
+		const policy = policies._policies[0]
+		assert.equal(policy._target, 'example')
+		assert.equal(policy._effect, 'allow')
+		assert.equal(policy._action, 'read')
+	})
+
 })

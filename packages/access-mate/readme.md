@@ -127,6 +127,11 @@ fields that the user does not have access to.
 The context object must contain an `action` (string), `target` (string),
 `environment` (object), `resource` (object), and `subject` (object) property.
 
+#### `defaults(defaults)`
+Allows you to set all policies stated in the policy set to default to the
+specified values. Valid options are: `fields`, `name`, `action`, `condition`,
+`target`.
+
 
 ### strategies
 Strategies determine how actions behave. Policy sets only use actions to
