@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "debug": "^3.1.0",
+    "lodash.omit": "^4.5.0",
     "lodash.uniq": "^4.5.0",
     "o-is": "^0.7.1"
   },

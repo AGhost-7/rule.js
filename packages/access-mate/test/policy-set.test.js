@@ -95,4 +95,75 @@ describe('policy set', () => {
 		assert.equal(policy._action, 'read')
 	})
 
+	describe('filters', () => {
+
+		const policySet = AccessMate.policySet()
+			.deny()
+				.name('banned users cannot edit')
+				.target('user')
+				.action('update')
+				.condition()
+					.true('subject.banned')
+				.end()
+			.deny()
+				.name('only admins can ban users')
+				.fields('banned')
+				.target('user')
+				.action('update')
+				.condition()
+					.not().true('subject.admin')
+				.end()
+			.allow()
+				.name('users can edit themselves')
+				.target('user')
+				.action('update')
+				.condition()
+					.propsEqual('resource.id', 'subject.id')
+				.end()
+			.allow()
+				.name('admins can edit other users')
+				.target('user')
+				.action('update')
+				.condition()
+					.true('subject.admin')
+				.end()
+			.end()
+
+		it('filters records', () => {
+			const resources = [
+				{ id: 1, admin: false, banned: false },
+				{ id: 2, admin: true, banned: false },
+				{ id: 3, admin: false, banned: true }
+			]
+			const withSubject = (subject) => {
+				return policySet.filter({
+					resources,
+					subject,
+					action: 'update',
+					target: 'user',
+					environment: {}
+				})
+			}
+			assert.equal(withSubject(resources[2]).length, 0)
+			assert.equal(withSubject(resources[0]).length, 1)
+			assert.equal(withSubject(resources[1]).length, 3)
+
+		})
+
+		it('filters fields', () => {
+			const result = policySet.filter({
+				resources: [
+					{ id: 1, admin: false, banned: false }
+				],
+				subject: { id: 1, admin: false, banned: false },
+				action: 'update',
+				target: 'user',
+				environment: {}
+			})
+
+			assert(!('banned' in result[0]))
+			assert.equal(result.length, 1)
+		})
+	})
+
 })

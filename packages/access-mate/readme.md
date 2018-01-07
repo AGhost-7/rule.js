@@ -132,6 +132,15 @@ Allows you to set all policies stated in the policy set to default to the
 specified values. Valid options are: `fields`, `name`, `action`, `condition`,
 `target`.
 
+#### `filter(context)`
+Accepts an object with an `action` (string), `target` (string), `environment`
+(object), `resources` (array or objects), and `subject` (object) property.
+
+This will return an array of objects which are the `resources` that were
+provided with the items that are not authorized removed from it. Will also
+omit fields from the objects if not authorized to access them.
+>>>>>>> Add filter methods on policy set
+
 
 ### strategies
 Strategies determine how actions behave. Policy sets only use actions to

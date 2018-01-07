@@ -5,6 +5,7 @@ const oIsDefault = require('./o-is-default')
 const Policy = require('./policy')
 const packageName = require('../package').name
 const debug = require('debug')(packageName)
+const omit = require('lodash.omit')
 
 class PolicySet {
 
@@ -101,6 +102,17 @@ class PolicySet {
 		}
 
 		return { omit, authorize }
+	}
+
+	filter(context) {
+		const resources = []
+		for(const resource of context.resources) {
+			const decision = this.authorize(Object.assign({ resource }, context))
+			if(decision.authorize) {
+				resources.push(omit(resource, decision.omit))
+			}
+		}
+		return resources
 	}
 
 	static fromJSON(policies, oIs) {
