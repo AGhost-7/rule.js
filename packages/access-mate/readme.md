@@ -139,7 +139,6 @@ Accepts an object with an `action` (string), `target` (string), `environment`
 This will return an array of objects which are the `resources` that were
 provided with the items that are not authorized removed from it. Will also
 omit fields from the objects if not authorized to access them.
->>>>>>> Add filter methods on policy set
 
 
 ### strategies
