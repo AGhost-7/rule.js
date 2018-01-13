@@ -12,6 +12,7 @@
     "ci": "npm run lint && npm test"
   },
   "dependencies": {
+    "babel-preset-es2017": "^6.24.1",
     "eslint": "^2.10.2",
     "jshint": "^2.9.4",
     "lerna": "^2.5.1",

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "",
     "dev": "webpack-dev-server",
-		"build": "webpack -d"
+    "build": "webpack -d"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +21,8 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "o-is": "0.0.0",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0"
   }
 }
