@@ -3,26 +3,16 @@ import PropTypes from 'prop-types'
 
 class FieldPicker extends React.Component {
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			selected: props.selected
-		}
-	}
-
 	onFieldPicked(event) {
 		const selected = event.target.value
-		if(this.props.onChange) {
-			const field = this.props.schema.find((field) =>
-				field.property === selected)
-			this.props.onChange(field)
-		}
-		this.setState({ selected })
+		const field = this.props.schema.find((field) =>
+			field.property === selected)
+		this.props.onChange(field)
 	}
 
 	render() {
 		return (
-			<select value={this.state.selected} onChange={this.onFieldPicked.bind(this)}>
+			<select value={this.props.selected} onChange={this.onFieldPicked.bind(this)}>
 				{this.props.schema.map((field) => 
 					<option key={field.property} value={field.property}>
 						{field.label}
@@ -34,7 +24,7 @@ class FieldPicker extends React.Component {
 }
 
 FieldPicker.propTypes = {
-	onChange: PropTypes.func,
+	onChange: PropTypes.func.isRequired,
 	schema: PropTypes.array.isRequired,
 	selected: PropTypes.string
 }
