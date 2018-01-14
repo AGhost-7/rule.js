@@ -4,34 +4,34 @@ import PropTypes from 'prop-types'
 import FieldPicker from './field-picker'
 
 class CompareCondition extends React.Component {
-	constructor(props) {
-		super(props)
-		const key = props.schema[0].property
-		this.state = { 
-			condition: { type: 'propsEqual' }
-		}
-		this.state.condition.keys = props.condition.keys || [key, key]
-	}
 
 	componentDidMount() {
-		if(!this.props.condition.keys) this.props.onChange(this.state.condition)
+		if(!this.props.condition.keys) this.props.onChange(this.condition())
+	}
+
+	condition() {
+		const key = this.props.schema[0].property
+		return {
+			type: 'propsEqual',
+			keys: this.props.condition.keys || [key, key]
+		}
 	}
 
 	onFieldPicked(index, field) {
-		const keys = this.state.condition.keys.slice()
+		const keys = this.condition().keys
 		keys[index]= field.property
 		const condition = {
 			type: 'propsEqual',
 			keys
 		}
-		this.setState({ condition })
 		this.props.onChange(condition)
 	}
 
 	render() {
+		const condition = this.condition()
 		return (
 			<span>
-				{this.state.condition.keys.map((key, index) =>
+				{condition.keys.map((key, index) =>
 					<FieldPicker selected={key} onChange={this.onFieldPicked.bind(this, index)} schema={this.props.schema}/>)}
 			</span>
 		)
