@@ -4,3 +4,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.6.5
     ports:
       - 9200:9200
+    environment:
+      http.cors.allow-origin: "/.*/"
+      http.cors.enabled: 'true'
+      http.cors.allow-headers: "X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization"
+      http.cors.allow-credentials: 'true'
