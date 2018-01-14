@@ -4,20 +4,6 @@ import FieldPicker from './field-picker'
 
 class EqualCondition extends React.Component {
 
-	//constructor(props) {
-	//	super(props)
-	//	this.state = {
-	//		condition: {
-	//			type: 'equal',
-	//			key: props.condition.key || props.schema[0].property,
-	//			value: props.condition.value
-	//		}
-	//	}
-	//	if(typeof props.condition.value === 'undefined') {
-	//		this.state.condition.value = this.defaultValue(this.state.condition.key)
-	//	}
-	//}
-
 	defaultValue(key) {
 		const field = this.findField(key)
 		if(field.type === 'enum') {
