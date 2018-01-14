@@ -29,7 +29,10 @@ class ConditionBuilder extends React.Component {
 		return (
 			<div>
 				{this.state.conditions.map((condition, index) =>
-					<ConditionNode onChange={this.onChange.bind(this, index)} condition={condition} schema={this.props.schema}/>)}
+					<ConditionNode
+						onChange={this.onChange.bind(this, index)}
+						condition={condition}
+						schema={this.props.schema}/>)}
 				<button onClick={this.onAdd.bind(this)}>Add</button>
 			</div>
 		)

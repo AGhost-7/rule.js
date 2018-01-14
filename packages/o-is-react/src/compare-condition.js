@@ -14,14 +14,18 @@ class CompareCondition extends React.Component {
 	}
 
 	componentDidMount() {
-		if(!this.props.condition.key) this.props.onChange(this.state.condition)
+		if(!this.props.condition.keys) this.props.onChange(this.state.condition)
 	}
 
 	onFieldPicked(index, field) {
 		const keys = this.state.condition.keys.slice()
 		keys[index]= field.property
-		this.setState({ keys })
-
+		const condition = {
+			type: 'propsEqual',
+			keys
+		}
+		this.setState({ condition })
+		this.props.onChange(condition)
 	}
 
 	render() {

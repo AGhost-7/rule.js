@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import EqualCondition from './equal-condition'
 import EmptyCondition from './empty-condition'
 import CompareCondition from './compare-condition'
+import OrCondition from './or-condition'
+import AndCondition from './and-condition'
 
 const types = {
 	equal: {
@@ -15,12 +17,8 @@ const types = {
 	//	translation: 'Not',
 	//	class: NotPicker
 	//},
-	//and: 'And',
-	//or: 'Or',
 	//if: 'If',
 	//any: 'Any',
-	//notEqual: 'Not Equal',
-	//propsEqual: 'Properties Equal',
 	null: {
 		translation: 'Empty',
 		class: EmptyCondition
@@ -29,8 +27,16 @@ const types = {
 		translation: 'Compare',
 		class: CompareCondition
 	},
-	//true: 'True',
-	//false: 'False',
+	or: {
+		translation: 'Or',
+		class: OrCondition,
+		types: {
+			and: {
+				translation: 'And',
+				class: AndCondition
+			}
+		}
+	}
 	//gt: 'Greater Than',
 	//lt: 'Less Than'
 }
@@ -61,19 +67,21 @@ class ConditionNode extends React.Component {
 	render() {
 		let Picker = null
 		const types = this.types
-		if(this.state.condition.type) {
-			Picker = types[this.state.condition.type].class
+		const type = this.state.condition.type
+		if(type) {
+			Picker = types[type].class
 		}
 		return (
 			<div>
-				<select onChange={this.onTypeChange.bind(this)}>
+				<select value={type} onChange={this.onTypeChange.bind(this)}>
 					{Object.keys(types).map((type) =>
-							<option value={type}>{types[type].translation}</option>)}
+							<option key={type} value={type}>{types[type].translation}</option>)}
 				</select>
 				{Picker && <Picker
 					schema={this.props.schema}
 					onChange={this.onConditionChange.bind(this)}
 					condition={this.state.condition}
+					ConditionNode={ConditionNode}
 					params={this.state.params}/>}
 			</div>
 		)

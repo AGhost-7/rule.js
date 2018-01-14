@@ -10,14 +10,28 @@ class EqualCondition extends React.Component {
 			condition: {
 				type: 'equal',
 				key: props.condition.key || props.schema[0].property,
-				value: props.condition.value || null
+				value: props.condition.value
 			}
+		}
+		if(typeof props.condition.value === 'undefined') {
+			this.state.condition.value = this.defaultValue(this.state.condition.key)
+		}
+	}
+
+	defaultValue(key) {
+		const field = this.findField(key)
+		if(field.type === 'enum') {
+			return field.values[0]
+		} else if(field.type === 'boolean') {
+			return false
+		} else {
+			return null
 		}
 	}
 
 	componentDidMount() {
 		if(typeof this.props.condition.key === 'undefined' ||
-				typeof this.props.condition.value === 'undefined') {
+					typeof this.props.condition.value === 'undefined') {
 			this.props.onChange(this.state.condition)
 		}
 	}
@@ -28,10 +42,8 @@ class EqualCondition extends React.Component {
 
 	onFieldPicked(field) {
 		const key = field.property
-		const value = field.type === 'boolean' ? false : null
-		const condition = {
-			key, value, type: 'equal'
-		}
+		let value = this.defaultValue(key)
+		const condition = { type: 'equal', key, value }
 		this.setState({ condition })
 		this.props.onChange(condition)
 	}
@@ -56,17 +68,23 @@ class EqualCondition extends React.Component {
 
 		switch(field.type) {
 		case 'string':
-				return <input type="text" onChange={this.onValuePicked.bind(this)}/>
+				return <input
+						value={state.condition.value}
+						type="text"
+						onChange={this.onValuePicked.bind(this)}/>
 		case 'enum':
 				return (
-					<select onChange={this.onValuePicked.bind(this)}>
-						<option value='' disabled selected>...</option>
+					<select
+							value={state.condition.value}
+							onChange={this.onValuePicked.bind(this)}>
 						{field.values.map((value) =>
 							<option key={value} value={value}>{value}</option>)}
 					</select>
 				)
 		case 'boolean':
-				return <input type="checkbox" onChange={this.onValuePicked.bind(this)}/>
+				return <input
+						type="checkbox"
+						onChange={this.onValuePicked.bind(this)}/>
 		}
 	}
 
@@ -74,10 +92,9 @@ class EqualCondition extends React.Component {
 		return (
 			<span>
 				<FieldPicker
-					selected={this.state.condition.key}
-					onChange={this.onFieldPicked.bind(this)}
-					schema={this.props.schema}/>
-
+						selected={this.state.condition.key}
+						onChange={this.onFieldPicked.bind(this)}
+						schema={this.props.schema}/>
 				{this.renderValuePicker()}
 			</span>
 		)
