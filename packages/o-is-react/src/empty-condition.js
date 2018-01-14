@@ -5,18 +5,15 @@ import PropTypes from 'prop-types'
 import FieldPicker from './field-picker'
 
 class EmptyCondition extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			condition: {
-				type: 'null',
-				key: this.props.condition.key || this.props.schema[0].property
-			}
-		}
-	}
 
 	componentDidMount() {
-		if(!this.props.condition.key) this.props.onChange(this.state.condition)
+		if(!this.props.condition.key) {
+			const condition = {
+				type: 'null',
+				key: this.selected()
+			}
+			this.props.onChange(condition)
+		}
 	}
 
 	onFieldPicked(field) {
@@ -24,13 +21,18 @@ class EmptyCondition extends React.Component {
 			type: 'null',
 			key: field.property
 		}
-			
-		this.setState({ condition })
 		this.props.onChange(condition)
 	}
 
+	selected() {
+		return this.props.condition.key || this.props.schema[0].property
+	}
+
 	render() {
-		return <FieldPicker onChange={this.onFieldPicked.bind(this)} schema={this.props.schema}/>
+		return <FieldPicker
+				onChange={this.onFieldPicked.bind(this)}
+				selected={this.selected()}
+				schema={this.props.schema}/>
 	}
 
 }

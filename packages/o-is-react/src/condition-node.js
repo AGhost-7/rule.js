@@ -45,29 +45,23 @@ class ConditionNode extends React.Component {
 
 	constructor(props) {
 		super(props)
-		this.state = {
-			condition: props.condition || { type: 'equal' }
-		}
 		this.types = types
 	}
 
 	onTypeChange(ev) {
 		const condition = { type: ev.target.value }
-		this.setState({ condition })
 		this.props.onChange(condition)
 	}
 
 	onConditionChange(change) {
-		this.setState({
-			condition: change
-		})
 		this.props.onChange(change)
 	}
 
 	render() {
 		let Picker = null
 		const types = this.types
-		const type = this.state.condition.type
+		const condition = this.props.condition || { type: 'equal' }
+		const type = condition.type
 		if(type) {
 			Picker = types[type].class
 		}
@@ -80,9 +74,8 @@ class ConditionNode extends React.Component {
 				{Picker && <Picker
 					schema={this.props.schema}
 					onChange={this.onConditionChange.bind(this)}
-					condition={this.state.condition}
-					ConditionNode={ConditionNode}
-					params={this.state.params}/>}
+					condition={condition}
+					ConditionNode={ConditionNode}/>}
 			</div>
 		)
 	}

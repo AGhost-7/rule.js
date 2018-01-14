@@ -115,15 +115,42 @@ class SearchExample extends React.Component {
 	}
 }
 
+class PersistanceExample extends React.Component {
+	onClear() {
+		delete localStorage.conditions
+	}
+	onLoad() {
+		const conditions = JSON.parse(localStorage.conditions)
+		this.props.onLoad(conditions)
+	}
+	onSave() {
+		localStorage.conditions = JSON.stringify(this.props.conditions)
+	}
+	render() {
+		return [
+			<h3>Persistance example</h3>,
+			<p>Since the conditions are represented as json data, it is possible
+			to persist the condition to local storage, etc.</p>,
+			<button onClick={this.onSave.bind(this)}>Save</button>,
+			<button onClick={this.onClear.bind(this)}>Clear</button>,
+			<button onClick={this.onLoad.bind(this)}>Load</button>
+		]
+	}
+}
+
 class Main extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			conditions: []
+			conditions: null
 		}
 	}
 	onConditionChange(conditions) {
 		console.log('onConditionChange:', JSON.stringify(conditions, null, 2))
+		this.setState({ conditions })
+	}
+	onConditionLoad(conditions) {
+		console.log('loading conditions', JSON.stringify(conditions, null, 2))
 		this.setState({ conditions })
 	}
 	render() {
@@ -131,9 +158,14 @@ class Main extends React.Component {
 			<div>
 				<ConditionBuilder
 						onChange={this.onConditionChange.bind(this)}
+						conditions={this.state.conditions}
 						schema={schema}/>
 				<hr/>
 				<SearchExample conditions={this.state.conditions} schema={schema}/>
+				<hr/>
+				<PersistanceExample
+						conditions={this.state.conditions}
+						onLoad={this.onConditionLoad.bind(this)}/>
 			</div>
 		)
 	}

@@ -42,7 +42,7 @@ class OrCondition extends React.Component {
 	}
 
 	render() {
-		const style = { 'padding-left': '15px' }
+		const style = { 'paddingLeft': '15px' }
 		const ConditionNode = this.props.ConditionNode
 		class OrConditionNode extends ConditionNode {
 			constructor(props) {
