@@ -2,50 +2,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ConditionNode from '../condition-node'
-
 class AndCondition extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			condition: {
-				type: 'and',
-				tests: props.condition.tests || [{
-					type: 'equal'
-				}]
-			}
+
+	condition() {
+		return {
+			type: 'and',
+			tests: this.props.condition.tests || [{ type: 'equal' }]
 		}
 	}
+
 	onNodeChange(index, conditionChange) {
-		const tests = this.state.condition.tests.slice()
-		tests[index] = conditionChange
-		const condition = {
-			type: 'and',
-			tests
-		}
+		const condition = this.condition()
+		condition.tests[index] = conditionChange
 		this.props.onChange(condition)
-		this.setState({ condition })
 	}
 
 	onAdd() {
-		const tests = this.state.condition.tests.concat({ type: 'equal' })
-		const condition = {
-			type: 'and',
-			tests
-		}
+		const condition = this.condition()
+		condition.tests.push({ type: 'equal' })
 		this.props.onChange(condition)
-		this.setState({ condition })
 	}
 
 	render() {
 		const style = { paddingLeft: '15px' }
+		const ConditionNode = this.props.ConditionNode
 		return (
 			<div style={style}>
-				{this.state.condition.tests.map((test, index) =>
+				{this.condition().tests.map((test, index) =>
 					<ConditionNode
 						schema={this.props.schema}
 						condition={test}
-						ConditionNode={this.props.ConditionNode}
+						ConditionNode={ConditionNode}
 						onChange={this.onNodeChange.bind(this, index)}/>)}
 				<button onClick={this.onAdd.bind(this)}>Add</button>
 			</div>

@@ -7,16 +7,23 @@ import EmptyCondition from './condition/empty'
 import CompareCondition from './condition/compare'
 import OrCondition from './condition/or'
 import AndCondition from './condition/and'
+import NotCondition from './condition/not'
 
 const types = {
 	equal: {
 		translation: 'Equal',
 		class: EqualCondition
 	},
-	//not: {
-	//	translation: 'Not',
-	//	class: NotPicker
-	//},
+	not: {
+		translation: 'Not',
+		class: NotCondition,
+		types: {
+			and: {
+				translation: 'And',
+				class: AndCondition
+			}
+		}
+	},
 	//if: 'If',
 	//any: 'Any',
 	null: {
