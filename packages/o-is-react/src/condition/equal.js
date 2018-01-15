@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import FieldPicker from './field-picker'
-import TextInput from './text-input'
+import FieldPicker from '../field-picker'
+import TextInput from '../text-input'
 
 class EqualCondition extends React.Component {
 

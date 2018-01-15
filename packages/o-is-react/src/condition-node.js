@@ -2,11 +2,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import EqualCondition from './equal-condition'
-import EmptyCondition from './empty-condition'
-import CompareCondition from './compare-condition'
-import OrCondition from './or-condition'
-import AndCondition from './and-condition'
+import EqualCondition from './condition/equal'
+import EmptyCondition from './condition/empty'
+import CompareCondition from './condition/compare'
+import OrCondition from './condition/or'
+import AndCondition from './condition/and'
 
 const types = {
 	equal: {

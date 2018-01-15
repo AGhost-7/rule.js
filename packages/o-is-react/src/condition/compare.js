@@ -1,7 +1,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import FieldPicker from './field-picker'
+import FieldPicker from '../field-picker'
 
 class CompareCondition extends React.Component {
 

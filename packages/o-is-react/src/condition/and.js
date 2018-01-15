@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ConditionNode from './condition-node'
+import ConditionNode from '../condition-node'
 
 class AndCondition extends React.Component {
 	constructor(props) {
