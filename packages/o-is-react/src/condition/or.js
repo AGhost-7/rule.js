@@ -5,6 +5,17 @@ import PropTypes from 'prop-types'
 
 class OrCondition extends React.Component {
 
+	constructor(props) {
+		super(props)
+		class OrConditionNode extends this.props.ConditionNode {
+			constructor(props) {
+				super(props)
+				this.types = Object.assign({}, this.types, this.types.or.types)
+			}
+		}
+		this.ConditionNode = OrConditionNode
+	}
+
 	condition() {
 		return {
 			type: 'or',
@@ -26,13 +37,8 @@ class OrCondition extends React.Component {
 
 	render() {
 		const style = { 'paddingLeft': '15px' }
+		const OrConditionNode = this.ConditionNode
 		const ConditionNode = this.props.ConditionNode
-		class OrConditionNode extends ConditionNode {
-			constructor(props) {
-				super(props)
-				this.types = Object.assign({}, this.types, this.types.or.types)
-			}
-		}
 		const condition = this.condition()
 		return (
 			<div style={style}>
