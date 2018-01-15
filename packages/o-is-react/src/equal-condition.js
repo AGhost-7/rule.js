@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import FieldPicker from './field-picker'
+import TextInput from './text-input'
 
 class EqualCondition extends React.Component {
 
@@ -49,12 +50,19 @@ class EqualCondition extends React.Component {
 		this.props.onChange(condition)
 	}
 
-	onValuePicked(event) {
+	onStringChanged(value) {
+		this.onValueChanged(value)
+	}
+	onEnumChanged(event) {
+		this.onValueChanged(event.target.value)
+	}
+	onBooleanChanged(event) {
+		this.onValueChanged(event.target.checked)
+	}
+
+	onValueChanged(value) {
 		const key = this.key()
 		const field = this.findField(key)
-		const value = field.type === 'boolean'
-			? event.target.checked
-			: event.target.value
 		const condition = {
 			type: 'equal',
 			key,
@@ -68,15 +76,12 @@ class EqualCondition extends React.Component {
 		const field = this.findField(condition.key)
 		switch(field.type) {
 		case 'string':
-				return <input
-						value={condition.value}
-						type="text"
-						onChange={this.onValuePicked.bind(this)}/>
+				return <TextInput value={condition.value} onChange={this.onStringChanged.bind(this)}/>
 		case 'enum':
 				return (
 					<select
 							value={condition.value}
-							onChange={this.onValuePicked.bind(this)}>
+							onChange={this.onEnumChanged.bind(this)}>
 						{field.values.map((value) =>
 							<option key={value} value={value}>{value}</option>)}
 					</select>
@@ -85,7 +90,7 @@ class EqualCondition extends React.Component {
 				return <input
 						type="checkbox"
 						checked={condition.value}
-						onChange={this.onValuePicked.bind(this)}/>
+						onChange={this.onBooleanChanged.bind(this)}/>
 		}
 	}
 

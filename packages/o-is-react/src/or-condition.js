@@ -4,41 +4,24 @@ import PropTypes from 'prop-types'
 
 
 class OrCondition extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			condition: {
-				type: 'or',
-				tests: props.condition.tests || [{
-					type: 'equal'
-				}]
-			}
-		}
-	}
 
-	shouldComponentUpdate(nextProps, nextState) {
-		return this.state.condition.tests.length !== nextState.condition.tests.length
+	condition() {
+		return {
+			type: 'or',
+			tests: this.props.condition.tests || [{ type: 'equal' }]
+		}
 	}
 
 	onNodeChange(index, conditionChange) {
-		const tests = this.state.condition.tests.slice()
-		tests[index] = conditionChange
-		const condition = {
-			type: 'or',
-			tests
-		}
+		const condition = this.condition()
+		condition.tests[index] = conditionChange
 		this.props.onChange(condition)
-		this.setState({ condition })
 	}
 
 	onAdd() {
-		const tests = this.state.condition.tests.concat({ type: 'equal' })
-		const condition = {
-			type: 'or',
-			tests
-		}
+		const condition = this.condition()
+		condition.tests.push({ type: 'equal' })
 		this.props.onChange(condition)
-		this.setState({ condition })
 	}
 
 	render() {
@@ -50,9 +33,10 @@ class OrCondition extends React.Component {
 				this.types = Object.assign({}, this.types, this.types.or.types)
 			}
 		}
+		const condition = this.condition()
 		return (
 			<div style={style}>
-				{this.state.condition.tests.map((test, index) =>
+				{condition.tests.map((test, index) =>
 					<OrConditionNode
 						schema={this.props.schema}
 						condition={test}
