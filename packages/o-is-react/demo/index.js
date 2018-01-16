@@ -72,7 +72,7 @@ class SearchExample extends React.Component {
 	onSearch() {
 		const filter = oIs(this.props.conditions).elasticsearch()
 		superagent
-			.post('http://localhost:9200/test/people/_search')
+			.post('http://' + location.hostname + ':9200/test/people/_search')
 			.auth('elastic', 'changeme')
 			.send({
 				query: {

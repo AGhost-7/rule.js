@@ -1,2 +1,8 @@
 <div id="component"></div>
-<script src="//localhost:8080/assets/bundle.js"></script>
+<script>
+	(function() {
+		const element = document.createElement('script')
+		element.src = location.origin + '/assets/bundle.js'
+		document.body.append(element)
+	})();
+</script>

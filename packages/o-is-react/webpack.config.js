@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
@@ -10,6 +11,11 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	devtool: 'eval-source-map',
+	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.BASE_URL': process.env.BASE_URL || 'localhost'
+		})
+	],
 	module: {
 		rules: [
 			{
