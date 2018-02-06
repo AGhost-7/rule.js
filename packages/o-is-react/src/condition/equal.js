@@ -80,6 +80,7 @@ class EqualCondition extends React.Component {
 		case 'enum':
 				return (
 					<select
+							class='ois-dropdown'
 							value={condition.value}
 							onChange={this.onEnumChanged.bind(this)}>
 						{field.values.map((value) =>

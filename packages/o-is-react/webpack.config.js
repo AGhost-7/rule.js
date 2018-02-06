@@ -1,19 +1,19 @@
-const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path')
 
 module.exports = {
-	entry: {
-		app: path.join(__dirname, 'demo/index.js')
-	},
+	entry: [
+		path.join(__dirname, 'demo/index.js'),
+		path.join(__dirname, 'src/style/index.scss')
+	],
 	output: {
-		path: path.join(__dirname, 'demo'),
-		publicPath: '/assets/',
-		filename: 'bundle.js'
+		filename: 'assets/bundle.js'
 	},
 	devtool: 'eval-source-map',
 	plugins: [
-		new webpack.DefinePlugin({
-			'process.env.BASE_URL': process.env.BASE_URL || 'localhost'
+		new ExtractTextPlugin({
+			filename: 'assets/bundle.css',
+			allChunks: true
 		})
 	],
 	module: {
@@ -24,6 +24,13 @@ module.exports = {
 				use: {
 					loader: 'babel-loader'
 				}
+			},
+			{
+				test: /\.scss/,
+				include: path.resolve('./src/style'),
+				use: ExtractTextPlugin.extract({
+					use: ['css-loader', 'sass-loader']
+				})
 			}
 		]
 	}

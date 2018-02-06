@@ -16,9 +16,13 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "node-sass": "^4.7.2",
     "o-is": "0.7.1",
     "o-is-elasticsearch": "0.7.1",
     "react-dom": "^16.2.0",
+    "sass-loader": "^6.0.6",
     "superagent": "^3.8.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
