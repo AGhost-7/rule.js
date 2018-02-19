@@ -32,10 +32,20 @@ class CompareCondition extends React.Component {
 		return (
 			<span>
 				{condition.keys.map((key, index) =>
-					<FieldPicker selected={key} onChange={this.onFieldPicked.bind(this, index)} schema={this.props.schema}/>)}
+					<FieldPicker
+						selected={key}
+						onChange={this.onFieldPicked.bind(this, index)}
+						schema={this.props.schema}
+					/>)}
 			</span>
 		)
 	}
+}
+
+CompareCondition.propTypes = {
+	schema: PropTypes.array.isRequired,
+	condition: PropTypes.object,
+	onChange: PropTypes.func.isRequired
 }
 
 export default CompareCondition

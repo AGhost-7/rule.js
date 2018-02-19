@@ -5,14 +5,15 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class TextInput extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			value: this.props.value || ''
+			value: this.props.value || '',
+			prevValue: null
 		}
-		this.state.prevValue = this.state.value
 	}
 
 	componentWillReceiveProps({value}) {
@@ -23,23 +24,36 @@ class TextInput extends React.Component {
 		if(this.props.onChange) {
 			if(this.state.prevValue !== this.state.value) {
 				this.props.onChange(this.state.value)
-				this.state.prevValue = this.state.value
 			}
 		}
 	}
 
 	onChange(ev) {
-		this.setState({ value: ev.target.value })
+		const value = ev.target.value
+		this.setState((prevState) => {
+			return {
+				value,
+				prevValue: prevState.value
+			}
+		})
 	}
 
 	render() {
-		return <input
+		return (
+			<input
 				type="text"
 				onChange={this.onChange.bind(this)}
 				onBlur={this.onBlur.bind(this)}
-				value={this.state.value}/>
+				value={this.state.value}
+			/>
+		)
 	}
 
+}
+
+TextInput.propTypes = {
+	value: PropTypes.string,
+	onChange: PropTypes.func.isRequired
 }
 
 export default TextInput

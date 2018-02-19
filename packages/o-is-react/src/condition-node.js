@@ -74,15 +74,17 @@ class ConditionNode extends React.Component {
 		}
 		return (
 			<div>
-				<select class='ois-dropdown' value={type} onChange={this.onTypeChange.bind(this)}>
+				<select className='ois-dropdown' value={type} onChange={this.onTypeChange.bind(this)}>
 					{Object.keys(types).map((type) =>
-							<option key={type} value={type}>{types[type].translation}</option>)}
+						<option key={type} value={type}>{types[type].translation}</option>)}
 				</select>
-				{Picker && <Picker
-					schema={this.props.schema}
-					onChange={this.onConditionChange.bind(this)}
-					condition={condition}
-					ConditionNode={ConditionNode}/>}
+				{Picker &&
+					<Picker
+						schema={this.props.schema}
+						onChange={this.onConditionChange.bind(this)}
+						condition={condition}
+						ConditionNode={ConditionNode}
+					/>}
 			</div>
 		)
 	}

@@ -45,7 +45,7 @@ class EqualCondition extends React.Component {
 
 	onFieldPicked(field) {
 		const key = field.property
-		let value = this.defaultValue(key)
+		const value = this.defaultValue(key)
 		const condition = { type: 'equal', key, value }
 		this.props.onChange(condition)
 	}
@@ -62,7 +62,6 @@ class EqualCondition extends React.Component {
 
 	onValueChanged(value) {
 		const key = this.key()
-		const field = this.findField(key)
 		const condition = {
 			type: 'equal',
 			key,
@@ -75,23 +74,27 @@ class EqualCondition extends React.Component {
 		const condition = this.condition()
 		const field = this.findField(condition.key)
 		switch(field.type) {
-		case 'string':
+			case 'string':
 				return <TextInput value={condition.value} onChange={this.onStringChanged.bind(this)}/>
-		case 'enum':
+			case 'enum':
 				return (
 					<select
-							class='ois-dropdown'
-							value={condition.value}
-							onChange={this.onEnumChanged.bind(this)}>
+						className='ois-dropdown'
+						value={condition.value}
+						onChange={this.onEnumChanged.bind(this)}
+					>
 						{field.values.map((value) =>
 							<option key={value} value={value}>{value}</option>)}
 					</select>
 				)
-		case 'boolean':
-				return <input
+			case 'boolean':
+				return (
+					<input
 						type="checkbox"
 						checked={condition.value}
-						onChange={this.onBooleanChanged.bind(this)}/>
+						onChange={this.onBooleanChanged.bind(this)}
+					/>
+				)
 		}
 	}
 
@@ -99,9 +102,10 @@ class EqualCondition extends React.Component {
 		return (
 			<span>
 				<FieldPicker
-						selected={this.key()}
-						onChange={this.onFieldPicked.bind(this)}
-						schema={this.props.schema}/>
+					selected={this.key()}
+					onChange={this.onFieldPicked.bind(this)}
+					schema={this.props.schema}
+				/>
 				{this.renderValuePicker()}
 			</span>
 		)
@@ -110,7 +114,8 @@ class EqualCondition extends React.Component {
 
 EqualCondition.propTypes = {
 	schema: PropTypes.array.isRequired,
-	onChange: PropTypes.func.isRequired
+	onChange: PropTypes.func.isRequired,
+	condition: PropTypes.object
 }
 
 export default EqualCondition

@@ -56,7 +56,7 @@ class SearchResultRow extends React.Component {
 		return (
 			<tr>
 				{this.props.schema.map((field) =>
-					<td>{this.format(this.props.item, field)}</td>)}
+					<td key="{field}">{this.format(this.props.item, field)}</td>)}
 			</tr>
 		)
 	}
@@ -70,6 +70,7 @@ class SearchExample extends React.Component {
 		}
 	}
 	onSearch() {
+		// global location:true
 		const filter = oIs(this.props.conditions).elasticsearch()
 		superagent
 			.post('http://' + location.hostname + ':9200/test/people/_search')
@@ -96,8 +97,8 @@ class SearchExample extends React.Component {
 			do so, run the following command at the root of the o-is repository</p>,
 			<pre>docker-compose up</pre>,
 			<p>Afterwards run the test file in
-			"packages/o-is-elasticsearch/test/common.test.js" to populate the
-			index with data</p>,
+			&quot;packages/o-is-elasticsearch/test/common.test.js&quot; to populate
+			the index with data</p>,
 			<table>
 				<thead>
 					<tr>
@@ -157,15 +158,17 @@ class Main extends React.Component {
 		return (
 			<div>
 				<ConditionBuilder
-						onChange={this.onConditionChange.bind(this)}
-						conditions={this.state.conditions}
-						schema={schema}/>
+					onChange={this.onConditionChange.bind(this)}
+					conditions={this.state.conditions}
+					schema={schema}
+				/>
 				<hr/>
 				<SearchExample conditions={this.state.conditions} schema={schema}/>
 				<hr/>
 				<PersistanceExample
-						conditions={this.state.conditions}
-						onLoad={this.onConditionLoad.bind(this)}/>
+					conditions={this.state.conditions}
+					onLoad={this.onConditionLoad.bind(this)}
+				/>
 			</div>
 		)
 	}

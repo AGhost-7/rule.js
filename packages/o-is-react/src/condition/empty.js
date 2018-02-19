@@ -29,17 +29,21 @@ class EmptyCondition extends React.Component {
 	}
 
 	render() {
-		return <FieldPicker
+		return (
+			<FieldPicker
 				onChange={this.onFieldPicked.bind(this)}
 				selected={this.selected()}
-				schema={this.props.schema}/>
+				schema={this.props.schema}
+			/>
+		)
 	}
 
 }
 
 EmptyCondition.propTypes = {
 	onChange: PropTypes.func.isRequired,
-	schema: PropTypes.array.isRequired
+	schema: PropTypes.array.isRequired,
+	condition: PropTypes.object
 }
 
 export default EmptyCondition

@@ -12,7 +12,7 @@ class FieldPicker extends React.Component {
 
 	render() {
 		return (
-			<select class='ois-dropdown' value={this.props.selected} onChange={this.onFieldPicked.bind(this)}>
+			<select className='ois-dropdown' value={this.props.selected} onChange={this.onFieldPicked.bind(this)}>
 				{this.props.schema.map((field) => 
 					<option key={field.property} value={field.property}>
 						{field.label}

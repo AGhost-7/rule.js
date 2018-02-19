@@ -2,3 +2,4 @@ node_modules/*
 packages/*/lib/*
 packages/*/.test/*
 packages/*/node_modules/*
+packages/*/examples/*/node_modules/*

@@ -34,10 +34,11 @@ class NotCondition extends React.Component {
 		return (
 			<div style={style}>
 				<ConditionNode
-						schema={this.props.schema}
-						condition={this.condition().args}
-						ConditionNode={this.props.ConditionNode}
-						onChange={this.onNodeChange.bind(this)}/>
+					schema={this.props.schema}
+					condition={this.condition().args}
+					ConditionNode={this.props.ConditionNode}
+					onChange={this.onNodeChange.bind(this)}
+				/>
 			</div>
 		)
 	}

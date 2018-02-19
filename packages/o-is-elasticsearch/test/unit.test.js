@@ -23,6 +23,8 @@ describe('o-is-elasticsearch#unit', () => {
 			.elasticsearch()
 		const rg1 = query.bool.must[0]
 		const rg2 = query.bool.must[1]
+		assert(rg1.range)
+		assert(rg2.range)
 	})
 
 	it('converts conditions to es queries', () => {

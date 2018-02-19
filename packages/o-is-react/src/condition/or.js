@@ -47,11 +47,19 @@ class OrCondition extends React.Component {
 						schema={this.props.schema}
 						condition={test}
 						ConditionNode={ConditionNode}
-						onChange={this.onNodeChange.bind(this, index)}/>)}
+						onChange={this.onNodeChange.bind(this, index)}
+					/>)}
 				<button onClick={this.onAdd.bind(this)}>Add</button>
 			</div>
 		)
 	}
+}
+
+OrCondition.propTypes = {
+	ConditionNode: PropTypes.func.isRequired,
+	onChange: PropTypes.func.isRequired,
+	condition: PropTypes.object,
+	schema: PropTypes.array.isRequired
 }
 
 export default OrCondition

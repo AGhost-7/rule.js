@@ -1,4 +1,3 @@
-import oIs from 'o-is'
 import React from 'react'
 import PropTypes from 'prop-types'
 import ConditionNode from './condition-node'
@@ -23,11 +22,18 @@ class ConditionBuilder extends React.Component {
 					<ConditionNode
 						onChange={this.onChange.bind(this, index, conditions)}
 						condition={condition}
-						schema={this.props.schema}/>)}
+						schema={this.props.schema}
+					/>)}
 				<button onClick={this.onAdd.bind(this, conditions)}>Add</button>
 			</div>
 		)
 	}
+}
+
+ConditionBuilder.propType = {
+	conditions: PropTypes.array.isRequired,
+	onChange: PropTypes.func.isRequired,
+	schema: PropTypes.array.isRequired
 }
 
 export default ConditionBuilder

@@ -33,11 +33,18 @@ class AndCondition extends React.Component {
 						schema={this.props.schema}
 						condition={test}
 						ConditionNode={ConditionNode}
-						onChange={this.onNodeChange.bind(this, index)}/>)}
+						onChange={this.onNodeChange.bind(this, index)}
+					/>)}
 				<button onClick={this.onAdd.bind(this)}>Add</button>
 			</div>
 		)
 	}
+}
+
+AndCondition.propTypes = {
+	schema: PropTypes.array.isRequired,
+	onChange: PropTypes.func.isRequired,
+	condition: PropTypes.array
 }
 
 export default AndCondition
