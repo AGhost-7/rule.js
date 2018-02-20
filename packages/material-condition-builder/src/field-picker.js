@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import SelectInput from './select-input'
 
 class FieldPicker extends React.Component {
 
@@ -12,12 +13,14 @@ class FieldPicker extends React.Component {
 
 	render() {
 		return (
-			<select className='ois-dropdown' value={this.props.selected} onChange={this.onFieldPicked.bind(this)}>
-				{this.props.schema.map((field) => 
-					<option key={field.property} value={field.property}>
-						{field.label}
-					</option>)}
-			</select>
+			<div className='col m2 input-field field-picker'>
+				<SelectInput value={this.props.selected} onChange={this.onFieldPicked.bind(this)}>
+					{this.props.schema.map((field) => 
+						<option key={field.property} value={field.property}>
+							{field.label}
+						</option>)}
+				</SelectInput>
+			</div>
 		)
 	}
 

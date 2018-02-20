@@ -70,7 +70,6 @@ class SearchExample extends React.Component {
 		}
 	}
 	onSearch() {
-		// global location:true
 		const filter = oIs(this.props.conditions).elasticsearch()
 		superagent
 			.post('http://' + location.hostname + ':9200/test/people/_search')
@@ -94,7 +93,7 @@ class SearchExample extends React.Component {
 		return [
 			<h3>Advanced search example</h3>,
 			<p>For this example to work you will need to bring up elasticsearch. To
-			do so, run the following command at the root of the o-is repository</p>,
+			do so, run the following command at the root of the o-is repository:</p>,
 			<pre>docker-compose up</pre>,
 			<p>Afterwards run the test file in
 			&quot;packages/o-is-elasticsearch/test/common.test.js&quot; to populate
@@ -111,7 +110,10 @@ class SearchExample extends React.Component {
 						<SearchResultRow schema={this.props.schema} item={item}/>)}
 				</tbody>
 			</table>,
-			<button onClick={this.onSearch.bind(this)}>Search!</button>
+			<br/>,
+			<button className='btn btn-floating' onClick={this.onSearch.bind(this)}>
+				<i className='material-icons'>search</i>
+			</button>
 		]
 	}
 }
@@ -129,12 +131,20 @@ class PersistanceExample extends React.Component {
 	}
 	render() {
 		return [
-			<h3>Persistance example</h3>,
-			<p>Since the conditions are represented as json data, it is possible
-			to persist the condition to local storage, etc.</p>,
-			<button onClick={this.onSave.bind(this)}>Save</button>,
-			<button onClick={this.onClear.bind(this)}>Clear</button>,
-			<button onClick={this.onLoad.bind(this)}>Load</button>
+			<h3 className='row'>Persistance example</h3>,
+			<p className='row'>Since the conditions are represented as json data, it is possible
+				to persist the condition to local storage, etc.</p>,
+			<div className='row'>
+				<div className='col m2 offset-m3'>
+					<a className='btn' onClick={this.onSave.bind(this)}>Save</a>
+				</div>
+				<div className='col m2'>
+					<a className='btn' onClick={this.onClear.bind(this)}>Clear</a>
+				</div>
+				<div className='col m2'>
+					<a className='btn' onClick={this.onLoad.bind(this)}>Load</a>
+				</div>
+			</div>
 		]
 	}
 }
@@ -163,12 +173,27 @@ class Main extends React.Component {
 					schema={schema}
 				/>
 				<hr/>
-				<SearchExample conditions={this.state.conditions} schema={schema}/>
+				<div className='row'>
+					<SearchExample conditions={this.state.conditions} schema={schema}/>
+				</div>
 				<hr/>
 				<PersistanceExample
 					conditions={this.state.conditions}
 					onLoad={this.onConditionLoad.bind(this)}
 				/>
+				<div className='row'>
+					<div className="input-field col s12">
+						<select>
+							<option value="" disabled selected>Choose your option</option>
+							<option value="1">Option 1</option>
+							<option value="2">Option 2</option>
+							<option value="3">Option 3</option>
+						</select>
+						<label>Materialize Select</label>
+					</div>
+
+				</div>
+
 			</div>
 		)
 	}
@@ -176,5 +201,5 @@ class Main extends React.Component {
 
 ReactDOM.render(
 	<Main/>,
-	document.getElementById('component')
+	document.getElementById('root')
 )

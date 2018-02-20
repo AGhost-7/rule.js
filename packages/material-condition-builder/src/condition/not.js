@@ -30,9 +30,9 @@ class NotCondition extends React.Component {
 
 	render() {
 		const ConditionNode = this.ConditionNode
-		const style = { paddingLeft: '15px' }
+		//const style = { paddingLeft: '15px' }
 		return (
-			<div style={style}>
+			<div>
 				<ConditionNode
 					schema={this.props.schema}
 					condition={this.condition().args}

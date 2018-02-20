@@ -99,16 +99,16 @@ class EqualCondition extends React.Component {
 	}
 
 	render() {
-		return (
-			<span>
-				<FieldPicker
-					selected={this.key()}
-					onChange={this.onFieldPicked.bind(this)}
-					schema={this.props.schema}
-				/>
+		return [
+			<FieldPicker
+				selected={this.key()}
+				onChange={this.onFieldPicked.bind(this)}
+				schema={this.props.schema}
+			/>,
+			<div className='col m2'>
 				{this.renderValuePicker()}
-			</span>
-		)
+			</div>
+		]
 	}
 }
 

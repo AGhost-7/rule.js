@@ -24,10 +24,9 @@ class AndCondition extends React.Component {
 	}
 
 	render() {
-		const style = { paddingLeft: '15px' }
 		const ConditionNode = this.props.ConditionNode
 		return (
-			<div style={style}>
+			<div>
 				{this.condition().tests.map((test, index) =>
 					<ConditionNode
 						schema={this.props.schema}

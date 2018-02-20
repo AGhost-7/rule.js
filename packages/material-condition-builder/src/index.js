@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ConditionNode from './condition-node'
+import AddButton from './add-button'
+
 
 class ConditionBuilder extends React.Component {
 
@@ -24,7 +26,7 @@ class ConditionBuilder extends React.Component {
 						condition={condition}
 						schema={this.props.schema}
 					/>)}
-				<button onClick={this.onAdd.bind(this, conditions)}>Add</button>
+				<AddButton onClick={this.onAdd.bind(this, conditions)}/>
 			</div>
 		)
 	}

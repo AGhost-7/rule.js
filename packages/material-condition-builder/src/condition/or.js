@@ -36,12 +36,11 @@ class OrCondition extends React.Component {
 	}
 
 	render() {
-		const style = { 'paddingLeft': '15px' }
 		const OrConditionNode = this.ConditionNode
 		const ConditionNode = this.props.ConditionNode
 		const condition = this.condition()
 		return (
-			<div style={style}>
+			<div>
 				{condition.tests.map((test, index) =>
 					<OrConditionNode
 						schema={this.props.schema}
