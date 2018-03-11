@@ -50,7 +50,11 @@ class PolicySet {
 
 	concat() {
 		var policies = Array.prototype.concat.apply(this._policies, arguments)
-		return new PolicySet(this._oIs, policies)
+		const policySet = new PolicySet(this._oIs, policies)
+		if(this._defaults) {
+			policySet._defaults = this._defaults
+		}
+		return policySet
 	}
 
 	toJSON() {

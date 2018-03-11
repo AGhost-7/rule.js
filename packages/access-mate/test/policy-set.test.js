@@ -88,11 +88,15 @@ describe('policy set', () => {
 			.defaults({ target: 'example' })
 			.allow()
 			.action('read')
+			.deny()
+			.action('update')
 			.end()
-		const policy = policies._policies[0]
+		let policy = policies._policies[0]
 		assert.equal(policy._target, 'example')
 		assert.equal(policy._effect, 'allow')
 		assert.equal(policy._action, 'read')
+		policy = policies._policies[1]
+		assert.equal(policy._target, 'example')
 	})
 
 	describe('filters', () => {
