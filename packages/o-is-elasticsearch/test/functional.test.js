@@ -4,8 +4,10 @@ const assert = require('power-assert')
 const esUtil = require('./es-util')
 
 const oIsElasticsearch = require('../index')
+const oIsContextualize = require('o-is-contextualize')
 const oIs = require('o-is').extend({}, {
-	elasticsearch: oIsElasticsearch
+	elasticsearch: oIsElasticsearch,
+	contextualize: oIsContextualize
 })
 
 const search = esUtil.search
@@ -82,6 +84,36 @@ describe('o-is-elasticsearch#functional', () => {
 			.then((res) => {
 				assert.equal(res.hits.hits.length, 1)
 				assert.equal(res.hits.hits[0]._source.country, 'Germany')
+			})
+	})
+
+	it('matches all', () => {
+		const query = oIs()
+			.gt('user.age', 10)
+			.contextualize({
+				user: {
+					age: 15
+				}
+			})
+			.elasticsearch()
+		return search(query)
+			.then((res) => {
+				assert.equal(res.hits.hits.length, 5)
+			})
+	})
+
+	it('matches none', () => {
+		const query = oIs()
+			.lt('user.age', 10)
+			.contextualize({
+				user: {
+					age: 15
+				}
+			})
+			.elasticsearch()
+		return search(query)
+			.then((res) => {
+				assert.equal(res.hits.hits.length, 0)
 			})
 	})
 

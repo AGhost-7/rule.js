@@ -37,6 +37,16 @@ const conversions = {
 		}
 		return r
 	},
+	pass(obj) {
+		return {
+			match_all: {}
+		}
+	},
+	fail(obj) {
+		return {
+			match_none: {}
+		}
+	},
 	exists(obj) {
 		return {
 			exists: objOf('field', obj.key)
