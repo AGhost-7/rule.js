@@ -1,4 +1,3 @@
+packages/access-mate/examples/express/node_modules/*
 node_modules/*
-packages/*/lib/*
-packages/*/.test/*
 packages/*/node_modules/*

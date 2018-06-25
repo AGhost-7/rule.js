@@ -1,0 +1,13 @@
+extends: standard
+rules:
+  # This is the only override required for prettier and standard style to
+  # work together properly.
+  space-before-function-paren:
+    - error
+    - never
+overrides:
+  - files:
+    - 'packages/access-mate/examples/express/test/**/*.js'
+    - 'packages/*/test/**/*js'
+    env:
+      mocha: true
