@@ -47,7 +47,7 @@ NotEmpty
 			type: 'not',
 			args:{
 			  type: 'null',
-				key: Key
+				key: key
 			}
 		}
 	}
