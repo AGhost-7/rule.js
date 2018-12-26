@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/elasticsearch",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Serializable object assertions.",
   "main": "index.js",
   "directories": {
@@ -25,11 +25,11 @@
   "license": "MIT",
   "bugs": {},
   "devDependencies": {
+    "@rule.js/common-suite": "^0.8.0",
+    "@rule.js/contextualize": "^0.8.0",
+    "@rule.js/core": "^0.8.0",
     "elasticsearch": "^12.1.0",
-    "@rule.js/core": "^0.7.1",
-    "@rule.js/common-suite": "^0.7.1",
-    "power-assert": "^1.4.2",
-		"@rule.js/contextualize": "0.7.1"
+    "power-assert": "^1.4.2"
   },
   "engines": {
     "node": ">=v8.12.0"
