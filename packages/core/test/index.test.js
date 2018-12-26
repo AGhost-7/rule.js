@@ -1,6 +1,6 @@
 'use strict'
 
-const oIs = require('../index')
+const Rule = require('../index')
 const assert = require('assert')
 
 describe('@rule.js/core', () => {
@@ -37,11 +37,11 @@ describe('@rule.js/core', () => {
     ]
 
     it('should pass basic assertions', () => {
-      oIs.test(oIs.assertions, obj, tests)
+      Rule.test(Rule.assertions, obj, tests)
     })
 
     it('should fail', () => {
-      const res = oIs.test(oIs.assertions, {}, [
+      const res = Rule.test(Rule.assertions, {}, [
         {
           type: 'fail'
         }
@@ -49,7 +49,7 @@ describe('@rule.js/core', () => {
       assert(!res)
     })
     it('should pass', () => {
-      const res = oIs.test(oIs.assertions, {}, [
+      const res = Rule.test(Rule.assertions, {}, [
         {
           type: 'pass'
         }
@@ -60,20 +60,20 @@ describe('@rule.js/core', () => {
 
   describe('builder basics', () => {
     it('should build', () => {
-      const res = oIs()
+      const res = Rule()
         .equal('a', 1)
         .test({ a: 1 })
       assert.ok(res)
     })
     it('should assert', () => {
       assert.throws(() => {
-        oIs()
+        Rule()
           .equal('a', 2)
           .assert({ a: 1 })
       })
     })
     it('should chain', () => {
-      oIs()
+      Rule()
         .equal('a', 1)
         .lt('a', 10)
         .gt('a', 0)
@@ -89,7 +89,7 @@ describe('@rule.js/core', () => {
         })
     })
     it('equal object', () => {
-      oIs()
+      Rule()
         .equal({
           'name.first': 'Jonathan',
           age: 23
@@ -105,7 +105,7 @@ describe('@rule.js/core', () => {
 
   describe('conditionals', () => {
     it('should handle simple cases', () => {
-      const o = oIs()
+      const o = Rule()
         .if()
         .true('validate')
         .then()
@@ -120,7 +120,7 @@ describe('@rule.js/core', () => {
     })
 
     it('else statements', () => {
-      const o = oIs()
+      const o = Rule()
         .if()
         .gt('income', 100)
         .then()
@@ -134,7 +134,7 @@ describe('@rule.js/core', () => {
       assert(!o.test({ income: 50, contributions: 3 }))
     })
     it.skip('should handle compound conditions', () => {
-      const o = oIs()
+      const o = Rule()
         .if()
         .gt('a', 10)
         .lt('a', 20)
@@ -149,7 +149,7 @@ describe('@rule.js/core', () => {
     })
     it('should handle nested conditions', () => {
       // idk...
-      const o = oIs()
+      const o = Rule()
         .if()
         .true('validate')
         .if()
@@ -171,7 +171,7 @@ describe('@rule.js/core', () => {
 
   describe('binding', () => {
     it('binds for simple cases', () => {
-      const res = oIs()
+      const res = Rule()
         .bind('name')
         .equal('first', 'Jonathan')
         .equal('last', 'Boudreau')
@@ -184,7 +184,7 @@ describe('@rule.js/core', () => {
       assert(res)
     })
     it('unbinds', () => {
-      const res = oIs()
+      const res = Rule()
         .bind('name')
         .equal('first', 'Jonathan')
         .unbind()
@@ -198,7 +198,7 @@ describe('@rule.js/core', () => {
       assert(res)
     })
     it('binds inside conditions', () => {
-      const o = oIs()
+      const o = Rule()
         .if()
         .equal('type', 'human')
         .then()
@@ -224,7 +224,7 @@ describe('@rule.js/core', () => {
       const obj = {
         a: { b: { c: 1 } }
       }
-      oIs()
+      Rule()
         .bind('a')
         .unbind()
         .bind('a')
@@ -235,13 +235,13 @@ describe('@rule.js/core', () => {
   })
   describe('not', () => {
     it('inverts equals', () => {
-      oIs()
+      Rule()
         .not()
         .equal('a', 1)
         .assert({ a: 2 })
     })
     it('inverts only the first statement', () => {
-      oIs()
+      Rule()
         .not()
         .equal('a', 1)
         .equal('b', 2)
@@ -251,7 +251,7 @@ describe('@rule.js/core', () => {
         })
     })
     it('inverts in ifs', () => {
-      oIs()
+      Rule()
         .if()
         .not()
         .equal('a', 1)
@@ -269,7 +269,7 @@ describe('@rule.js/core', () => {
 
   describe('or', () => {
     it('eithers...', () => {
-      const o = oIs()
+      const o = Rule()
         .or()
         .equal('a', 1)
         .equal('a', 2)
@@ -281,7 +281,7 @@ describe('@rule.js/core', () => {
       assert(o.test({ a: 2 }))
     })
     it('allows multiple strict conditions', () => {
-      const o = oIs()
+      const o = Rule()
         .equal('a', 1)
         .or()
         .equal('b', 1)
@@ -292,7 +292,7 @@ describe('@rule.js/core', () => {
       assert(!o.test({ a: 2, b: 1 }))
     })
     it('functions inside if blocks', () => {
-      const o = oIs()
+      const o = Rule()
         .if()
         .or()
         .equal({ a: 1, b: 2 })
@@ -307,7 +307,7 @@ describe('@rule.js/core', () => {
       o.assert({ c: 4 })
     })
     it('functions inside then block', () => {
-      const o = oIs()
+      const o = Rule()
         .if()
         .equal('a', 1)
         .then()
@@ -320,7 +320,7 @@ describe('@rule.js/core', () => {
       o.assert({ a: 2, b: 3 })
     })
     it('functions inside else block', () => {
-      const o = oIs()
+      const o = Rule()
         .if()
         .equal('a', 1)
         .then()
@@ -335,7 +335,7 @@ describe('@rule.js/core', () => {
       o.assert({ b: 4 })
     })
     it('binds', () => {
-      const o = oIs()
+      const o = Rule()
         .or()
         .bind('name')
         .equal('first', 'jonathan')
@@ -345,7 +345,7 @@ describe('@rule.js/core', () => {
       o.assert({ name: { first: 'Jonathan' } })
     })
     it('should allow mixtures of ors and ands', () => {
-      const o = oIs()
+      const o = Rule()
         .or()
         .equal('a', 1)
         .and()
@@ -362,13 +362,13 @@ describe('@rule.js/core', () => {
 
   describe('extensions', () => {
     it('should allow extensions', () => {
-      var oIs2 = oIs.extend({}, {})
-      oIs2()
+      var Rule2 = Rule.extend({}, {})
+      Rule2()
         .equal('a', 1)
         .assert({ a: 1 })
     })
     it('should allow adding new methods', () => {
-      var oIs2 = oIs.extend(
+      var Rule2 = Rule.extend(
         {},
         {
           foo() {
@@ -377,7 +377,7 @@ describe('@rule.js/core', () => {
         }
       )
       assert.equal(
-        oIs2()
+        Rule2()
           .equal('foo', 'baz')
           .foo(),
         'bar'

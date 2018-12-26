@@ -1,4 +1,4 @@
-## Object Is: Contextualize
+## Rule.js: Contextualize
 The idea behind this module is to allow to bind properties on
 every call done to a `Rule` object as though the property was
 present on every object you're testing against. This allows,

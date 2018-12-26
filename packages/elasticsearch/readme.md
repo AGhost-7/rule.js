@@ -1,4 +1,4 @@
-## Object Is: Elasticsearch converter
+## Rule.js: Elasticsearch converter
 Convert the `Rule` object into an elasticsearch query.
 
 ```javascript

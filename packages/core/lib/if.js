@@ -2,7 +2,7 @@
 
 const assign = require('lodash.assign')
 
-const createIfClass = oIsProto => {
+const createIfClass = ruleProto => {
   function Else(parent, conds, ifTests, tests, boundKeys) {
     this.parent = parent
     this.conds = conds
@@ -11,7 +11,7 @@ const createIfClass = oIsProto => {
     this._boundKeys = boundKeys
   }
 
-  Else.prototype = assign(Object.create(null), oIsProto)
+  Else.prototype = assign(Object.create(null), ruleProto)
 
   Else.prototype._create = function(tests, boundKeys) {
     return new Else(this.parent, this.conds, this.ifTests, tests, boundKeys)
@@ -33,7 +33,7 @@ const createIfClass = oIsProto => {
     this._boundKeys = boundKeys
   }
 
-  Then.prototype = assign(Object.create(null), oIsProto)
+  Then.prototype = assign(Object.create(null), ruleProto)
 
   Then.prototype.end = function() {
     return this.parent._cons({
@@ -57,7 +57,7 @@ const createIfClass = oIsProto => {
     this._boundKeys = boundKeys
   }
 
-  If.prototype = assign(Object.create(null), oIsProto)
+  If.prototype = assign(Object.create(null), ruleProto)
   If.prototype.then = function() {
     return new this._Then(this.parent, this.tests, [], this._boundKeys)
   }

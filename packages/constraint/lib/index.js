@@ -5,7 +5,7 @@ const util = require('util')
 const baseConstraintTypes = require('./base-constraint-types')
 const Rule = require('@rule.js/core')
 
-const createClass = (constraintMembers, constraintTypes, OIsExtended) => {
+const createClass = (constraintMembers, constraintTypes, RuleExtended) => {
   const ConstraintBuilder = function(constraints, constraintTypes) {
     this._constraints = constraints
     this._constraintTypes = constraintTypes
@@ -35,7 +35,7 @@ const createClass = (constraintMembers, constraintTypes, OIsExtended) => {
   }
 
   ConstraintBuilder.prototype.when = function() {
-    const condition = new OIsExtended([], [])
+    const condition = new RuleExtended([], [])
     condition._constraintBuilder = this
     return condition
   }
@@ -134,7 +134,7 @@ module.exports = function(options) {
     }
   }
 
-  const OIsExtended = createRuleClass(
+  const RuleExtended = createRuleClass(
     ruleMembers,
     ruleAssertions,
     constraintMembers,
@@ -144,7 +144,7 @@ module.exports = function(options) {
   const ConstraintBuilder = createClass(
     constraintMembers,
     constraintTypes,
-    OIsExtended
+    RuleExtended
   )
 
   return new ConstraintBuilder([], constraintTypes)

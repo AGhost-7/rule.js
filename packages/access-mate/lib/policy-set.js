@@ -110,8 +110,8 @@ class PolicySet {
     return resources
   }
 
-  static fromJSON(policies, oIs) {
-    const policySet = new PolicySet(oIs)
+  static fromJSON(policies, Rule) {
+    const policySet = new PolicySet(Rule)
     policySet._policies = policies.map(policy =>
       Policy.fromJSON(policySet, policy)
     )

@@ -1,4 +1,4 @@
-## Object Is: Expression Language
+## Rule.js: Expression Language
 A simple language for expressing business rules.
 
 ### API

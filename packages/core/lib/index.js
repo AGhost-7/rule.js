@@ -130,37 +130,37 @@ const members = {
 assign(members, memberTestMethods)
 
 const createClass = (assertions, members) => {
-  function OIs(tests, boundKeys) {
+  function RuleClass(tests, boundKeys) {
     this._boundKeys = boundKeys
     this.tests = tests
   }
-  OIs.prototype = Object.create(null)
-  assign(OIs.prototype, members)
-  OIs.prototype._create = function(tests, boundKeys) {
-    return new OIs(tests, boundKeys)
+  RuleClass.prototype = Object.create(null)
+  assign(RuleClass.prototype, members)
+  RuleClass.prototype._create = function(tests, boundKeys) {
+    return new RuleClass(tests, boundKeys)
   }
-  OIs.prototype._isInstance = obj => obj instanceof OIs
-  OIs.prototype.assertions = assertions
+  RuleClass.prototype._isInstance = obj => obj instanceof RuleClass
+  RuleClass.prototype.assertions = assertions
 
-  var Or = createOrClass(OIs.prototype)
-  OIs.prototype._Or = Or
+  var Or = createOrClass(RuleClass.prototype)
+  RuleClass.prototype._Or = Or
 
-  const Not = createNotClass(OIs.prototype)
-  OIs.prototype._Not = Not
+  const Not = createNotClass(RuleClass.prototype)
+  RuleClass.prototype._Not = Not
   Or.prototype._Not = Not
 
-  const If = createIfClass(OIs.prototype)
-  OIs.prototype._If = If
+  const If = createIfClass(RuleClass.prototype)
+  RuleClass.prototype._If = If
   Or.prototype._If = If
   Not.prototype._If = If
 
-  return OIs
+  return RuleClass
 }
 
-const ObjectIs = createClass(assertions, members)
+const RuleClass = createClass(assertions, members)
 
 const mod = items => {
-  return new ObjectIs(items || [], [])
+  return new RuleClass(items || [], [])
 }
 
 const extend = (a, m) => {
@@ -172,7 +172,6 @@ const extend = (a, m) => {
   }
 }
 
-mod.ObjectIs = ObjectIs
 mod.test = testRunner
 mod.assertions = assertions
 mod.members = members

@@ -2,13 +2,13 @@
 
 const assign = require('lodash.assign')
 
-const createOrClass = oIsProto => {
+const createOrClass = ruleProto => {
   function Or(parent, tests, boundKeys) {
     this.parent = parent
     this._boundKeys = boundKeys
     this.tests = tests
   }
-  Or.prototype = assign(Object.create(null), oIsProto)
+  Or.prototype = assign(Object.create(null), ruleProto)
   Or.prototype._create = function(tests, boundKeys) {
     return new Or(this.parent, tests, boundKeys)
   }
@@ -29,7 +29,7 @@ const createOrClass = oIsProto => {
     this._boundKeys = boundKeys
     this.tests = tests
   }
-  And.prototype = assign(Object.create(null), oIsProto)
+  And.prototype = assign(Object.create(null), ruleProto)
 
   And.prototype._create = function(tests, boundKeys) {
     return new And(this.parent, tests, boundKeys)

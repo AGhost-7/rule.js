@@ -8,8 +8,8 @@ and running a condition.
 elasticsearch query.
 - [@rule.js/contextualize](packages/contextualize): Replace certain keys
 in your conditions with data.
-- [@rule.js/access-mate](packages/access-mate): Attribute-based access control using
-o-is conditions.
+- [@rule.js/access-mate](packages/access-mate): Attribute-based access control
+using rule.js conditions.
 - [@rule.js/constraint](packages/constraint): Data constraints module
 leveraging the core library.
 - [@rule.js/expression](packages/expression): A simple language for expressing

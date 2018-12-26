@@ -1,4 +1,4 @@
-# Object Is: Constraints Module
+# Rule.js: Constraints Module
 Serializable constraints with complex conditions (provided by
 [@rule.js/core][1] module).
 

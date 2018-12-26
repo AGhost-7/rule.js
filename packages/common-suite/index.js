@@ -13,7 +13,7 @@ const containsNames = (arr, names) =>
     return containsName(arr, name)
   })
 
-module.exports = oIs => {
+module.exports = Rule => {
   return {
     data: [
       {
@@ -68,14 +68,14 @@ module.exports = oIs => {
     tests: [
       [
         'equal',
-        oIs().equal('firstName', 'Joe'),
+        Rule().equal('firstName', 'Joe'),
         res => {
           assert.equal(res.length, 1)
         }
       ],
       [
         'or',
-        oIs()
+        Rule()
           .or()
           .equal('firstName', 'Nils')
           .equal('firstName', 'Joe')
@@ -86,7 +86,7 @@ module.exports = oIs => {
       ],
       [
         'not',
-        oIs()
+        Rule()
           .not()
           .equal('firstName', 'Joe'),
         res => {
@@ -95,7 +95,7 @@ module.exports = oIs => {
       ],
       [
         'propsEqual',
-        oIs().propsEqual('deceased', 'virtuoso'),
+        Rule().propsEqual('deceased', 'virtuoso'),
         res => {
           assert.equal(res.length, 3)
           assert(!containsProp(res, 'firstName', 'Bill'))
@@ -103,7 +103,7 @@ module.exports = oIs => {
       ],
       [
         'notEqual',
-        oIs().notEqual('deceased', false),
+        Rule().notEqual('deceased', false),
         res => {
           assert.equal(res.length, 2)
           assert(containsNames(res, ['Bill', 'Joe']))
@@ -111,7 +111,7 @@ module.exports = oIs => {
       ],
       [
         'false',
-        oIs().false('deceased'),
+        Rule().false('deceased'),
         res => {
           assert.equal(res.length, 2)
           assert(containsNames(res, ['Nils', 'Jonathan']))
@@ -119,7 +119,7 @@ module.exports = oIs => {
       ],
       [
         'true',
-        oIs().true('virtuoso'),
+        Rule().true('virtuoso'),
         res => {
           assert.equal(res.length, 1)
           assert(containsName(res, 'Joe'))
@@ -127,21 +127,21 @@ module.exports = oIs => {
       ],
       [
         'gt',
-        oIs().gt('age', 24),
+        Rule().gt('age', 24),
         res => {
           assert.equal(res.length, 3)
         }
       ],
       [
         'lt',
-        oIs().lt('age', 35),
+        Rule().lt('age', 35),
         res => {
           assert.equal(res.length, 2)
         }
       ],
       [
         'multiple conditions',
-        oIs()
+        Rule()
           .gt('age', 24)
           .lt('age', 50),
         res => {
@@ -151,7 +151,7 @@ module.exports = oIs => {
       ],
       [
         'array: equal',
-        oIs()
+        Rule()
           .equal('hobbies', 'Guitar')
           .equal('hobbies', 'Games'),
         res => {
@@ -161,7 +161,7 @@ module.exports = oIs => {
       ],
       [
         'if',
-        oIs()
+        Rule()
           .if()
           .lt('age', 40)
           .then()
@@ -173,7 +173,7 @@ module.exports = oIs => {
       ],
       [
         'if else',
-        oIs()
+        Rule()
           .if()
           .equal('firstName', 'Joe')
           .then()
@@ -187,7 +187,7 @@ module.exports = oIs => {
       ],
       [
         'if not',
-        oIs()
+        Rule()
           .if()
           .not()
           .true('virtuoso')
@@ -202,28 +202,28 @@ module.exports = oIs => {
       ],
       [
         'null',
-        oIs().null('description'),
+        Rule().null('description'),
         res => {
           assert.equal(res.length, 1)
         }
       ],
       [
         'any:none',
-        oIs().any('firstName', ['foobar']),
+        Rule().any('firstName', ['foobar']),
         res => {
           assert.equal(res.length, 0)
         }
       ],
       [
         'any:some',
-        oIs().any('country', ['US', 'Canada']),
+        Rule().any('country', ['US', 'Canada']),
         res => {
           assert.equal(res.length, 3)
         }
       ],
       [
         'any:all',
-        oIs().any('instrument', ['Piano', 'Guitar']),
+        Rule().any('instrument', ['Piano', 'Guitar']),
         res => {
           assert.equal(res.length, 4)
         }
