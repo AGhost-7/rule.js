@@ -10,7 +10,7 @@
     "type": "git"
   },
   "bugs": {},
-  "keywords": {
+  "keywords": [
     "Assertion",
     "Conditional",
     "Serialization",
@@ -20,7 +20,7 @@
     "PEG",
     "Language",
     "Expressions"
-  },
+  ],
   "dependencies": {
     "@rule.js/core": "^0.7.1",
     "pegjs": "^0.10.0"
