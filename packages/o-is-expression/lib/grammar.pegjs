@@ -1,31 +1,35 @@
 Start
 	= Expression
-  / Test
 
 Expression
-  = left:Test right:OrExpression {
+  = "(" _* left:Operation _* ")" _* type:("and"/"or") _* "(" _* right:Operation _* ")" {
 		return {
-			type: 'or',
+			type: type,
 			tests: [left, right]
 		}
 	}
-	/ left:Test right:AndExpression {
+	/ "(" _* left:Operation _* ")" _* type:("and"/"or") _ right:Operation {
+	  return {
+		  type: type,
+			tests: [left, right]
+		};
+	}
+	/ left:Operation _ type:("and"/"or") _* "(" _* right:Operation _* ")" {
 		return {
-			type: 'and',
+			type: type,
+			tests: [left, right]
+		}
+	}
+	/ Operation
+
+Operation
+  = left:Test _ type:("and"/"or") _ right:Expression {
+		return {
+			type: type,
 			tests: [left, right]
 		}
 	}
 	/ Test
-
-OrExpression
-  = _ "or" _ expression:Expression {
-		return expression;
-	}
-
-AndExpression
-  = _ "and" _ expression:Expression {
-		return expression;
-	}
 
 Test "test"
   = NotEqual
@@ -106,4 +110,4 @@ Quote = '"'
 Unescaped = [^\0-\x1F\x22\x5C]
 
 _ "whitespace"
-	= [\t ]+
+	= [\n\t ]+

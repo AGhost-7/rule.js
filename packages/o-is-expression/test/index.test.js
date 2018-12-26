@@ -4,7 +4,8 @@ const oIsExpression = require('../')()
 const assert = require('assert')
 
 const assertExpression = function(condition, expected) {
-  assert.deepEqual(oIsExpression(condition).tests, expected)
+  const tests = oIsExpression(condition).tests
+  assert.deepEqual(tests, expected)
 }
 
 const expressionThrows = function(condition) {
@@ -88,36 +89,39 @@ describe('o-is-expression', function() {
     })
 
     it('not equal', function() {
-      assertExpression('"foo" equal true or "bar" equal "baz" and "foob" not equal "bar"', [
-        {
-          type: 'or',
-          tests: [
-            {
-              type: 'equal',
-              key: 'foo',
-              value: true
-            },
-            {
-              type: 'and',
-              tests: [
-                {
-                  type: 'equal',
-                  key: 'bar',
-                  value: 'baz'
-                },
-                {
-                  type: 'not',
-                  args: {
+      assertExpression(
+        '"foo" equal true or "bar" equal "baz" and "foob" not equal "bar"',
+        [
+          {
+            type: 'or',
+            tests: [
+              {
+                type: 'equal',
+                key: 'foo',
+                value: true
+              },
+              {
+                type: 'and',
+                tests: [
+                  {
                     type: 'equal',
-                    key: 'foob',
-                    value: 'bar'
+                    key: 'bar',
+                    value: 'baz'
+                  },
+                  {
+                    type: 'not',
+                    args: {
+                      type: 'equal',
+                      key: 'foob',
+                      value: 'bar'
+                    }
                   }
-                }
-              ]
-            }
-          ]
-        }
-      ])
+                ]
+              }
+            ]
+          }
+        ]
+      )
     })
 
     it('empty', function() {
@@ -226,6 +230,187 @@ describe('o-is-expression', function() {
                     type: 'equal',
                     key: 'bar',
                     value: true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      )
+    })
+  })
+
+  describe('()', function() {
+    it('left', function() {
+      assertExpression(
+        '("baz" equal "foob" or "baz" equal "bar") and "foo" equal "bar"',
+        [
+          {
+            type: 'and',
+            tests: [
+              {
+                type: 'or',
+                tests: [
+                  {
+                    type: 'equal',
+                    key: 'baz',
+                    value: 'foob'
+                  },
+                  {
+                    type: 'equal',
+                    key: 'baz',
+                    value: 'bar'
+                  }
+                ]
+              },
+              {
+                type: 'equal',
+                key: 'foo',
+                value: 'bar'
+              }
+            ]
+          }
+        ]
+      )
+    })
+
+    it('right', function() {
+      assertExpression(
+        '"bar" equal "foob" and ("blob" is not empty or "foo" equal "bar" )',
+        [
+          {
+            type: 'and',
+            tests: [
+              {
+                type: 'equal',
+                key: 'bar',
+                value: 'foob'
+              },
+              {
+                type: 'or',
+                tests: [
+                  {
+                    type: 'not',
+                    args: {
+                      type: 'null',
+                      key: 'blob'
+                    }
+                  },
+                  {
+                    type: 'equal',
+                    key: 'foo',
+                    value: 'bar'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      )
+    })
+
+    it('both', function() {
+      assertExpression('("foo" is empty) and ("bar" is empty)', [
+        {
+          type: 'and',
+          tests: [
+            {
+              type: 'null',
+              key: 'foo'
+            },
+            {
+              type: 'null',
+              key: 'bar'
+            }
+          ]
+        }
+      ])
+    })
+
+    it('nested', function() {
+      assertExpression(
+        '("foo" is empty and "bar" equal "baz" or (' +
+          '"baz" equal "foob" and "foo" equal "bar")) or "bleh" equal "ok"',
+        [
+          {
+            type: 'or',
+            tests: [
+              {
+                type: 'and',
+                tests: [
+                  {
+                    type: 'null',
+                    key: 'foo'
+                  },
+                  {
+                    type: 'or',
+                    tests: [
+                      {
+                        type: 'equal',
+                        key: 'bar',
+                        value: 'baz'
+                      },
+                      {
+                        type: 'and',
+                        tests: [
+                          {
+                            type: 'equal',
+                            key: 'baz',
+                            value: 'foob'
+                          },
+                          {
+                            type: 'equal',
+                            key: 'foo',
+                            value: 'bar'
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                type: 'equal',
+                key: 'bleh',
+                value: 'ok'
+              }
+            ]
+          }
+        ]
+      )
+    })
+
+    it.skip('multiple', function() {
+      assertExpression(
+        '("foo" is empty) and ("bar" is empty) or "baz" is empty' +
+          ' or ("foob" is empty)',
+        [
+          {
+            type: 'and',
+            tests: [
+              {
+                type: 'null',
+                key: 'foo'
+              },
+              {
+                type: 'or',
+                tests: [
+                  {
+                    type: 'null',
+                    key: 'bar'
+                  },
+                  {
+                    type: 'or',
+                    tests: [
+                      {
+                        type: 'null',
+                        key: 'baz'
+                      },
+                      {
+                        type: 'null',
+                        key: 'foob'
+                      }
+                    ]
                   }
                 ]
               }
