@@ -1,11 +1,11 @@
 'use strict'
 
-const oIsDefault = require('./o-is-default')
+const RuleDefault = require('./rule-default')
 
 class Policy {
   constructor(policySet, effect) {
     this._policySet = policySet
-    this._oIs = policySet._oIs || oIsDefault
+    this._Rule = policySet._Rule || RuleDefault
     this._target = []
     this._action = []
     this._name = null
@@ -65,7 +65,7 @@ class Policy {
     if (value) {
       return this._set('_condition', value.tests)
     } else {
-      const o = this._oIs()
+      const o = this._Rule()
       o._policy = this
       return o
     }
@@ -98,7 +98,7 @@ class Policy {
         if (
           context.action === action &&
           context.target === target &&
-          this._oIs.test(this._oIs.assertions, context, this._condition)
+          this._Rule.test(this._Rule.assertions, context, this._condition)
         ) {
           switch (this._effect) {
             case 'allow':

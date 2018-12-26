@@ -1,6 +1,6 @@
 'use strict'
 
-const oIsDefault = require('./o-is-default')
+const RuleDefault = require('./rule-default')
 
 const Policy = require('./policy')
 const packageName = require('../package').name
@@ -8,14 +8,14 @@ const debug = require('debug')(packageName)
 const omit = require('lodash.omit')
 
 class PolicySet {
-  constructor(oIs, policies) {
+  constructor(Rule, policies) {
     this._policies = policies || []
-    this._oIs = oIs || oIsDefault
+    this._Rule = Rule || RuleDefault
     this._defaults = null
   }
 
   defaults(defaults) {
-    const policySet = new PolicySet(this._oIs, this._policies)
+    const policySet = new PolicySet(this._Rule, this._policies)
     policySet._defaults = defaults
     return policySet
   }
@@ -43,7 +43,7 @@ class PolicySet {
 
   concat() {
     var policies = Array.prototype.concat.apply(this._policies, arguments)
-    const policySet = new PolicySet(this._oIs, policies)
+    const policySet = new PolicySet(this._Rule, policies)
     if (this._defaults) {
       policySet._defaults = this._defaults
     }

@@ -2,18 +2,18 @@
 
 const Policy = require('./lib/policy')
 const PolicySet = require('./lib/policy-set')
-const oIsDefault = require('./lib/o-is-default')
+const RuleDefault = require('./lib/rule-default')
 const strategies = require('./lib/strategies')
 
 exports.PolicySet = PolicySet
 exports.Policy = Policy
 
-exports.policySet = function(policies, oIs) {
-  return PolicySet.fromJSON(policies || [], oIs || oIsDefault)
+exports.policySet = function(policies, Rule) {
+  return PolicySet.fromJSON(policies || [], Rule || RuleDefault)
 }
 
-exports.policy = function(oIs) {
-  return new Policy(oIs || oIsDefault)
+exports.policy = function(Rule) {
+  return new Policy(Rule || RuleDefault)
 }
 
 exports.strategies = strategies

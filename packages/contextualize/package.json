@@ -1,0 +1,41 @@
+{
+  "name": "@rule.js/contextualize",
+  "version": "0.7.1",
+  "description": "Serializable object assertions.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo 'See main repo to run tests'"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "Assertion",
+    "Conditional",
+    "Serialization",
+    "Storable",
+    "Conditions",
+    "Validation",
+    "Elasticsearch"
+  ],
+  "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com>",
+  "license": "MIT",
+  "bugs": {},
+  "dependencies": {
+    "lodash.assign": "^4.2.0",
+    "lodash.get": "^4.4.2",
+    "lodash.topath": "^4.5.2"
+  },
+  "devDependencies": {
+    "elasticsearch": "^12.1.0",
+    "@rule.js/core": "^0.7.1",
+    "@rule.js/common-suite": "^0.7.1",
+    "power-assert": "^1.4.2"
+  },
+  "engines": {
+    "node": ">=6.9.0"
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "name": "access-mate",
+  "name": "@rule.js/access-mate",
   "version": "0.7.1",
-  "description": "Attribute base access control using o-is for the conditions",
+  "description": "Attribute base access control using rule.js for the conditions",
   "main": "index.js",
   "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com",
   "license": "Apache-2.0",
@@ -9,7 +9,7 @@
     "debug": "^3.1.0",
     "lodash.omit": "^4.5.0",
     "lodash.uniq": "^4.5.0",
-    "o-is": "^0.7.1"
+    "@rule.js/core": "^0.7.1"
   },
   "scripts": {
     "test": "echo 'See main repo to run tests'"

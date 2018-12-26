@@ -24,8 +24,8 @@ how actions behave, and pass the context over to the policies.
 
 
 ## Conditions
-Conditions are generated using the `o-is` module. See [documentation][3] for
-details.
+Conditions are generated using the `@rule.js/core` module. See
+[documentation][3] for details.
 
 
 ## API
@@ -61,12 +61,12 @@ array in the result instead of causing the entire record to fail authorization.
 
 #### `condition(value)`
 Optionally accepts a value which will be "set" as the policie's condition.
-If no value is given this will instead return an `o-is` instance, allowing
-construction of the condition immediately.
+If no value is given this will instead return an `@rule.js/core` instance,
+allowing construction of the condition immediately.
 
 Example when specifying the condition value: 
 ```javascript
-const isAdmin = oIs().true('isAdmin')
+const isAdmin = Rule().true('isAdmin')
 
 // You can define your conditions first and use them on policies later.
 const policy = AccessMate.policy()
@@ -178,10 +178,10 @@ instead of the usual single result.
 ## Full Example
 ```javascript
 const AccessMate = require('access-mate')
-const oIs = require('o-is')
+const Rule = require('@rule.js/core')
 
 // conditions can be re-used.
-const isOwner = oIs().propsEqual('subject.id', 'resource.owner')
+const isOwner = Rule().propsEqual('subject.id', 'resource.owner')
 
 const policySet = AcessMate.policySet()
 	.deny()
@@ -267,4 +267,4 @@ This module uses the `debug` package for managing debug logs. Simply set your
 
 [1]: https://en.wikipedia.org/wiki/Attribute-based_access_control
 [2]: http://docs.oasis-open.org/xacml/3.0/errata01/os/xacml-3.0-core-spec-errata01-os-complete.html
-[3]: https://github.com/AGhost-7/o-is/tree/master/packages/o-is
+[3]: https://github.com/AGhost-7/rule.js/tree/master/packages/core

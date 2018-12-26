@@ -1,11 +1,11 @@
 'use strict'
 
 const assert = require('assert')
-const oIs = require('o-is')
+const Rule = require('@rule.js/core')
 const AccessMate = require('../')
 
 describe('strategies', () => {
-  const isAdmin = oIs().true('subject.isAdmin')
+  const isAdmin = Rule().true('subject.isAdmin')
 
   const simpleForumPolicySet = AccessMate.policySet()
     .allow()

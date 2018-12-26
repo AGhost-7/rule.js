@@ -1,12 +1,12 @@
 'use strict'
 
 const Policy = require('../lib/policy')
-const oIsDefault = require('../lib/o-is-default')
+const RuleDefault = require('../lib/rule-default')
 const assert = require('assert')
 
 const PolicySetMock = function(policies) {
   this._policies = policies
-  this._oIs = oIsDefault
+  this._Rule = RuleDefault
 }
 
 PolicySetMock.prototype.concat = function(policy) {
@@ -40,7 +40,7 @@ describe('policy', () => {
   })
 
   it('external condition', () => {
-    const isAdmin = oIsDefault().true('isAdmin')
+    const isAdmin = RuleDefault().true('isAdmin')
     const policy = new Policy(mock)
       .effect('allow')
       .condition(isAdmin)

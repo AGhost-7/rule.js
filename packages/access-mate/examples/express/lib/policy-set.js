@@ -2,10 +2,10 @@
  * The access control list.
  */
 
-const oIs = require('o-is')
+const Rule = require('@rule.js/core')
 const AccessMate = require('../../../index')
 
-const isNotSelf = oIs()
+const isNotSelf = Rule()
   .not()
   .propsEqual('resource.id', 'subject.id')
 

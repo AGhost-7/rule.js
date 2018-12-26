@@ -1,0 +1,16 @@
+{
+  "name": "@rule.js/constraint",
+  "version": "0.7.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "lodash.assign": "^4.2.0",
+    "lodash.get": "^4.4.2",
+    "@rule.js/core": "^0.7.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
