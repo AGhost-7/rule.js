@@ -14,7 +14,7 @@ const expressionThrows = function(condition) {
   })
 }
 
-describe('o-is-expression', function() {
+describe('o-is-expression#parse', function() {
   describe('test', function() {
     it('equal', function() {
       assertExpression('"foo" equal "lel"', [
