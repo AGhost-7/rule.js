@@ -67,11 +67,77 @@ describe('o-is-expression', function() {
   })
 
   describe('and', function() {
-    it.skip('equal', function() {})
+    it('equal', function() {
+      assertExpression('"foo" equal true and "foo" equal "baz"', [
+        {
+          type: 'and',
+          tests: [
+            {
+              type: 'equal',
+              key: 'foo',
+              value: true
+            },
+            {
+              type: 'equal',
+              key: 'foo',
+              value: 'baz'
+            }
+          ]
+        }
+      ])
+    })
 
-    it.skip('not equal', function() {})
+    it('not equal', function() {
+      assertExpression('"foo" equal true or "bar" equal "baz" and "foob" not equal "bar"', [
+        {
+          type: 'or',
+          tests: [
+            {
+              type: 'equal',
+              key: 'foo',
+              value: true
+            },
+            {
+              type: 'and',
+              tests: [
+                {
+                  type: 'equal',
+                  key: 'bar',
+                  value: 'baz'
+                },
+                {
+                  type: 'not',
+                  args: {
+                    type: 'equal',
+                    key: 'foob',
+                    value: 'bar'
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ])
+    })
 
-    it.skip('empty', function() {})
+    it('empty', function() {
+      assertExpression('"foo" is empty and "baz" equal "floob"  ', [
+        {
+          type: 'and',
+          tests: [
+            {
+              type: 'null',
+              key: 'foo'
+            },
+            {
+              type: 'equal',
+              key: 'baz',
+              value: 'floob'
+            }
+          ]
+        }
+      ])
+    })
   })
 
   describe('or', function() {
