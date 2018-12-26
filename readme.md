@@ -13,6 +13,8 @@ in your conditions with data.
 o-is conditions.
 - [o-is-constraint](packages/o-is-constraint): Data constraints module
 leveraging the core library.
+- [o-is-expression](packages/o-is-expression): A simple language for expressing
+business rules.
 
 [badge-url]: https://travis-ci.org/AGhost-7/o-is.svg?branch=master
 [ci-url]: https://travis-ci.org/AGhost-7/o-is
