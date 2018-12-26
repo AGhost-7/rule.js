@@ -32,6 +32,6 @@
 		"@rule.js/contextualize": "0.7.1"
   },
   "engines": {
-    "node": ">=6.9.0"
+    "node": ">=v8.12.0"
   }
 }

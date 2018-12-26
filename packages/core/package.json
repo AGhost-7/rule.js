@@ -31,7 +31,7 @@
   "devDependencies": {
     "@rule.js/common-suite": "^0.7.1"
   },
-  "engine": {
-    "node": ">=6.9.0"
+  "engines": {
+    "node": ">=v8.12.0"
   }
 }

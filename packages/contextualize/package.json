@@ -35,7 +35,7 @@
     "@rule.js/common-suite": "^0.7.1",
     "power-assert": "^1.4.2"
   },
-  "engines": {
-    "node": ">=6.9.0"
+  "engine": {
+    "node": ">=v8.12.0"
   }
 }
