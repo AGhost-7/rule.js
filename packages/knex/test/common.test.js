@@ -1,8 +1,11 @@
 const snakeCase = require('lodash.snakecase')
 const camelCase = require('lodash.camelcase')
-const Rule = require('@rule.js/core').extend({}, {
-  knex: require('..')()
-})
+const Rule = require('@rule.js/core').extend(
+  {},
+  {
+    knex: require('..')()
+  }
+)
 const commonSuite = require('@rule.js/common-suite')(Rule)
 const knexlib = require('knex')
 
@@ -20,7 +23,7 @@ const camelObject = caseConvert(camelCase)
 
 const setupTable = async function(knex) {
   await knex.schema.dropTableIfExists('people')
-  await knex.schema.createTable('people', (table) => {
+  await knex.schema.createTable('people', table => {
     table.string('first_name')
     table.string('last_name')
     table.integer('age')
@@ -32,8 +35,9 @@ const setupTable = async function(knex) {
     table.string('instrument')
     table.string('description')
   })
-  await knex.Promise.each(commonSuite.data, (item) =>
-    knex('people').insert(snakeObject(item)))
+  await knex.Promise.each(commonSuite.data, item =>
+    knex('people').insert(snakeObject(item))
+  )
 }
 
 const testSuite = function(knex) {
