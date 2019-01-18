@@ -4,7 +4,7 @@ Use your rule.js conditions with KnexJs!
 Example:
 
 ```js
-const Rule = require('@rule.js/core').extend({
+const Rule = require('@rule.js/core').extend({}, {
 	knex: require('@rule.js/knex')()
 })
 
@@ -20,8 +20,8 @@ knex('user')
 **Note**: This module automatically converts keys to snake case. If you don't
 want it to do this, you can override it with:
 
-```
-const Rule = require('@rule.js/core').extend({
+```js
+const Rule = require('@rule.js/core').extend({}, {
 	knex: require('@rule.js/knex')(function(key) { return key })
 })
 ```
