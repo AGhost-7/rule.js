@@ -1,0 +1,42 @@
+{
+  "name": "@rule.js/knex",
+  "version": "0.8.0",
+  "description": "Serializable object assertions.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo 'See main repo to run tests'"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "Assertion",
+    "Conditional",
+    "Serialization",
+    "Storable",
+    "Conditions",
+    "Validation",
+    "SQL"
+  ],
+  "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com>",
+  "license": "MIT",
+  "bugs": {},
+  "devDependencies": {
+    "@rule.js/common-suite": "^0.8.0",
+    "@rule.js/core": "^0.8.0",
+    "knex": "^0.16.3",
+    "lodash.camelcase": "^4.3.0",
+    "mysql2": "^1.6.4",
+    "pg": "^7.8.0",
+    "power-assert": "^1.4.2"
+  },
+  "engines": {
+    "node": ">=v8.12.0"
+  },
+  "dependencies": {
+    "lodash.snakecase": "^4.1.1"
+  }
+}

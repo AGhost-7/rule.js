@@ -1,6 +1,21 @@
 version: '3'
 services:
+  test:
+    command: sleep Infinity
+    image: node:dubnium
+    user: node
+    environment:
+      - PGHOST=pg
+      - PGUSER=postgres
+      - PGDATABASE=postgres
+      - MYSQL_HOST=mysql
+      - ES_HOST=elasticsearch
+    working_dir: /test
+    volumes:
+      - ./:/test
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.6.5
-    ports:
-      - 9200:9200
+  pg:
+    image: aghost7/pg-dev:10
+  mysql:
+    image: aghost7/my-dev:5.6

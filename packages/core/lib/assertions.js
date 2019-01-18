@@ -28,12 +28,8 @@ const ifBase = function(context, tests, self) {
   return true
 }
 
-// Comparison which works similarly to elasticsearch's indexing; elasticsearch
-// doesn't care if the indexed document has array fields.
 const compare = (assertionValue, objectValue) => {
-  return Array.isArray(objectValue)
-    ? objectValue.indexOf(assertionValue) > -1
-    : objectValue === assertionValue
+  return objectValue === assertionValue
 }
 
 exports.assertions = {
@@ -75,7 +71,7 @@ exports.assertions = {
   },
   equal(context, args) {
     const value = get(context, args.key)
-    return compare(args.value, value)
+    return (args.value, value)
   },
   any(context, args) {
     for (const assertionValue of args.values) {

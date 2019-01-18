@@ -9,7 +9,7 @@
     "publish": "npm login && lerna publish",
     "bootstrap": "lerna bootstrap",
     "test": "mocha packages/*/test/**/*.test.js",
-		"lint": "prettier --list-different 'packages/**/*.js' && eslint 'packages/**/*.js'",
+    "lint": "prettier --list-different 'packages/**/*.js' && eslint 'packages/**/*.js'",
     "ci": "npm run lint && npm test"
   },
   "dependencies": {

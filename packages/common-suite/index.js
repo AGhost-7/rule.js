@@ -150,57 +150,6 @@ module.exports = Rule => {
         }
       ],
       [
-        'array: equal',
-        Rule()
-          .equal('hobbies', 'Guitar')
-          .equal('hobbies', 'Games'),
-        res => {
-          assert(containsName(res, 'Jonathan'))
-          assert.equal(res.length, 1)
-        }
-      ],
-      [
-        'if',
-        Rule()
-          .if()
-          .lt('age', 40)
-          .then()
-          .equal('occupation', 'Musician')
-          .end(),
-        res => {
-          assert(!containsName(res, ['Jonathan']))
-        }
-      ],
-      [
-        'if else',
-        Rule()
-          .if()
-          .equal('firstName', 'Joe')
-          .then()
-          .equal('age', 65)
-          .else()
-          .equal('deceased', false)
-          .end(),
-        res => {
-          assert.equal(res.length, 3)
-        }
-      ],
-      [
-        'if not',
-        Rule()
-          .if()
-          .not()
-          .true('virtuoso')
-          .then()
-          .not()
-          .equal('occupation', 'Musician')
-          .end(),
-        res => {
-          assert.equal(res.length, 2)
-          assert(!containsName(res, ['Nils']))
-        }
-      ],
-      [
         'null',
         Rule().null('description'),
         res => {

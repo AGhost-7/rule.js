@@ -1,8 +1,9 @@
 'use strict'
 
 const elasticsearch = require('elasticsearch')
+const hostname = process.env.ES_HOST || 'localhost'
 const es = new elasticsearch.Client({
-  host: process.env.O_IS_ES_HOST || 'localhost:9200',
+  host: hostname + ':9200',
   httpAuth: 'elastic:changeme'
 })
 

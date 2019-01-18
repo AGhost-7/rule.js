@@ -6,6 +6,7 @@ This repository is used to host multiple projects:
 and running a condition.
 - [@rule.js/elasticsearch](packages/elasticsearch): Convert your rule into an
 elasticsearch query.
+- [@rule.js/knex](packages/knex): Use rule.js conditions with KnexJs!
 - [@rule.js/contextualize](packages/contextualize): Replace certain keys
 in your conditions with data.
 - [@rule.js/access-mate](packages/access-mate): Attribute-based access control

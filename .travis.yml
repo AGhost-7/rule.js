@@ -4,5 +4,6 @@ node_js:
   - "10"
 services:
   - "elasticsearch"
+  - "postgresql"
 before_script: npm run bootstrap
 script: npm run ci
