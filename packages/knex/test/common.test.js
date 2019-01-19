@@ -52,7 +52,6 @@ const testSuite = function(knex) {
           rule.knex(this)
         })
         .then(function(rows) {
-          console.log('rows:', rows)
           return rows.map(camelObject)
         })
         .then(testBlock)
@@ -64,7 +63,10 @@ describe('@rule.js/knex#common', () => {
   describe('postgres', () => {
     const knex = knexlib({
       client: 'pg',
-      connection: {}
+      connection: {
+        user: process.env.PGUSER || 'postgres',
+        database: process.env.PGDATABASE || 'postgres'
+      }
     })
 
     before(() => {
