@@ -74,6 +74,8 @@ describe('@rule.js/knex#common', () => {
     })
 
     testSuite(knex)
+
+    after(() => knex.destroy())
   })
 
   describe.skip('mysql', () => {
@@ -89,5 +91,7 @@ describe('@rule.js/knex#common', () => {
     })
 
     testSuite(knex)
+
+    after(() => knex.destroy())
   })
 })
