@@ -71,7 +71,7 @@ exports.assertions = {
   },
   equal(context, args) {
     const value = get(context, args.key)
-    return args.value, value
+    return compare(args.value, value)
   },
   any(context, args) {
     for (const assertionValue of args.values) {
