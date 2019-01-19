@@ -112,37 +112,4 @@ describe('@rule.js/elasticsearch#functional', () => {
       assert.equal(res.hits.hits.length, 0)
     })
   })
-
-  describe('if conditions', () => {
-    it('handles simple conditions', () => {
-      const query = Rule()
-        .if()
-        .equal('firstName', 'Joe')
-        .then()
-        .gt('age', 64)
-        .end()
-        .elasticsearch()
-      return search(query).then(res => {
-        assert.equal(res.hits.hits.length, 4)
-      })
-    })
-
-    it('does if else conditions', () => {
-      const query = Rule()
-        .if()
-        .equal('deceased', true)
-        .then()
-        .equal('firstName', 'Bill')
-        .else()
-        .equal('lastName', 'Frahm')
-        .end()
-        .elasticsearch()
-
-      return search(query).then(res => {
-        assert.equal(res.hits.hits.length, 2)
-        assert(res.hits.hits.some(el => el._source.firstName === 'Nils'))
-        assert(res.hits.hits.some(el => el._source.lastName === 'Evans'))
-      })
-    })
-  })
 })

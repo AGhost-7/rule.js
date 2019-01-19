@@ -41,31 +41,6 @@ const runIfKey = type => (self, test, types, data) => {
   }
 }
 
-const ifBase = (self, types, data, tests) => {
-  let allPass = false
-  const results = Array(tests.length)
-  for (let i = 0; i < tests.length; i++) {
-    const test = tests[i]
-    const result = types[test.type](self, test, types, data)
-    if (result.type === 'fail') {
-      return result
-    } else if (result.type !== 'pass') {
-      allPass = false
-    }
-    results[i] = result
-  }
-  if (allPass) {
-    return {
-      type: 'pass'
-    }
-  } else {
-    return {
-      type: 'and',
-      tests: results
-    }
-  }
-}
-
 const builtinTypes = {
   not(self, test, types, data) {
     const result = types[test.args.type](self, test.args, types, data)
@@ -86,36 +61,6 @@ const builtinTypes = {
   },
   or: returnFirst('pass'),
   and: returnFirst('fail'),
-  if(self, test, types, data) {
-    const result = Array(test.conds.length)
-    let allPass = true
-    for (let i = 0; i < result.length; i++) {
-      const condTest = test.conds[i]
-      result[i] = types[condTest.type](self, condTest, types, data)
-      if (result.type === 'fail') {
-        if (test.ifFalse.length > 0) {
-          return ifBase(self, types, data, test.ifFalse)
-        } else {
-          return {
-            type: 'pass'
-          }
-        }
-      } else if (result.type !== 'pass') {
-        allPass = false
-      }
-    }
-
-    if (allPass) {
-      return ifBase(self, types, data, test.ifTrue)
-    } else {
-      return {
-        type: 'if',
-        conds: result,
-        ifTrue: ifBase(self, types, data, test.ifTrue),
-        ifFalse: ifBase(self, types, data, test.ifFalse)
-      }
-    }
-  },
   fail(self, test) {
     return test
   },

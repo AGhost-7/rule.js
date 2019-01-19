@@ -4,7 +4,6 @@ const { assertions, testRunner, assertRunner } = require('./assertions')
 const clone = require('lodash.clone')
 const assign = require('lodash.assign')
 const get = require('lodash.get')
-const { createIfClass } = require('./if')
 const { createNotClass } = require('./not')
 const { createOrClass } = require('./or')
 
@@ -148,11 +147,6 @@ const createClass = (assertions, members) => {
   const Not = createNotClass(RuleClass.prototype)
   RuleClass.prototype._Not = Not
   Or.prototype._Not = Not
-
-  const If = createIfClass(RuleClass.prototype)
-  RuleClass.prototype._If = If
-  Or.prototype._If = If
-  Not.prototype._If = If
 
   return RuleClass
 }

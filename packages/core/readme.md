@@ -109,20 +109,6 @@ Rule()
 	.test({ a: 2 }); // => true
 ```
 
-## Conditional Properties
-```javascript
-Rule()
-	.if()
-		.equal('type', 'human')
-	.then()
-		.exist('name')
-	.end()
-	.assert({
-		type: 'bear',
-		age: 5
-	}); // doesn't throw an error
-```
-
 ## Binding to a specific key
 ```javascript
 Rule()

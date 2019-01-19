@@ -10,11 +10,9 @@ const errors = constraint
 	// `when()` starts a condition builder which ends the moment you call a
 	// constraint.
 	.when()
-		.if().gt('clearance', 4).then()
-			.false('admin')
-			.false('supervisor')
-		.else()
-			.false('admin')
+		.or()
+			.and().gt('clearance', 4).false('admin').false('supervisor').end()
+			.false('admin').end()
 		.end()
 	.mandatory(['region'])
 	// We want the name to always require a minium of 5 characters, hence we

@@ -3,17 +3,14 @@ Convert the `Rule` object into an elasticsearch query.
 
 ```javascript
 const ruleElasticsearch = require('@rule.js/elasticsearch')
-const Rule = require('@rule.js/core').extend({
+const Rule = require('@rule.js/core').extend({}, {
 	elasticsearch: ruleElasticsearch
 })
 
 Rule()
-	.if()
-		.equal('name', 'foobar')
-	.then()
-		.gt('age', 20)
-	.else()
-		.lt('age', '10')
+	.or()
+		.and().equal('name', 'foobar').gt('age', 20).end()
+		.lt('age', 10)
 	.end()
 	.elasticsearch()
 ```
@@ -45,16 +42,10 @@ Outputs:
               }
             },
             {
-              "bool": {
-                "must": [
-                  {
-                    "range": {
-                      "age": {
-                        "lt": 10
-                      }
-                    }
-                  }
-                ]
+              "range": {
+                "age": {
+                  "lt": 10
+                }
               }
             }
           ]

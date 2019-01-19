@@ -103,72 +103,6 @@ describe('@rule.js/core', () => {
     })
   })
 
-  describe('conditionals', () => {
-    it('should handle simple cases', () => {
-      const o = Rule()
-        .if()
-        .true('validate')
-        .then()
-        .equal('name', 'jo')
-        .end()
-      assert(o.test({ validate: false, foo: 'bar' }), 'dont run validation')
-      assert(o.test({ validate: true, name: 'jo' }), 'run validation')
-      assert(
-        !o.test({ validate: true, foo: 'bar' }),
-        'run validation (failing)'
-      )
-    })
-
-    it('else statements', () => {
-      const o = Rule()
-        .if()
-        .gt('income', 100)
-        .then()
-        .gt('contributions', 10)
-        .else()
-        .gt('contributions', 5)
-        .end()
-      assert(o.test({ income: 101, contributions: 20 }))
-      assert(o.test({ income: 50, contributions: 6 }))
-      assert(!o.test({ income: 101, contributions: 5 }))
-      assert(!o.test({ income: 50, contributions: 3 }))
-    })
-    it.skip('should handle compound conditions', () => {
-      const o = Rule()
-        .if()
-        .gt('a', 10)
-        .lt('a', 20)
-        .then()
-        .equal('a', 15)
-        .end()
-        .not()
-        .null('a')
-      assert(o.test({ a: 15 }))
-      assert(!o.test({ a: 16 }))
-      assert(o.test({ a: 10 }))
-    })
-    it('should handle nested conditions', () => {
-      // idk...
-      const o = Rule()
-        .if()
-        .true('validate')
-        .if()
-        .gt('age', 60)
-        .then()
-        .true('senior')
-        .end()
-        .if()
-        .lt('age', '16')
-        .then()
-        .true('junior')
-        .end()
-        .then()
-        .lt('money', 20)
-        .end()
-      assert(o.test({ age: 70, senior: true, money: 15 }))
-    })
-  })
-
   describe('binding', () => {
     it('binds for simple cases', () => {
       const res = Rule()
@@ -196,29 +130,6 @@ describe('@rule.js/core', () => {
           }
         })
       assert(res)
-    })
-    it('binds inside conditions', () => {
-      const o = Rule()
-        .if()
-        .equal('type', 'human')
-        .then()
-        .bind('name')
-        .equal({
-          first: 'Jonathan',
-          last: 'Boudreau'
-        })
-        .end()
-      assert(o.test({ type: 'bear' }))
-      assert(
-        o.test({
-          type: 'human',
-          name: {
-            first: 'Jonathan',
-            last: 'Boudreau'
-          }
-        })
-      )
-      assert(!o.test({ type: 'human' }))
     })
     it('binds multiple times', () => {
       const obj = {
@@ -250,21 +161,6 @@ describe('@rule.js/core', () => {
           b: 2
         })
     })
-    it('inverts in ifs', () => {
-      Rule()
-        .if()
-        .not()
-        .equal('a', 1)
-        .then()
-        .equal('b', 1)
-        .else()
-        .equal('b', 2)
-        .end()
-        .assert({
-          a: 2,
-          b: 1
-        })
-    })
   })
 
   describe('or', () => {
@@ -290,49 +186,6 @@ describe('@rule.js/core', () => {
       o.assert({ a: 1, b: 1 })
       o.assert({ a: 1, b: 2 })
       assert(!o.test({ a: 2, b: 1 }))
-    })
-    it('functions inside if blocks', () => {
-      const o = Rule()
-        .if()
-        .or()
-        .equal({ a: 1, b: 2 })
-        .end()
-        .then()
-        .equal('c', 3)
-        .else()
-        .equal('c', 4)
-        .end()
-      o.assert({ b: 2, c: 3 })
-      o.assert({ a: 1, c: 3 })
-      o.assert({ c: 4 })
-    })
-    it('functions inside then block', () => {
-      const o = Rule()
-        .if()
-        .equal('a', 1)
-        .then()
-        .or()
-        .equal('b', 2)
-        .equal('b', 3)
-        .end()
-        .end()
-      o.assert({ a: 1, b: 2 })
-      o.assert({ a: 2, b: 3 })
-    })
-    it('functions inside else block', () => {
-      const o = Rule()
-        .if()
-        .equal('a', 1)
-        .then()
-        .equal('b', 2)
-        .else()
-        .or()
-        .equal('b', 3)
-        .equal('b', 4)
-        .end()
-        .end()
-      o.assert({ b: 3 })
-      o.assert({ b: 4 })
     })
     it('binds', () => {
       const o = Rule()
