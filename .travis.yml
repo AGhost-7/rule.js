@@ -5,5 +5,7 @@ node_js:
 services:
   - "elasticsearch"
   - "postgresql"
-before_script: npm run bootstrap
-script: npm run ci
+before_script: yarn run bootstrap
+script: yarn run ci
+cache:
+  yarn: true
