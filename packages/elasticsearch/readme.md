@@ -2,7 +2,7 @@
 Convert the `Rule` object into an elasticsearch query.
 
 ```javascript
-const ruleElasticsearch = require('@rule.js/elasticsearch')
+const ruleElasticsearch = require('@rule.js/elasticsearch')()
 const Rule = require('@rule.js/core').extend({}, {
 	elasticsearch: ruleElasticsearch
 })

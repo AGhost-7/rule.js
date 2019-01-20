@@ -13,114 +13,87 @@ const term = (key, val) => {
 }
 
 const conversions = {
-  _expand(ts) {
+  _expand(toEs, ts) {
     return ts.map(t => {
-      return this[t.type](t)
+      return this[t.type](toEs, t)
     })
   },
-  any(obj) {
+  any(toEs, obj) {
     return {
-      terms: objOf(obj.key, obj.values)
+      terms: objOf(toEs(obj.key), obj.values)
     }
   },
-  lt(obj) {
+  lt(toEs, obj) {
     const r = { range: {} }
-    r.range[obj.key] = {
+    r.range[toEs(obj.key)] = {
       lt: obj.value
     }
     return r
   },
-  gt(obj) {
+  gt(toEs, obj) {
     const r = { range: {} }
-    r.range[obj.key] = {
+    r.range[toEs(obj.key)] = {
       gt: obj.value
     }
     return r
   },
-  pass(obj) {
+  pass(toEs, obj) {
     return {
       match_all: {}
     }
   },
-  fail(obj) {
+  fail(toEs, obj) {
     return {
       match_none: {}
     }
   },
-  exists(obj) {
+  exists(toEs, obj) {
     return {
       exists: objOf('field', obj.key)
     }
   },
-  if(obj) {
-    const query = {
-      bool: {
-        should: [
-          {
-            bool: {
-              must: this._expand(obj.conds).concat(this._expand(obj.ifTrue))
-            }
-          }
-        ]
-      }
-    }
-    if (obj.ifFalse && obj.ifFalse.length) {
-      query.bool.should.push({
-        bool: {
-          must: this._expand(obj.ifFalse)
-        }
-      })
-    } else {
-      query.bool.should.push({
-        bool: {
-          must_not: this._expand(obj.conds)
-        }
-      })
-    }
-    return query
-  },
-  not(obj) {
+  not(toEs, obj) {
     return {
       bool: {
-        must_not: conversions[obj.args.type](obj.args)
+        must_not: conversions[obj.args.type](toEs, obj.args)
       }
     }
   },
-  or(obj) {
+  or(toEs, obj) {
     return {
       bool: {
-        should: this._expand(obj.tests)
+        should: this._expand(toEs, obj.tests)
       }
     }
   },
-  and(obj) {
+  and(toEs, obj) {
     return {
       bool: {
-        must: this._expand(obj.tests)
+        must: this._expand(toEs, obj.tests)
       }
     }
   },
-  true(obj) {
-    return term(obj.key, true)
+  true(toEs, obj) {
+    return term(toEs(obj.key), true)
   },
-  false(obj) {
-    return term(obj.key, false)
+  false(toEs, obj) {
+    return term(toEs(obj.key), false)
   },
   // Since there are no undefined fields I just check for nulls.
   // The storing logic should then set the fields to the correct
   // values.
-  nil(obj) {
-    return term(obj.key, null)
+  nil(toEs, obj) {
+    return term(toEs(obj.key), null)
   },
-  undefined(obj) {
-    return term(obj.key, null)
+  undefined(toEs, obj) {
+    return term(toEs(obj.key), null)
   },
-  null(obj) {
+  null(toEs, obj) {
     return {
       bool: {
         must_not: [
           {
-            exists: objOf('field', obj.key)
+            exists: objOf('field', toEs(obj.key))
           }
         ]
       }
@@ -129,44 +102,49 @@ const conversions = {
   // This is the only possible way to handle this in elasticsearch.
   // Normally you're not going to need this when running elasticsearch
   // queries.
-  propsEqual(obj) {
+  propsEqual(toEs, obj) {
     return {
       script: {
         script: {
           lang: 'painless',
           inline: 'doc[params.val1].value == doc[params.val2].value',
           params: {
-            val1: obj.keys[0],
-            val2: obj.keys[1]
+            val1: toEs(obj.keys[0]),
+            val2: toEs(obj.keys[1])
           }
         }
       }
     }
   },
-  equal(obj) {
-    return term(obj.key, obj.value)
+  equal(toEs, obj) {
+    return term(toEs(obj.key), obj.value)
   },
-  notEqual(obj) {
+  notEqual(toEs, obj) {
     return {
       bool: {
-        must_not: [term(obj.key, obj.value)]
+        must_not: [
+          term(toEs(obj.key), obj.value)
+        ]
       }
     }
   },
   // TODO: I think I need to change the original assert to match this.
-  exist(obj) {
+  exist(toEs, obj) {
     return {
-      exists: objOf('field', obj.key)
+      exists: objOf('field', toEs(obj.key))
     }
   }
 }
 
-const convert = function() {
-  return {
-    bool: {
-      must: conversions._expand(this.tests)
+const identity = (key) => key
+
+module.exports = (toEs) => {
+  if (!toEs) toEs = identity
+  return function() {
+    return {
+      bool: {
+        must: conversions._expand(toEs, this.tests)
+      }
     }
   }
 }
-
-module.exports = convert

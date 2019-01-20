@@ -3,7 +3,7 @@
 const assert = require('power-assert')
 const esUtil = require('./es-util')
 
-const ruleElasticsearch = require('../index')
+const ruleElasticsearch = require('../index')()
 const ruleContextualize = require('@rule.js/contextualize')
 const Rule = require('@rule.js/core').extend(
   {},
