@@ -6,11 +6,11 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier --write 'packages/**/*.js'",
-    "publish": "npm login && lerna publish",
+    "publish": "yarn login && lerna publish",
     "bootstrap": "lerna bootstrap",
     "test": "mocha packages/*/test/**/*.test.js",
     "lint": "prettier --list-different 'packages/**/*.js' && eslint 'packages/**/*.js'",
-    "ci": "npm run lint && npm test"
+    "ci": "yarn run lint && yarn run test"
   },
   "dependencies": {
     "eslint": "^5.0.0",

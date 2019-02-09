@@ -122,9 +122,7 @@ const conversions = {
   notEqual(toEs, obj) {
     return {
       bool: {
-        must_not: [
-          term(toEs(obj.key), obj.value)
-        ]
+        must_not: [term(toEs(obj.key), obj.value)]
       }
     }
   },
@@ -136,9 +134,9 @@ const conversions = {
   }
 }
 
-const identity = (key) => key
+const identity = key => key
 
-module.exports = (toEs) => {
+module.exports = toEs => {
   if (!toEs) toEs = identity
   return function() {
     return {

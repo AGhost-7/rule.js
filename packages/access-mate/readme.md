@@ -1,4 +1,4 @@
-# Access Mate
+# Access-Mate
 [Attribute-based access control][1] inspired by [xacml][2].
 
 ## Benefits
