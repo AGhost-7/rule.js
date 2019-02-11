@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('power-assert')
-const esUtil = require('./es-util')
+const esUtil = require('@rule.js/es-util')
 
 const ruleElasticsearch = require('../index')()
 const ruleContextualize = require('@rule.js/contextualize')

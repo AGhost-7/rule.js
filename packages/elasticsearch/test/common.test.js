@@ -1,6 +1,6 @@
 'use strict'
 
-const esUtil = require('./es-util')
+const esUtil = require('@rule.js/es-util')
 
 const ruleElasticsearch = require('../index')()
 const Rule = require('@rule.js/core').extend(

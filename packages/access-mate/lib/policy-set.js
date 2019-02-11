@@ -67,7 +67,7 @@ class PolicySet {
   authorize(context) {
     const fieldDecisions = {}
     let allDecision = null
-
+    debug('Authorizing resource %j', context.resource)
     for (const policy of this._policies) {
       debug('Evaluating policy "%s"', policy._name)
       const result = policy.decision(context)
