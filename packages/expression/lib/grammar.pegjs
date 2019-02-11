@@ -1,3 +1,4 @@
+
 Start
 	= Expression
 
@@ -78,7 +79,9 @@ Equal "equal"
 		}
 	}
 
-Key = StringLiteral
+Key = key:StringLiteral {
+		return options.toPath(key)
+	}
 
 Value
   = StringLiteral

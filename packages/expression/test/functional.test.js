@@ -1,13 +1,14 @@
-const ruleExpression = require('../')()
+const Rule = require('@rule.js/core')
+const RuleExpression = require('../')
 const assertModule = require('assert')
 
 const assert = function(expression, obj) {
-  ruleExpression(expression).assert(obj)
+  RuleExpression()(expression).assert(obj)
 }
 
 const assertThrows = function(expression, obj) {
   assertModule.throws(function() {
-    ruleExpression(expression).assert(obj)
+    RuleExpression()(expression).assert(obj)
   })
 }
 
@@ -19,6 +20,14 @@ describe('@rule.js/expression#functional', function() {
     })
     assertThrows('"name" is not equal "foobar"', {
       name: 'foobar'
+    })
+  })
+
+  it('toPath', function() {
+    const toLower = (key) => key.toLowerCase()
+    const rule = RuleExpression(Rule, toLower)('"Name" equal "john"')
+    rule.assert({
+      name: 'john'
     })
   })
 })
