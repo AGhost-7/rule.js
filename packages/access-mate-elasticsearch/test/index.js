@@ -28,6 +28,8 @@ describe('access-mate-elasticsearch', () => {
     .true('resource.private')
     .end()
 
+    .end()
+
   it('allows all', () => {
     const filter = toElasticsearch(policies, {
       target: 'todo',

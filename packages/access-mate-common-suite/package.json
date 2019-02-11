@@ -1,0 +1,17 @@
+{
+  "name": "@rule.js/access-mate-common-suite",
+  "version": "0.9.0",
+  "private": true,
+  "description": "Test suite used by several @rule.js packages.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=v8.12.0"
+  },
+  "dependencies": {
+  }
+}

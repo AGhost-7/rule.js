@@ -32,6 +32,8 @@ const policies = AccessMate.policySet()
 	.true('resource.private')
 	.end()
 
+	.end()
+
 const filter = toElasticsearch(policies, {
 	target: 'todo',
 	action: 'read',
