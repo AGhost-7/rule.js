@@ -12,6 +12,7 @@ const identity = a => a
 
 module.exports = function(RuleConstructor = Rule, toPath = identity) {
   return function(condition) {
+    if (condition.trim() === '') return RuleConstructor()
     let parsed = parser.parse(condition.trim(), {
       startRule: 'Start',
       toPath

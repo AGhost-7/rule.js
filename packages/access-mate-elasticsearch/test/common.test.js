@@ -18,7 +18,7 @@ const mappings = {
   }
 }
 
-const assertGives = async (testGroup, policies, assertion) => {
+async function assertGives(testGroup, policies, assertion) {
   const filter = toElasticsearch(policies, {
     environment: {},
     target: assertion.target,
@@ -34,7 +34,7 @@ const assertGives = async (testGroup, policies, assertion) => {
 
 describe('access-mate-elasticsearch#common', () => {
   for (const testGroup of commonSuite) {
-    it('test group: ' + testGroup.name, async () => {
+    it('test group: ' + testGroup.name, async function() {
       await esUtil.prepareType({
         mapping: {
           index: 'test',

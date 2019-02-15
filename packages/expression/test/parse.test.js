@@ -16,6 +16,9 @@ const expressionThrows = function(condition) {
 
 describe('@rule.js/expression#parse', function() {
   describe('test', function() {
+    it('nothing', function() {
+      assertExpression('', [])
+    })
     it('equal', function() {
       assertExpression('"foo" equal "lel"', [
         {
