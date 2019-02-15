@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/expression",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "A simple language for expressing business rules.",
   "main": "index.js",
   "scripts": {

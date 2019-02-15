@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/access-mate-elasticsearch",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Convert access-mate policies to elasticsearch filters.",
   "main": "index.js",
   "directories": {
