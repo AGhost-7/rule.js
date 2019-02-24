@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/common-suite",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "private": true,
   "description": "Test suite used by several @rule.js packages.",
   "main": "index.js",

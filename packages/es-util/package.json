@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.10.0",
+  "version": "0.11.0",
   "name": "@rule.js/es-util",
   "dependencies": {
     "elasticsearch": "^12.1.0"
