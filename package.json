@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier --write 'packages/**/*.js'",
-    "publish": "yarn login && lerna publish",
+    "publish": "lerna publish",
     "bootstrap": "lerna bootstrap",
     "test": "mocha packages/*/test/**/*.test.js",
     "lint": "prettier --list-different 'packages/**/*.js' && eslint 'packages/**/*.js'",
