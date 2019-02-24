@@ -106,3 +106,10 @@ You can mix logical operators together. For example:
 ```
 "quantity" is empty or "status" is empty and "owner" is empty
 ```
+
+#### Keys
+You can do deep lookups with the following:
+
+```
+"person"."name" equal "Rick"
+```

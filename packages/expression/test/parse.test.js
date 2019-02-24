@@ -19,6 +19,15 @@ describe('@rule.js/expression#parse', function() {
     it('nothing', function() {
       assertExpression('', [])
     })
+    it('deep equal', function() {
+      assertExpression('"person"."name" equal "foobar"', [
+        {
+          type: 'equal',
+          key: ['person', 'name'],
+          value: 'foobar'
+        }
+      ])
+    })
     it('equal', function() {
       assertExpression('"foo" equal "lel"', [
         {

@@ -23,6 +23,14 @@ describe('@rule.js/expression#functional', function() {
     })
   })
 
+  it('deep equal', function() {
+    assert('"person"."name" equal "john"', {
+      person: {
+        name: 'john'
+      }
+    })
+  })
+
   it('toPath', function() {
     const toLower = key => key.toLowerCase()
     const rule = RuleExpression(Rule, toLower)('"Name" equal "john"')
