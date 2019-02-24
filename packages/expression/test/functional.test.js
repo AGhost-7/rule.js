@@ -1,8 +1,9 @@
+const assert = require('assert').strict
 const Rule = require('@rule.js/core')
 const RuleExpression = require('../')
 const assertModule = require('assert')
 
-const assert = function(expression, obj) {
+const assertExpression = function(expression, obj) {
   RuleExpression()(expression).assert(obj)
 }
 
@@ -14,7 +15,7 @@ const assertThrows = function(expression, obj) {
 
 describe('@rule.js/expression#functional', function() {
   it('equal', function() {
-    assert('"name" equal "john" and "last name" equal "doe"', {
+    assertExpression('"name" equal "john" and "last name" equal "doe"', {
       name: 'john',
       'last name': 'doe'
     })
@@ -24,11 +25,19 @@ describe('@rule.js/expression#functional', function() {
   })
 
   it('deep equal', function() {
-    assert('"person"."name" equal "john"', {
+    assertExpression('"person"."name" equal "john"', {
       person: {
         name: 'john'
       }
     })
+  })
+
+  it('custom deep equal', function() {
+    const toPath = keys => {
+      assert(Array.isArray(keys))
+      return keys
+    }
+    RuleExpression(Rule, toPath)('"person"."name" equal "john"')
   })
 
   it('toPath', function() {

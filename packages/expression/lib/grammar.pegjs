@@ -80,7 +80,7 @@ Equal "equal"
 	}
 
 Key = 
-	head:StringLiteral tail: ("." Key)+ {
+	head:StringLiteral tail: ("." StringLiteral)+ {
 		const result = tail.map(token => token[1])
 		result.unshift(head)
 		return options.toPath(result)
