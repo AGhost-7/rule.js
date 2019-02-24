@@ -83,7 +83,7 @@ Key =
 	head:StringLiteral tail: ("." Key)+ {
 		const result = tail.map(token => token[1])
 		result.unshift(head)
-		return result
+		return options.toPath(result)
 	}
 	/ key:StringLiteral {
 		return options.toPath(key)
