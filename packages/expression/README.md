@@ -81,6 +81,14 @@ Example:
 "quantity" is not empty
 ```
 
+##### `any`
+Tests if the key is equal any of the given values.
+
+Example:
+```
+"status" any ("open", "draft")
+```
+
 #### Logical Operators
 
 ##### `and`

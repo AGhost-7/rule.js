@@ -38,6 +38,30 @@ describe('@rule.js/expression#parse', function() {
       ])
     })
 
+    it('any', function() {
+      assertExpression('"foo" any ("one", true)', [
+        {
+          type: 'any',
+          key: 'foo',
+          values: ['one', true]
+        }
+      ])
+      assertExpression('"foo" any("two")', [
+        {
+          type: 'any',
+          key: 'foo',
+          values: ['two']
+        }
+      ])
+      assertExpression('"foo" any ("three","four")', [
+        {
+          type: 'any',
+          key: 'foo',
+          values: ['three', 'four']
+        }
+      ])
+    })
+
     it('equal fail', function() {
       expressionThrows('"f"')
       expressionThrows('"')

@@ -35,6 +35,7 @@ Operation
 Test "test"
   = NotEqual
 	/ Equal
+	/ Any
 	/ NotEmpty
 	/ Empty
 
@@ -76,6 +77,19 @@ Equal "equal"
 			type: 'equal',
 			key: key,
 			value: value
+		}
+	}
+
+Any "any"
+	= key:Key _+ "any" _* "(" _* head:Value tail: (_* "," _* Value)* ")" {
+		const values = [head]
+		tail.forEach(function(group) {
+				values.push(group[3])
+		})
+		return {
+			type: 'any',
+			key: key,
+			values: values
 		}
 	}
 
