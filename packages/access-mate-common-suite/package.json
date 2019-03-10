@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/access-mate-common-suite",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "private": true,
   "description": "Test suite used by several @rule.js packages.",
   "main": "index.js",
