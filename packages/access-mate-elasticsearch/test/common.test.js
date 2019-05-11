@@ -28,7 +28,7 @@ async function assertGives(testGroup, policies, assertion) {
 
   const result = await esUtil.search(filter)
   const body = result.hits.hits.map(item => item._source.id)
-
+  body.sort()
   assert.deepEqual(body, assertion.gives)
 }
 
