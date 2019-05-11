@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/access-mate-elasticsearch",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Convert access-mate policies to elasticsearch filters.",
   "main": "index.js",
   "directories": {
@@ -17,15 +17,15 @@
   },
   "bugs": {},
   "dependencies": {
-    "@rule.js/contextualize": "^0.12.0",
-    "@rule.js/core": "^0.12.0",
-    "@rule.js/elasticsearch": "^0.12.0",
+    "@rule.js/contextualize": "^0.13.0",
+    "@rule.js/core": "^0.13.0",
+    "@rule.js/elasticsearch": "^0.13.0",
     "lodash.topath": "^4.5.2"
   },
   "devDependencies": {
-    "@rule.js/access-mate": "^0.12.0",
-    "@rule.js/access-mate-common-suite": "^0.12.0",
-    "@rule.js/es-util": "^0.12.0"
+    "@rule.js/access-mate": "^0.13.0",
+    "@rule.js/access-mate-common-suite": "^0.13.0",
+    "@rule.js/es-util": "^0.13.0"
   },
   "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com>",
   "license": "MIT"
