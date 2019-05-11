@@ -3,6 +3,6 @@
   "version": "0.12.0",
   "name": "@rule.js/es-util",
   "dependencies": {
-    "elasticsearch": "^12.1.0"
+    "elasticsearch": "^16.0.0"
   }
 }

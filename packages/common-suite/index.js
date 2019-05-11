@@ -176,6 +176,13 @@ module.exports = Rule => {
         res => {
           assert.equal(res.length, 4)
         }
+      ],
+      [
+        'contains',
+        Rule().contains('hobbies', 'Guitar'),
+        res => {
+          assert.equal(res.length, 1)
+        }
       ]
     ]
   }

@@ -82,6 +82,16 @@ exports.assertions = {
     }
     return false
   },
+  contains(context, args) {
+    const value = get(context, args.key)
+    if (value === null || value === undefined) return false
+    for (let index = 0; index < value.length; index++) {
+      if (compare(args.value, value[index])) {
+        return true
+      }
+    }
+    return false
+  },
   notEqual(context, args, self) {
     return !self.equal(context, args)
   },

@@ -89,6 +89,15 @@ Example:
 "status" any ("open", "draft")
 ```
 
+##### `contains`
+Test if the key contains the given value.
+
+Example:
+```
+"hobbies" contains "Guitar"
+```
+
+
 #### Logical Operators
 
 ##### `and`

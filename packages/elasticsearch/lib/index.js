@@ -131,6 +131,9 @@ const conversions = {
     return {
       exists: objOf('field', toEs(obj.key))
     }
+  },
+  contains(toEs, obj) {
+    return term(toEs(obj.key), obj.value)
   }
 }
 

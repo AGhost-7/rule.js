@@ -49,6 +49,9 @@ const conversions = {
   any(knex, toDb, obj) {
     knex.whereIn(toDb(obj.key), obj.values)
   },
+  contains(knex, toDb, obj) {
+    knex.whereRaw('?? @> ARRAY[?]', [obj.key, obj.value])
+  },
   notEqual(knex, toDb, obj) {
     knex.whereNot(toDb(obj.key), '=', obj.value)
   },

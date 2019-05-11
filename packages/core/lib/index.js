@@ -43,6 +43,13 @@ const memberTestMethods = {
       key: key,
       values: values
     })
+  },
+  contains(key, value) {
+    return this._cons({
+      type: 'contains',
+      key,
+      value
+    })
   }
 }
 

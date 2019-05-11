@@ -30,7 +30,7 @@ const setupTable = async function(knex) {
     table.boolean('deceased')
     table.boolean('virtuoso')
     table.string('occupation')
-    table.string('hobbies')
+    table.specificType('hobbies', 'text[]')
     table.string('country')
     table.string('instrument')
     table.string('description')

@@ -36,6 +36,7 @@ Test "test"
   = NotEqual
 	/ Equal
 	/ Any
+	/ Contains
 	/ NotEmpty
 	/ Empty
 
@@ -90,6 +91,15 @@ Any "any"
 			type: 'any',
 			key: key,
 			values: values
+		}
+	}
+
+Contains
+	= key:Key _+ "contains" _+ value:Value {
+		return {
+			type: 'contains',
+			key: key,
+			value: value
 		}
 	}
 
