@@ -39,6 +39,16 @@ Test "test"
 	/ Contains
 	/ NotEmpty
 	/ Empty
+	/ Range
+
+Range
+	= key:Key _+ operator:("less"/"greater") _* "than" _+ value:Value {
+		return {
+			type: operator === 'less' ? 'lt' : 'gt',
+			key: key,
+			value: value
+		};
+	}
 
 Empty
   = key:Key _ "is" _ "empty" {
@@ -116,6 +126,8 @@ Key =
 Value
   = StringLiteral
 	/ BooleanLiteral
+	/ FloatLiteral
+	/ IntegerLiteral
 
 BooleanLiteral "boolean"
   = "true" { return true; }
@@ -125,6 +137,16 @@ StringLiteral "string"
   = Quote chars:Char* Quote {
     return chars.join('')
   }
+
+FloatLiteral "float"
+	= [0-9]+ "." [0-9]+ {
+		return Number(text())
+	}
+
+IntegerLiteral "integer"
+	= [0-9]+ {
+		return Number(text())
+	}
 
 Char
   = Unescaped

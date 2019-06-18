@@ -19,6 +19,27 @@ describe('@rule.js/expression#parse', function() {
     it('nothing', function() {
       assertExpression('', [])
     })
+
+    it('lt', function() {
+      assertExpression('"age" less than 10', [
+        {
+          type: 'lt',
+          key: 'age',
+          value: 10
+        }
+      ])
+    })
+
+    it('gt', function() {
+      assertExpression('"currency" greater than 0.11', [
+        {
+          type: 'gt',
+          key: 'currency',
+          value: 0.11
+        }
+      ])
+    })
+
     it('deep equal', function() {
       assertExpression('"person"."name" equal "foobar"', [
         {

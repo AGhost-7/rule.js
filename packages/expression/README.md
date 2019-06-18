@@ -97,6 +97,21 @@ Example:
 "hobbies" contains "Guitar"
 ```
 
+##### `greater than`
+Test if the key is less than the specified value.
+
+Example:
+```
+"age" less than 21
+```
+
+##### `less than`
+Test if the key is greater than the specified value.
+
+Example:
+```
+"income" greater than 55374.19
+```
 
 #### Logical Operators
 
