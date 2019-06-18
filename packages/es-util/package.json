@@ -1,5 +1,4 @@
 {
-  "private": true,
   "version": "0.13.0",
   "name": "@rule.js/es-util",
   "dependencies": {
