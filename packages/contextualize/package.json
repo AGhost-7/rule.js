@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/contextualize",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Serializable object assertions.",
   "main": "index.js",
   "directories": {
@@ -30,8 +30,8 @@
     "lodash.topath": "^4.5.2"
   },
   "devDependencies": {
-    "@rule.js/common-suite": "^0.13.0",
-    "@rule.js/core": "^0.13.0",
+    "@rule.js/common-suite": "^0.14.0",
+    "@rule.js/core": "^0.14.0",
     "elasticsearch": "^12.1.0",
     "power-assert": "^1.4.2"
   },
