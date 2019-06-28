@@ -43,6 +43,8 @@ const createOrClass = ruleProto => {
 
   Or.prototype._And = And
 
+  Or.prototype._Or = Or
+
   return Or
 }
 

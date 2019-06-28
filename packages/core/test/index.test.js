@@ -211,6 +211,11 @@ describe('@rule.js/core', () => {
       assert(!o.test({ a: 2 }))
       assert(!o.test({ b: 3 }))
     })
+    it('should allow multiple ors', () => {
+      const o = Rule().or().or().equal('a', 1).end().end()
+      assert(o.test({ a: 1 }))
+      assert(!o.test({ a: 2 }))
+    })
   })
 
   describe('extensions', () => {
