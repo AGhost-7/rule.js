@@ -2,7 +2,6 @@
 
 const { assertions, testRunner, assertRunner } = require('./assertions')
 const clone = require('lodash.clone')
-const assign = require('lodash.assign')
 const get = require('lodash.get')
 const { createNotClass } = require('./not')
 const { createOrClass } = require('./or')
@@ -133,7 +132,7 @@ const members = {
   }
 }
 
-assign(members, memberTestMethods)
+Object.assign(members, memberTestMethods)
 
 const createClass = (assertions, members) => {
   function RuleClass(tests, boundKeys) {
@@ -141,7 +140,7 @@ const createClass = (assertions, members) => {
     this.tests = tests
   }
   RuleClass.prototype = Object.create(null)
-  assign(RuleClass.prototype, members)
+  Object.assign(RuleClass.prototype, members)
   RuleClass.prototype._create = function(tests, boundKeys) {
     return new RuleClass(tests, boundKeys)
   }
@@ -165,8 +164,8 @@ const mod = items => {
 }
 
 const extend = (a, m) => {
-  const newAsserts = assign(clone(assertions), a)
-  const newMembers = assign(clone(members), m)
+  const newAsserts = Object.assign(clone(assertions), a)
+  const newMembers = Object.assign(clone(members), m)
   const Class = createClass(newAsserts, newMembers)
   return items => {
     return new Class(items || [], [])

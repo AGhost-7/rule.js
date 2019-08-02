@@ -1,6 +1,3 @@
-'use strict'
-
-const assign = require('lodash.assign')
 
 const createOrClass = ruleProto => {
   function Or(parent, tests, boundKeys) {
@@ -8,7 +5,7 @@ const createOrClass = ruleProto => {
     this._boundKeys = boundKeys
     this.tests = tests
   }
-  Or.prototype = assign(Object.create(null), ruleProto)
+  Or.prototype = Object.assign(Object.create(null), ruleProto)
   Or.prototype._create = function(tests, boundKeys) {
     return new Or(this.parent, tests, boundKeys)
   }
