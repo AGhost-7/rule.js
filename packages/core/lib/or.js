@@ -26,7 +26,7 @@ const createOrClass = ruleProto => {
     this._boundKeys = boundKeys
     this.tests = tests
   }
-  And.prototype = assign(Object.create(null), ruleProto)
+  And.prototype = Object.assign(Object.create(null), ruleProto)
 
   And.prototype._create = function(tests, boundKeys) {
     return new And(this.parent, tests, boundKeys)
