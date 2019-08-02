@@ -93,6 +93,19 @@ describe('@rule.js/expression#parse', function() {
       ])
     })
 
+    it('not contains', function() {
+      assertExpression('"foo" not contains "bar"', [
+        {
+          type: 'not',
+          args: {
+            type: 'contains',
+            key: 'foo',
+            value: 'bar'
+          }
+        }
+      ])
+    })
+
     it('equal fail', function() {
       expressionThrows('"f"')
       expressionThrows('"')

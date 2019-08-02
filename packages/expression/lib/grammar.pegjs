@@ -104,6 +104,18 @@ Any "any"
 		}
 	}
 
+NotContains
+	= key:Key _+ "not" _+ "contains" _+ value:Value {
+		return {
+			type: 'not',
+			args: {
+				type: 'contains',
+				key: key,
+				value: value
+			}
+		}
+	}
+
 Contains
 	= key:Key _+ "contains" _+ value:Value {
 		return {

@@ -97,6 +97,14 @@ Example:
 "hobbies" contains "Guitar"
 ```
 
+##### `not contains`
+Inverse of the contains operator.
+
+Example:
+```
+"hobbies" not contains "Guitar"
+```
+
 ##### `greater than`
 Test if the key is less than the specified value.
 
