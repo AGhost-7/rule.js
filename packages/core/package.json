@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/core",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "description": "Serializable object assertions.",
   "main": "index.js",
   "directories": {
@@ -28,7 +28,7 @@
     "lodash.get": "^4.4.2"
   },
   "devDependencies": {
-    "@rule.js/test-suite": "^0.15.0"
+    "@rule.js/test-suite": "^0.15.1"
   },
   "engines": {
     "node": ">=v8.12.0"

@@ -1,18 +1,18 @@
 {
   "name": "@rule.js/access-mate",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "description": "Attribute base access control using rule.js for the conditions",
   "main": "index.js",
   "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com",
   "license": "Apache-2.0",
   "dependencies": {
-    "@rule.js/core": "^0.15.0",
+    "@rule.js/core": "^0.15.1",
     "debug": "^3.1.0",
     "lodash.omit": "^4.5.0",
     "lodash.uniq": "^4.5.0"
   },
   "devDependencies": {
-    "@rule.js/access-mate-test-suite": "^0.15.0"
+    "@rule.js/access-mate-test-suite": "^0.15.1"
   },
   "scripts": {
     "test": "echo 'See main repo to run tests'"
