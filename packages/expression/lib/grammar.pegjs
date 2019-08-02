@@ -33,12 +33,14 @@ Operation
 	/ Test
 
 Test "test"
-  = NotEqual
-	/ Equal
+  = Equal
+	/ NotEqual
 	/ Any
+	/ NotAny
 	/ Contains
-	/ NotEmpty
+	/ NotContains
 	/ Empty
+	/ NotEmpty
 	/ Range
 
 Range
@@ -104,7 +106,23 @@ Any "any"
 		}
 	}
 
-NotContains
+NotAny "not any"
+	= key:Key _+ "not" _+ "any" _* "(" _* head:Value tail: (_* "," _* Value)* ")" {
+		const values = [head]
+		tail.forEach(function(group) {
+				values.push(group[3])
+		})
+		return {
+			type: 'not',
+			args: {
+				type: 'any',
+				key: key,
+				values: values
+			}
+		}
+	}
+
+NotContains "not contains"
 	= key:Key _+ "not" _+ "contains" _+ value:Value {
 		return {
 			type: 'not',

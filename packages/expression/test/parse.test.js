@@ -83,6 +83,19 @@ describe('@rule.js/expression#parse', function() {
       ])
     })
 
+    it('not any', function() {
+      assertExpression('"name" not any ("foo", "bar")', [
+        {
+          type: 'not',
+          args: {
+            type: 'any',
+            key: 'name',
+            values: ['foo', 'bar']
+          }
+        }
+      ])
+    })
+
     it('contains', function() {
       assertExpression('"foo" contains "bar"', [
         {

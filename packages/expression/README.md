@@ -89,6 +89,14 @@ Example:
 "status" any ("open", "draft")
 ```
 
+##### `not any`
+Test if the given key is not equal any of the specified values.
+
+Example:
+```
+"status" not any ("pending", "new")
+```
+
 ##### `contains`
 Test if the key contains the given value.
 
