@@ -1,7 +1,7 @@
 const assert = require('assert').strict
 const AccessMate = require('@rule.js/access-mate')
-const esUtil = require('@rule.js/es-util')
-const commonSuite = require('@rule.js/access-mate-common-suite')
+const esUtil = require('@rule.js/elasticsearch-util')
+const commonSuite = require('@rule.js/access-mate-test-suite')
 const toElasticsearch = require('..')
 
 const mappings = {

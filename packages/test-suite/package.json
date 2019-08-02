@@ -1,5 +1,5 @@
 {
-  "name": "@rule.js/common-suite",
+  "name": "@rule.js/test-suite",
   "version": "0.15.0",
   "description": "Test suite used by several @rule.js packages.",
   "main": "index.js",

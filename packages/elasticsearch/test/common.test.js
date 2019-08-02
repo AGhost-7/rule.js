@@ -1,6 +1,6 @@
 'use strict'
 
-const esUtil = require('@rule.js/es-util')
+const esUtil = require('@rule.js/elasticsearch-util')
 
 const ruleElasticsearch = require('../index')()
 const Rule = require('@rule.js/core').extend(
@@ -10,7 +10,7 @@ const Rule = require('@rule.js/core').extend(
   }
 )
 
-const commonSuite = require('@rule.js/common-suite')(Rule)
+const commonSuite = require('@rule.js/test-suite')(Rule)
 
 describe('@rule.js/elastiscearch#common', () => {
   before(function() {

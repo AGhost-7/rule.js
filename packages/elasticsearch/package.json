@@ -25,10 +25,10 @@
   "license": "MIT",
   "bugs": {},
   "devDependencies": {
-    "@rule.js/common-suite": "^0.15.0",
+    "@rule.js/test-suite": "^0.15.0",
     "@rule.js/contextualize": "^0.15.0",
     "@rule.js/core": "^0.15.0",
-    "@rule.js/es-util": "^0.15.0",
+    "@rule.js/elasticsearch-util": "^0.15.0",
     "power-assert": "^1.4.2"
   },
   "engines": {

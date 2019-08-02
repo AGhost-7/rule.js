@@ -1,6 +1,6 @@
 const assert = require('assert').strict
 const AccessMate = require('../')
-const commonSuite = require('@rule.js/access-mate-common-suite')
+const commonSuite = require('@rule.js/access-mate-test-suite')
 
 const assertGives = (testGroup, policies, assertion) => {
   const result = []

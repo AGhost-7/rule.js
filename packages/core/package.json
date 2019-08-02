@@ -28,7 +28,7 @@
     "lodash.get": "^4.4.2"
   },
   "devDependencies": {
-    "@rule.js/common-suite": "^0.15.0"
+    "@rule.js/test-suite": "^0.15.0"
   },
   "engines": {
     "node": ">=v8.12.0"

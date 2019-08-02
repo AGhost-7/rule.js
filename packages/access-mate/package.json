@@ -12,7 +12,7 @@
     "lodash.uniq": "^4.5.0"
   },
   "devDependencies": {
-    "@rule.js/access-mate-common-suite": "^0.15.0"
+    "@rule.js/access-mate-test-suite": "^0.15.0"
   },
   "scripts": {
     "test": "echo 'See main repo to run tests'"

@@ -6,7 +6,7 @@ const Rule = require('@rule.js/core').extend(
     knex: require('..')()
   }
 )
-const commonSuite = require('@rule.js/common-suite')(Rule)
+const commonSuite = require('@rule.js/test-suite')(Rule)
 const knexlib = require('knex')
 
 const caseConvert = function(keyConvert) {
