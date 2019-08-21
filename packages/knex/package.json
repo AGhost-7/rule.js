@@ -10,8 +10,10 @@
     "test": "echo 'See main repo to run tests'"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git://github.com/AGhost-7/rule.js.git"
   },
+  "homepage": "https://github.com/AGhost-7/rule.js",
   "keywords": [
     "Assertion",
     "Conditional",

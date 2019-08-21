@@ -10,7 +10,8 @@
     "test": "echo 'See main repo to run tests'"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git://github.com/AGhost-7/rule.js.git"
   },
   "keywords": [
     "Assertion",
@@ -22,6 +23,7 @@
   ],
   "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com>",
   "license": "MIT",
+  "homepage": "https://github.com/AGhost-7/rule.js",
   "bugs": {},
   "dependencies": {
     "lodash.clone": "^4.5.0",

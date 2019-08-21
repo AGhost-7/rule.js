@@ -1,6 +1,11 @@
 {
   "version": "0.16.0",
   "name": "@rule.js/elasticsearch-util",
+  "homepage": "https://github.com/AGhost-7/rule.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/AGhost-7/rule.js.git"
+  },
   "dependencies": {
     "elasticsearch": "^16.0.0"
   }

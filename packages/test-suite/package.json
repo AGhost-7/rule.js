@@ -6,6 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "https://github.com/AGhost-7/rule.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/AGhost-7/rule.js.git"
+  },
   "author": "",
   "license": "MIT",
   "engines": {
