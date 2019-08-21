@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/constraint",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/AGhost-7/rule.js",
   "dependencies": {
-    "@rule.js/core": "^0.16.0",
+    "@rule.js/core": "^0.16.1",
     "lodash.assign": "^4.2.0",
     "lodash.get": "^4.4.2"
   },
