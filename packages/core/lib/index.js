@@ -52,7 +52,7 @@ const memberTestMethods = {
   }
 }
 
-const keyOnlyTestMethods = ['null', 'true', 'false']
+const keyOnlyTestMethods = ['empty', 'null', 'true', 'false']
 
 const kvOnlyTestMethods = ['lt', 'gt', 'notEqual']
 

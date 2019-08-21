@@ -58,6 +58,9 @@ const conversions = {
   null(knex, toDb, obj) {
     knex.whereNull(toDb(obj.key))
   },
+  empty(knex, toDb, obj) {
+    knex.whereNull(toDb(obj.key))
+  },
   true(knex, toDb, obj) {
     knex.where(toDb(obj.key), '=', true)
   },

@@ -101,6 +101,10 @@ exports.assertions = {
   null(context, args) {
     return get(context, args.key) === null
   },
+  empty(context, args) {
+    const value = get(context, args.key)
+    return value === undefined || value === null
+  },
   true(context, args) {
     return get(context, args.key) === true
   },

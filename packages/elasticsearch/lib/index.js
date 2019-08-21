@@ -99,6 +99,17 @@ const conversions = {
       }
     }
   },
+  empty(toEs, obj) {
+    return {
+      bool: {
+        must_not: [
+          {
+            exists: objOf('field', toEs(obj.key))
+          }
+        ]
+      }
+    }
+  },
   // This is the only possible way to handle this in elasticsearch.
   // Normally you're not going to need this when running elasticsearch
   // queries.

@@ -157,6 +157,13 @@ module.exports = Rule => {
         }
       ],
       [
+        'empty',
+        Rule().empty('description'),
+        res => {
+          assert.equal(res.length, 1)
+        }
+      ],
+      [
         'any:none',
         Rule().any('firstName', ['foobar']),
         res => {

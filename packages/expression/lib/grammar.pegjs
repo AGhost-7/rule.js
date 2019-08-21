@@ -55,7 +55,7 @@ Range
 Empty
   = key:Key _ "is" _ "empty" {
 		return {
-			type: 'null',
+			type: 'empty',
 			key: key
 		}
 	}
@@ -65,7 +65,7 @@ NotEmpty
 	  return {
 			type: 'not',
 			args:{
-			  type: 'null',
+			  type: 'empty',
 				key: key
 			}
 		}

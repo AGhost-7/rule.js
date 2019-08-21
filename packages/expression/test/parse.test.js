@@ -141,7 +141,7 @@ describe('@rule.js/expression#parse', function() {
     it('empty', function() {
       assertExpression('"foo"  is   empty', [
         {
-          type: 'null',
+          type: 'empty',
           key: 'foo'
         }
       ])
@@ -152,7 +152,7 @@ describe('@rule.js/expression#parse', function() {
         {
           type: 'not',
           args: {
-            type: 'null',
+            type: 'empty',
             key: 'bleh'
           }
         }
@@ -223,7 +223,7 @@ describe('@rule.js/expression#parse', function() {
           type: 'and',
           tests: [
             {
-              type: 'null',
+              type: 'empty',
               key: 'foo'
             },
             {
@@ -287,7 +287,7 @@ describe('@rule.js/expression#parse', function() {
           type: 'or',
           tests: [
             {
-              type: 'null',
+              type: 'empty',
               key: 'foo'
             },
             {
@@ -308,7 +308,7 @@ describe('@rule.js/expression#parse', function() {
             type: 'or',
             tests: [
               {
-                type: 'null',
+                type: 'empty',
                 key: 'foo'
               },
               {
@@ -385,7 +385,7 @@ describe('@rule.js/expression#parse', function() {
                   {
                     type: 'not',
                     args: {
-                      type: 'null',
+                      type: 'empty',
                       key: 'blob'
                     }
                   },
@@ -408,11 +408,11 @@ describe('@rule.js/expression#parse', function() {
           type: 'and',
           tests: [
             {
-              type: 'null',
+              type: 'empty',
               key: 'foo'
             },
             {
-              type: 'null',
+              type: 'empty',
               key: 'bar'
             }
           ]
@@ -432,7 +432,7 @@ describe('@rule.js/expression#parse', function() {
                 type: 'and',
                 tests: [
                   {
-                    type: 'null',
+                    type: 'empty',
                     key: 'foo'
                   },
                   {
@@ -482,25 +482,25 @@ describe('@rule.js/expression#parse', function() {
             type: 'and',
             tests: [
               {
-                type: 'null',
+                type: 'empty',
                 key: 'foo'
               },
               {
                 type: 'or',
                 tests: [
                   {
-                    type: 'null',
+                    type: 'empty',
                     key: 'bar'
                   },
                   {
                     type: 'or',
                     tests: [
                       {
-                        type: 'null',
+                        type: 'empty',
                         key: 'baz'
                       },
                       {
-                        type: 'null',
+                        type: 'empty',
                         key: 'foob'
                       }
                     ]
