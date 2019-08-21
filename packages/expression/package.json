@@ -1,6 +1,6 @@
 {
   "name": "@rule.js/expression",
-  "version": "0.15.1",
+  "version": "0.16.0",
   "description": "A simple language for expressing business rules.",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "Expressions"
   ],
   "dependencies": {
-    "@rule.js/core": "^0.15.1",
+    "@rule.js/core": "^0.16.0",
     "pegjs": "^0.10.0"
   },
   "author": "Jonathan Boudreau <jonathan.boudreau.92@gmail.com>",
