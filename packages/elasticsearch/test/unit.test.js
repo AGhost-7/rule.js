@@ -8,7 +8,7 @@ const Rule = require('@rule.js/core').extend(
   }
 )
 
-const assert = require('assert')
+const assert = require('assert').strict
 
 describe('@rule.js/elasticsearch#unit', () => {
   it('converts arbitrary comparisons', () => {

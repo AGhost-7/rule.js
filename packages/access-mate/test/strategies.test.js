@@ -1,6 +1,6 @@
 'use strict'
 
-const assert = require('assert')
+const assert = require('assert').strict
 const Rule = require('@rule.js/core')
 const AccessMate = require('../')
 

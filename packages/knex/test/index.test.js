@@ -1,4 +1,4 @@
-const assert = require('assert')
+const assert = require('assert').strict
 var knex = require('knex')({ client: 'pg' })
 const Rule = require('@rule.js/core').extend(
   {},
@@ -20,7 +20,7 @@ const selectScenario = function(expect, block) {
 describe('conversions', function() {
   it('equal', function() {
     selectScenario(
-      `select * from "user" where (("name" = 'joe pass') and ("active" = false))`,
+      'select * from "user" where (("name" = \'joe pass\') and ("active" = false))',
       function() {
         Rule()
           .equal('name', 'joe pass')
@@ -31,7 +31,7 @@ describe('conversions', function() {
   })
 
   it('null', function() {
-    selectScenario(`select * from "user" where (("age" is null))`, function() {
+    selectScenario('select * from "user" where (("age" is null))', function() {
       Rule()
         .null('age')
         .knex(this)
@@ -39,20 +39,20 @@ describe('conversions', function() {
   })
 
   it('pass', function() {
-    selectScenario(`select * from "user" where ((true))`, function() {
+    selectScenario('select * from "user" where ((true))', function() {
       Rule([{ type: 'pass' }]).knex(this)
     })
   })
 
   it('fail', function() {
-    selectScenario(`select * from "user" where ((false))`, function() {
+    selectScenario('select * from "user" where ((false))', function() {
       Rule([{ type: 'fail' }]).knex(this)
     })
   })
 
   it('any', function() {
     selectScenario(
-      `select * from "user" where (("occupations" in ('guitar', 'smoking cigars')))`,
+      'select * from "user" where (("occupations" in (\'guitar\', \'smoking cigars\')))',
       function() {
         Rule()
           .any('occupations', ['guitar', 'smoking cigars'])
@@ -63,7 +63,7 @@ describe('conversions', function() {
 
   it('not equal', function() {
     selectScenario(
-      `select * from "user" where ((not "alive" = true))`,
+      'select * from "user" where ((not "alive" = true))',
       function() {
         Rule()
           .notEqual('alive', true)
@@ -73,7 +73,7 @@ describe('conversions', function() {
   })
 
   it('true', function() {
-    selectScenario(`select * from "user" where (("jazzy" = true))`, function() {
+    selectScenario('select * from "user" where (("jazzy" = true))', function() {
       Rule()
         .true('jazzy')
         .knex(this)
@@ -82,7 +82,7 @@ describe('conversions', function() {
 
   it('false', function() {
     selectScenario(
-      `select * from "user" where (("alive" = false))`,
+      'select * from "user" where (("alive" = false))',
       function() {
         Rule()
           .false('alive')
@@ -92,7 +92,7 @@ describe('conversions', function() {
   })
 
   it('gt', function() {
-    selectScenario(`select * from "user" where (("age" > 17))`, function() {
+    selectScenario('select * from "user" where (("age" > 17))', function() {
       Rule()
         .gt('age', 17)
         .knex(this)
@@ -100,7 +100,7 @@ describe('conversions', function() {
   })
 
   it('lt', function() {
-    selectScenario(`select * from "user" where (("age" < 1000))`, function() {
+    selectScenario('select * from "user" where (("age" < 1000))', function() {
       Rule()
         .lt('age', 1000)
         .knex(this)

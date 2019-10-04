@@ -1,9 +1,12 @@
 const contextualize = require('@rule.js/contextualize')
 const elasticsearch = require('../lib')
-const Rule = require('@rule.js/core').extend({}, {
-  elasticsearch,
-  contextualize
-})
+const Rule = require('@rule.js/core').extend(
+  {},
+  {
+    elasticsearch,
+    contextualize
+  }
+)
 
 let count = 0
 let last = Rule()

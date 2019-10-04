@@ -1,7 +1,7 @@
 'use strict'
 
 const Rule = require('../index')
-const assert = require('assert')
+const assert = require('assert').strict
 
 describe('@rule.js/core', () => {
   describe('assertions', () => {
@@ -212,7 +212,12 @@ describe('@rule.js/core', () => {
       assert(!o.test({ b: 3 }))
     })
     it('should allow multiple ors', () => {
-      const o = Rule().or().or().equal('a', 1).end().end()
+      const o = Rule()
+        .or()
+        .or()
+        .equal('a', 1)
+        .end()
+        .end()
       assert(o.test({ a: 1 }))
       assert(!o.test({ a: 2 }))
     })

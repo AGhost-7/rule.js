@@ -1,4 +1,4 @@
-const assert = require('assert')
+const assert = require('assert').strict
 const toElasticsearch = require('..')
 const AccessMate = require('@rule.js/access-mate')
 

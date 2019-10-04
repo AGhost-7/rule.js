@@ -13,7 +13,7 @@ const createClass = (constraintMembers, constraintTypes, RuleExtended) => {
 
   assign(ConstraintBuilder.prototype, constraintMembers)
 
-  for (let type in constraintTypes) {
+  for (const type in constraintTypes) {
     ConstraintBuilder.prototype[type] = (function(type) {
       return function(...args) {
         return this.concat({
@@ -57,7 +57,7 @@ const createRuleClass = (
   constraintMembers,
   constraintTypes
 ) => {
-  for (let type in constraintTypes) {
+  for (const type in constraintTypes) {
     ruleMembers[type] = (function(type) {
       return function(...args) {
         return this._constraintBuilder.concat({
@@ -69,7 +69,7 @@ const createRuleClass = (
     })(type)
   }
 
-  for (let key in constraintMembers) {
+  for (const key in constraintMembers) {
     ruleMembers[key] = (function(key) {
       return function(context) {
         this._constraintBuilder[key](context)

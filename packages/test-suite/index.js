@@ -1,6 +1,6 @@
 'use strict'
 
-const assert = require('assert')
+const assert = require('assert').strict
 
 const containsProp = (arr, prop, val) => {
   return arr.some(item => item[prop] === val)

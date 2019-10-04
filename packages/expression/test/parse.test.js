@@ -1,7 +1,7 @@
 'use strict'
 
 const ruleExpression = require('../')()
-const assert = require('assert')
+const assert = require('assert').strict
 
 const assertExpression = function(condition, expected) {
   const tests = ruleExpression(condition).tests

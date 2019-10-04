@@ -60,18 +60,15 @@ exports.bread = (policySet, options) => {
       if (!Array.isArray(options.resources)) {
         throw new Error('Option "resources" must be specified')
       }
-      const results = []
-      for (const resource of options.resources) {
-        const result = simpleStrategy(policySet, {
+      return options.resources.map(resource =>
+        simpleStrategy(policySet, {
           resource,
           environment: options.environment,
           subject: options.subject,
           action: options.action,
           target: options.target
         })
-        results.push(result)
-      }
-      return results
+      )
     case 'edit':
       return mergeResults(
         simpleStrategy(policySet, options),

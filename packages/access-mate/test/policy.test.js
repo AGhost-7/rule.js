@@ -2,7 +2,7 @@
 
 const Policy = require('../lib/policy')
 const RuleDefault = require('../lib/rule-default')
-const assert = require('assert')
+const assert = require('assert').strict
 
 const PolicySetMock = function(policies) {
   this._policies = policies

@@ -1,4 +1,3 @@
-
 const createOrClass = ruleProto => {
   function Or(parent, tests, boundKeys) {
     this.parent = parent

@@ -13,6 +13,7 @@ class Policy {
     this._effect = effect || null
     this._fields = null
   }
+
   _copy() {
     const copy = new Policy(this._policySet)
     copy._effect = this._effect
@@ -23,40 +24,50 @@ class Policy {
     copy._fields = this._fields
     return copy
   }
+
   _set(key, value) {
     const copy = this._copy()
     copy[key] = value
     return copy
   }
+
   _concat(key, value) {
     const copy = this._copy()
     copy[key] = copy[key].concat(value)
     return copy
   }
+
   target(value) {
     return this._concat('_target', value)
   }
+
   action(value) {
     return this._concat('_action', value)
   }
+
   effect(value) {
     if (value !== 'allow' && value !== 'deny') {
       throw new Error('Effect "' + value + '" is not valid')
     }
     return this._set('_effect', value)
   }
+
   fields(...values) {
     return this._set('_fields', values)
   }
+
   name(value) {
     return this._set('_name', value)
   }
+
   allow() {
     return this._policySet.concat(this).allow()
   }
+
   deny() {
     return this._policySet.concat(this).deny()
   }
+
   concat(item) {
     return this._policySet.concat(this, item)
   }

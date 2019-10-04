@@ -1,6 +1,6 @@
 'use strict'
 
-const assert = require('assert')
+const assert = require('assert').strict
 const RuleContextualize = require('../index')
 const Rule = require('@rule.js/core').extend(
   {},

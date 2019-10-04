@@ -8,7 +8,7 @@ while (++count < 30) last = last.or()
 last.equal('foo', 'bar')
 while (--count > 0) last = last.end()
 
-const data = [];
+const data = []
 while (++count < 50000) {
   data.push({ [`foo${count}`]: `foobar${count}` })
 }

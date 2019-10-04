@@ -1,6 +1,6 @@
 'use strict'
 
-var assert = require('assert')
+var assert = require('assert').strict
 var AccessMate = require('../index')
 
 describe('policy set', () => {
