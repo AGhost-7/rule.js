@@ -21,7 +21,7 @@ describe('@rule.js/expression#parse', function() {
     })
 
     it('lt', function() {
-      assertExpression('"age" less than 10', [
+      assertExpression('"age" leSs thAn 10', [
         {
           type: 'lt',
           key: 'age',
@@ -31,7 +31,7 @@ describe('@rule.js/expression#parse', function() {
     })
 
     it('gt', function() {
-      assertExpression('"currency" greater than 0.11', [
+      assertExpression('"currency" Greater than 0.11', [
         {
           type: 'gt',
           key: 'currency',
@@ -60,7 +60,7 @@ describe('@rule.js/expression#parse', function() {
     })
 
     it('any', function() {
-      assertExpression('"foo" any ("one", true)', [
+      assertExpression('"foo" Any ("one", true)', [
         {
           type: 'any',
           key: 'foo',
@@ -84,7 +84,7 @@ describe('@rule.js/expression#parse', function() {
     })
 
     it('not any', function() {
-      assertExpression('"name" not any ("foo", "bar")', [
+      assertExpression('"name" Not any ("foo", "bar")', [
         {
           type: 'not',
           args: {
@@ -122,7 +122,7 @@ describe('@rule.js/expression#parse', function() {
     it('equal fail', function() {
       expressionThrows('"f"')
       expressionThrows('"')
-      expressionThrows('"foob" equal \'heh\'')
+      expressionThrows('"foob" Equal \'heh\'')
     })
 
     it('not equal', function() {

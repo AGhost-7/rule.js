@@ -3,30 +3,30 @@ Start
 	= Expression
 
 Expression
-  = "(" _* left:Operation _* ")" _* type:("and"/"or") _* "(" _* right:Operation _* ")" {
+  = "(" _* left:Operation _* ")" _* type:("and"i/"or"i) _* "(" _* right:Operation _* ")" {
 		return {
-			type: type,
+			type: type.toLowerCase(),
 			tests: [left, right]
 		}
 	}
-	/ "(" _* left:Operation _* ")" _* type:("and"/"or") _ right:Operation {
+	/ "(" _* left:Operation _* ")" _* type:("and"i/"or"i) _ right:Operation {
 	  return {
-		  type: type,
+		  type: type.toLowerCase(),
 			tests: [left, right]
 		};
 	}
-	/ left:Operation _ type:("and"/"or") _* "(" _* right:Operation _* ")" {
+	/ left:Operation _ type:("and"i/"or"i) _* "(" _* right:Operation _* ")" {
 		return {
-			type: type,
+			type: type.toLowerCase(),
 			tests: [left, right]
 		}
 	}
 	/ Operation
 
 Operation
-  = left:Test _ type:("and"/"or") _ right:Expression {
+  = left:Test _ type:("and"i/"or"i) _ right:Expression {
 		return {
-			type: type,
+			type: type.toLowerCase(),
 			tests: [left, right]
 		}
 	}
@@ -44,16 +44,16 @@ Test "test"
 	/ Range
 
 Range
-	= key:Key _+ operator:("less"/"greater") _* "than" _+ value:Value {
+	= key:Key _+ operator:("less"i/"greater"i) _* "than"i _+ value:Value {
 		return {
-			type: operator === 'less' ? 'lt' : 'gt',
+			type: operator.toLowerCase() === 'less' ? 'lt' : 'gt',
 			key: key,
 			value: value
 		};
 	}
 
 Empty
-  = key:Key _ "is" _ "empty" {
+  = key:Key _ "is"i _ "empty"i {
 		return {
 			type: 'empty',
 			key: key
@@ -61,7 +61,7 @@ Empty
 	}
 
 NotEmpty
-  = key:Key _ "is" _ "not" _ "empty" {
+  = key:Key _ "is"i _ "not"i _ "empty"i {
 	  return {
 			type: 'not',
 			args:{
@@ -73,7 +73,7 @@ NotEmpty
 
 
 NotEqual "not equal"
-  = key:Key _ "not" _ "equal" _ value:Value {
+  = key:Key _ "not"i _ "equal"i _ value:Value {
     return {
       type: 'not',
 			args: {
@@ -85,7 +85,7 @@ NotEqual "not equal"
   }
 
 Equal "equal"
-  = key:Key _ "equal" _ value:Value {
+  = key:Key _ "equal"i _ value:Value {
 		return {
 			type: 'equal',
 			key: key,
@@ -94,7 +94,7 @@ Equal "equal"
 	}
 
 Any "any"
-	= key:Key _+ "any" _* "(" _* head:Value tail: (_* "," _* Value)* ")" {
+	= key:Key _+ "any"i _* "(" _* head:Value tail: (_* "," _* Value)* ")" {
 		const values = [head]
 		tail.forEach(function(group) {
 				values.push(group[3])
@@ -107,7 +107,7 @@ Any "any"
 	}
 
 NotAny "not any"
-	= key:Key _+ "not" _+ "any" _* "(" _* head:Value tail: (_* "," _* Value)* ")" {
+	= key:Key _+ "not"i _+ "any"i _* "(" _* head:Value tail: (_* "," _* Value)* ")" {
 		const values = [head]
 		tail.forEach(function(group) {
 				values.push(group[3])
@@ -123,7 +123,7 @@ NotAny "not any"
 	}
 
 NotContains "not contains"
-	= key:Key _+ "not" _+ "contains" _+ value:Value {
+	= key:Key _+ "not"i _+ "contains"i _+ value:Value {
 		return {
 			type: 'not',
 			args: {
@@ -135,7 +135,7 @@ NotContains "not contains"
 	}
 
 Contains
-	= key:Key _+ "contains" _+ value:Value {
+	= key:Key _+ "contains"i _+ value:Value {
 		return {
 			type: 'contains',
 			key: key,
