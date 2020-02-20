@@ -1,6 +1,6 @@
 'use strict'
 
-const snakeCase = require('lodash.snakecase').strict
+const snakeCase = require('lodash.snakecase')
 
 const conversions = {
   _expand(knex, toDb, tests) {
