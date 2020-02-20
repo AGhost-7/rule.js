@@ -2,10 +2,8 @@
 
 const Rule = require('@rule.js/core')
 const peg = require('pegjs')
-const fs = require('fs')
-const path = require('path')
 
-const grammar = fs.readFileSync(path.join(__dirname, './grammar.pegjs'), 'utf8')
+const grammar = require('./grammar')
 const parser = peg.generate(grammar)
 
 const identity = a => a
