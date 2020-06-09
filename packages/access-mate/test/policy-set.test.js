@@ -16,7 +16,7 @@ describe('policy set', () => {
       .toJSON()
     const deny = control[0]
     assert.equal(deny.effect, 'deny')
-    assert.equal(deny.action, 'create')
+    assert.deepEqual(deny.action, ['create'])
   })
 
   it('multiple', () => {
@@ -36,7 +36,7 @@ describe('policy set', () => {
       .end()
       .toJSON()
     assert.equal(control[0].effect, 'deny')
-    assert.equal(control[1].target, 'todo_item')
+    assert.deepEqual(control[1].target, ['todo_item'])
   })
 
   it('composes', () => {
@@ -94,7 +94,7 @@ describe('policy set', () => {
     let policy = policies._policies[0]
     assert.equal(policy._target, 'example')
     assert.equal(policy._effect, 'allow')
-    assert.equal(policy._action, 'read')
+    assert.deepEqual(policy._action, ['read'])
     policy = policies._policies[1]
     assert.equal(policy._target, 'example')
   })

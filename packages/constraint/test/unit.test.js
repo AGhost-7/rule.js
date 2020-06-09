@@ -85,7 +85,7 @@ describe('@rule.js/constraint', () => {
     const pass = { admin: false, password: 'helloworld' }
     const fail = { admin: true, password: '1234' }
 
-    assert.equal(constraints.errors(pass), 0)
+    assert.equal(constraints.errors(pass).length, 0)
     assert.equal(constraints.errors(fail).length, 1)
     const js = constraints.toJSON()
     const deserialized = constraint.fromJSON(js)

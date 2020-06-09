@@ -23,8 +23,8 @@ describe('policy', () => {
       .action('create')
       .target('video')
     assert.equal(policy._effect, 'allow')
-    assert.equal(policy._action, 'create')
-    assert.equal(policy._target, 'video')
+    assert.deepEqual(policy._action, ['create'])
+    assert.deepEqual(policy._target, ['video'])
     assert.equal(policy._name, 'create vids')
   })
 
@@ -50,7 +50,7 @@ describe('policy', () => {
     assert.equal(policy._condition[0].key, 'isAdmin')
     assert.equal(policy._condition[0].type, 'true')
     assert.equal(policy._effect, 'allow')
-    assert.equal(policy._action, 'create')
+    assert.deepEqual(policy._action, ['create'])
   })
 
   it('no condition is always applied', () => {
