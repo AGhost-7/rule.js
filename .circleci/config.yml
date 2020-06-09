@@ -19,6 +19,7 @@ jobs:
         environment:
           PGUSER: postgres
           PGDATABASE: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
 
     working_directory: ~/repo
 
