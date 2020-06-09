@@ -1,35 +1,23 @@
 module.exports = `
 Start
-  = Expression
+  = Sequence
 
-Expression
-  = "(" _* left:Operation _* ")" _* type:("and"i/"or"i) _* "(" _* right:Operation _* ")" {
-    return {
-      type: type.toLowerCase(),
-      tests: [left, right]
-    }
+Sequence
+  = items:(operation:Operation _+ type:("and"i/"or"i) _+)+ last:Operation {
+    items.reverse();
+
+    return items.reduce((condition, right) => {
+      const [operation,,type] = right
+      return {
+        type: type.toLowerCase(),
+        tests: [operation, condition]
+      };
+    }, last);
   }
-  / "(" _* left:Operation _* ")" _* type:("and"i/"or"i) _ right:Operation {
-    return {
-      type: type.toLowerCase(),
-      tests: [left, right]
-    };
-  }
-  / left:Operation _ type:("and"i/"or"i) _* "(" _* right:Operation _* ")" {
-    return {
-      type: type.toLowerCase(),
-      tests: [left, right]
-    }
-  }
-  / Operation
+  / Test
 
 Operation
-  = left:Test _ type:("and"i/"or"i) _ right:Expression {
-    return {
-      type: type.toLowerCase(),
-      tests: [left, right]
-    }
-  }
+  = "(" _* sequence:Sequence _* ")" { return sequence; }
   / Test
 
 Test "test"
@@ -49,7 +37,7 @@ Range
       type: operator.toLowerCase() === 'less' ? 'lt' : 'gt',
       key: key,
       value: value
-    };
+    }
   }
 
 Empty

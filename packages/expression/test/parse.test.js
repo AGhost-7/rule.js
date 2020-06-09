@@ -473,7 +473,7 @@ describe('@rule.js/expression#parse', function() {
       )
     })
 
-    it.skip('multiple', function() {
+    it('multiple', function() {
       assertExpression(
         '("foo" is empty) and ("bar" is empty) or "baz" is empty' +
           ' or ("foob" is empty)',
@@ -512,5 +512,47 @@ describe('@rule.js/expression#parse', function() {
         ]
       )
     })
+    assertExpression(
+      '"Status" equal "Disqualified" AND ' +
+      '(("Team Name" equal  "Verbal Turtles" or "Team Name" equal "Sparring Jaguars")' +
+      ' OR (("Team Name" equal "Intergalactic Woodpeckers" or "Team Name" equal "Stereophonic Geese") AND "Grounded" equal true))',
+      [
+        {
+          type: 'and',
+          tests: [
+            { type: 'equal', key: 'Status', value: 'Disqualified' },
+            {
+              type: 'or',
+              tests: [
+                {
+                  type: 'or',
+                  tests: [
+                    { type: 'equal', key: 'Team Name', value: 'Verbal Turtles' },
+                    { type: 'equal', key: 'Team Name', value: 'Sparring Jaguars' }
+                  ]
+                },
+                {
+                  type: 'and',
+                  tests: [
+                    {
+                      type: 'or',
+                      tests: [
+                        { type: 'equal', key: 'Team Name', value: 'Intergalactic Woodpeckers' },
+                        { type: 'equal', key: 'Team Name', value: 'Stereophonic Geese' }
+                      ]
+                    },
+                    {
+                      type: 'equal',
+                      key: 'Grounded',
+                      value: true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    )
   })
 })
